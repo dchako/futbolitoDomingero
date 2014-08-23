@@ -1,0 +1,84 @@
+azul = #22BCE0
+gris_oscuro = #444
+gris_texto = #7A7A7A
+naranja = #DD4F24
+body
+	background #E8E8E8
+	color gris_oscuro
+	font-family Arial 
+	font-size 14px
+footer
+	background naranja
+	bottom 0
+	color rgba(white,0.5)
+	text-align center
+	h3
+		font-size 14px
+		font-weigt normal
+		strong
+			display block
+		.mejor
+			&:before
+			&:after
+				content " - "	
+	position absolute
+	width 100%
+
+header 
+	background gris_oscuro
+	color white 
+	overflow hidden
+	padding 0.5em
+	position  relative
+	.logo_ingreso
+		border-right 1px solid azul 
+		position absolute
+		left 10px
+		top 10px
+		width 120px
+		img
+			width 119px
+	.logo_registro
+		position absolute
+		right 10px
+		top 10px
+		width 150px
+		img
+			width 149px
+			border-radius 7px
+	.titular
+		margin 0px 80px 15px 70px
+		.titulo
+			font-size 18px
+			font-weigt normal
+			font-style italic
+			text-align center
+			margin 0
+			padding 0
+.wrap
+	padding 0.5em 
+	display inline-block
+	.lista
+		background white 
+		color gris_texto
+		box-shadow 2px 2px 10px rgba(black,0.5)
+		.menu
+			li
+				border 1px solid  red
+				display inline-block
+				margin 0 2em
+
+		.menu-for
+			li
+				border 1px solid  red
+				display inline-block
+				margin 0 2em
+.resultados_equipos
+	float right
+	background white 
+	color gris_texto
+	box-shadow 2px 2px 10px rgba(black,0.5)
+.left
+	float left
+.right
+	float right
