@@ -2,10 +2,14 @@ azul = #22BCE0
 gris_oscuro = #444
 gris_texto = #7A7A7A
 naranja = #DD4F24
+a 
+	color naranja
+	text-decoration none 
 body
 	background #E8E8E8
 	color gris_oscuro
 	font-family Arial 
+
 	font-size 14px
 footer
 	background naranja
@@ -23,7 +27,6 @@ footer
 				content " - "	
 	position absolute
 	width 100%
-
 header 
 	background gris_oscuro
 	color white 
@@ -58,26 +61,43 @@ header
 .wrap
 	padding 0.5em 
 	display inline-block
+	width 48%
+	vertical-align top
 	.lista
+		background white 
+		border-radius 0 0 0.5em 0.5em
+		color gris_texto
+		box-shadow 2px 2px 10px rgba(black,0.5)
+		color gris_texto
+		.menu
+			text-align center
+			.jugadores
+				li
+					border 1px solid  red
+					display inline-block
+					margin 0 2em
+			.jugadores-for
+				li
+					border 1px solid  red
+					display inline-block
+					margin 0 2em
+		.acciones
+			border-top 3px solid naranja
+			padding 0.5em
+			text-align center
+			.asisto
+				margin 2em
+.wrap_2
+	display inline-block
+	padding 0.5em 
+	width 48%
+	float right
+	box-shadow 2px 2px 10px rgba(black,1)
+	.resultados_equipos
+		float center
 		background white 
 		color gris_texto
 		box-shadow 2px 2px 10px rgba(black,0.5)
-		.menu
-			li
-				border 1px solid  red
-				display inline-block
-				margin 0 2em
-
-		.menu-for
-			li
-				border 1px solid  red
-				display inline-block
-				margin 0 2em
-.resultados_equipos
-	float right
-	background white 
-	color gris_texto
-	box-shadow 2px 2px 10px rgba(black,0.5)
 .left
 	float left
 .right
