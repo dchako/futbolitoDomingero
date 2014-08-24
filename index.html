@@ -1,37 +1,192 @@
 <!DOCTYPE html>
 <html lang="ES">
 <head>
-	<title>El cammpito WEB</title>
-	<link rel="stylesheet" type="text/css" href="css/reset.css">
-	<link rel="stylesheet" type="text/css" href="css/estilos.css">
+	<meta charset="utf-8"/>
+	<title>El FutbolitoDomingero WEB</title>
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="css/estilos.css">
 </head>	
 <body>
+	   <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- Add your site or application content here -->
 	<header>
-		<div id="subheader">
-			<nav>
-				<ul>
-					<li id="ing"><a href="#">Ingresar</a></li>
-					<li id="logotipo">JUGADORES DEL CAMPITO MASTER - jueves (dia) a las 19hs</li>
-					<li id="reg"><a href="#">Registrarse</a></li>
-					
-				</ul>
-			</nav>
+		<div class="logo_ingreso left">
+			<img src="imagenes/login_1.png">
+		</div>
+		<div class="titular">
+			<h1 class="titulo">
+				Futbolitos Domingeros
+			</h1>
+		</div>
+		<div class="logo_registro right">
+			<img src="imagenes/registrate_1.png">
 		</div>
 	</header>
-	<section id="wrap">
-		<article>
-			<ul>
-				<li> nombre </li>
-				<li> asistire/ no asistira</li>
-			</ul>
-		</article>	
-		<aside>
-			<section> aca va el resultado del anterior partirdo </section>
-			<section> aca va los equipos </section>
+	<section class="wrap">
+		<article class ="lista">
+			<div class = "menu">
+				<TABLE class="asistencia" FRAME="void" RULES="cols" HEIGHT = 430>
+				  <TR>
+					    <TD>nombre</TD>
+					    <TD>asistir_noAsistir</TD>
+				  </TR>
+				  <TR>
+					    <TD>#nombre#</TD>
+					    <TD>#nombre#</TD>
+				  </TR>
+				  <TR>
+					    <TD>#nombre#</TD>
+					    <TD>#nombre#</TD>
+				  </TR>
+				  <TR>
+					    <TD>#nombre#</TD>
+					    <TD>#nombre#</TD>
+				  </TR>
+				  <TR>
+					    <TD>#nombre#</TD>
+					    <TD>#nombre#</TD>
+				  </TR>
+				    <TR>
+					    <TD>#nombre#</TD>
+					    <TD>#nombre#</TD>
+				  </TR>
+				  <TR>
+					    <TD>#nombre#</TD>
+					    <TD>#nombre#</TD>
+				  </TR>
+				    <TR>
+					    <TD>#nombre#</TD>
+					    <TD>#nombre#</TD>
+				  </TR>
+				  <TR>
+					    <TD>#nombre#</TD>
+					    <TD>#nombre#</TD>
+				  </TR>
+				    <TR>
+					    <TD>#nombre#</TD>
+					    <TD>#nombre#</TD>
+				  </TR>
+				  <TR>
+					    <TD>#nombre#</TD>
+					    <TD>#nombre#</TD>
+				  </TR>
+				   <TR>
+					    <TD>#nombre#</TD>
+					    <TD>#nombre#</TD>
+				  </TR>
+				   <TR>
+					    <TD>#nombre#</TD>
+					    <TD>#nombre#</TD>
+				  </TR>
+				   <TR>
+					    <TD>#nombre#</TD>
+					    <TD>#nombre#</TD>
+				  </TR>
+				   <TR>
+					    <TD>#nombre#</TD>
+					    <TD>#nombre#</TD>
+				  </TR>
+				</TABLE>
+			</div>	
+			<div class="acciones">
+				<div class="asistir_noAsistir">
+					<a class="asisto" href="#">Asistir</a>
+					<a class="no_asisto" href="#">No Asistir</a>
+				</div>
+			</div>
+		</article>
+	</section>
+	<section class="wrap_2">
+		<aside class="resultados_equipos">
+			<section class="partidos_anterior"> 
+				<div class="resultado">
+					<ul class = "equipos_resulado">
+						<li>nombre del equipo_1</li>
+						<li class="goles">123</li>
+						<li>nombre del equipo_2</li>
+						<li class="goles">1234</li>
+					</ul>
+				</div> 
+			</section>
+			<div class="equipos">
+				<TABLE class="tabla" FRAME="void" RULES="cols">
+				  <TR>
+					    <TD>nombre del equipo_1</TD>
+					    <TD>Nombre del equipo_2</TD>
+				  </TR>
+					  <TR>
+					    <TD>#nombre#</TD>
+					    <TD>#nombre#</TD>
+				  </TR>
+					  <TR>
+					    <TD>#nombre#</TD>
+					    <TD>#nombre#</TD>
+				  </TR>
+				    </TR>
+					  <TR>
+					    <TD>#nombre#</TD>
+					    <TD>#nombre#</TD>
+				  </TR>
+					  <TR>
+					    <TD>#nombre#</TD>
+					    <TD>#nombre#</TD>
+				  </TR>
+				    </TR>
+					  <TR>
+					    <TD>#nombre#</TD>
+					    <TD>#nombre#</TD>
+				  </TR>
+					  <TR>
+					    <TD>#nombre#</TD>
+					    <TD>#nombre#</TD>
+				  </TR>
+				    </TR>
+					  <TR>
+					    <TD>#nombre#</TD>
+					    <TD>#nombre#</TD>
+				  </TR>
+				  <TR>
+					    <TD>#nombre#</TD>
+					    <TD>#nombre#</TD>
+				  </TR>
+				    </TR>
+				  <TR>
+					    <TD>#nombre#</TD>
+					    <TD>#nombre#</TD>
+				  </TR>
+				   <TR>
+					    <TD>#nombre#</TD>
+					    <TD>#nombre#</TD>
+				  </TR>
+				</TABLE>
+			</div>
+				<div class="acciones">
+						<a class="cambiar_a" href="#">cambiazo</a>
+				</div>
+			<section>
+			</section>
 		</aside>
 	</section>
-</body>
+	<section class="wrap_3">
+		<div class="Cantidad">
+				<h3>
+				<strong>cantidad!:</strong>
+				</h3>			
+		</vid>
+		<div class="jugadores">
+			<h3>
+				<strong>123 jugadores</strong>
+			</h3>			
+		</vid>
+	</section>
 <footer>
-	<p>cantidad de jugadores 10 jug</p>
+	<h3>
+		<strong>Powered by FutbolitoDomingero<br></strong>
+		<span class="mejor">v0.1 por chako</span>
+	</h3>
 </footer>
+</body>
 </html>
