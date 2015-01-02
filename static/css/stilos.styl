@@ -33,26 +33,28 @@ header
 	overflow hidden
 	padding 0.5em
 	position  relative
-	.logo_ingreso
+	.agregar_jugador_left
 		border-right 1px solid azul 
 		position absolute
 		left 10px
 		top 10px
 		width 120px
-		img
-			width 119px
-	.logo_registro
+		h5
+		  	font-size 28px
+	.logo_usuario_right
 		position absolute
 		right 10px
 		top 10px
-		width 150px
+		height 39px
+		width 59px
 		img
-			width 149px
+			height 100%
+			width 100%
 			border-radius 7px
 	.titular
 		margin 0px 80px 15px 70px
 		.titulo
-			font-size 18px
+			font-size 28px
 			font-weigt normal
 			font-style italic
 			text-align center
@@ -79,7 +81,7 @@ nav
 				padding 0.5em
 				text-decoration none
 
-		.unite
+		.Nuevo_Grupo
 			float left
 		.nombre
 			position relative
@@ -105,13 +107,35 @@ nav
 				position relative
 				text-align center
 				//box-shadow 4px 4px 10px rgba(red,1)
+	.titulares
+		text-align center
+		box-shadow 2px 2px 10px rgba(black,1)
+		display block
+		//bottom 0em
+		position relative
+		width 100%
+		height 40px
+		//margin-left 25%
+		h3
+			//margin-left 50%
+			//box-shadow 2px 2px 10px rgba(red,1)
+		//margin-top 12px
+		.titulo
+			color azul
+			margin-right 10px
+			font-size 25px
+			font-weigt normal
+		.cantidad
+			color red
+			font-size 25px
+			font-family italic				
 .acciones
 	border-top 3px solid naranja
 	padding 0.5em
 	text-align center
 .asisto
 	margin 2em
-.wrap_2
+.wrap_1
 	border-radius 0 0 0.5em 0.5em
 	text-align center
 	display block
@@ -148,7 +172,6 @@ nav
 					.equipo2
 						margin-right 1%
 		.equipos
-			
 			.tabla
 				td 
 					width 50%
@@ -157,8 +180,7 @@ nav
 				position relative
 				//background red
 				//box-shadow 2px 2px 10px rgba(black,0.5)
-			
-.wrap_3
+.wrap_2
 	box-shadow 2px 2px 10px rgba(black,1)
 	display block
 	//bottom 0em
@@ -166,26 +188,13 @@ nav
 	width 100%
 	height 40px
 	//margin-left 25%
-	.titulares
-		text-align center
-		h3
-			//margin-left 50%
-			//box-shadow 2px 2px 10px rgba(red,1)
-		//margin-top 12px
-		.titulo
-			color azul
-			margin-right 10px
-			font-size 25px
-			font-weigt normal
-		.cantidad
-			color red
-			font-size 25px
-			font-family italic
-	
-.left
-	float left
-.right
-	float right
+	text-align center
+	background #05e617
+	a
+		color white
+		font-size 25px
+		font-family italic
+
 @media screen and (min-width: 768px)
 	body
 		//background red
@@ -194,7 +203,7 @@ nav
 			display inline-block
 			width 48%
 			vertical-align top	
-		.wrap_2
+		.wrap_1
 			border-radius 0 0 0.5em 0.5em
 			display inline-block
 			padding 0.5em
@@ -208,12 +217,13 @@ nav
 				width 100%
 				//margin-top 0em
 				box-shadow 2px 2px 10px rgba(black,1)
-		.wrap_3
+		.wrap_2
 			//background azul
-			.titulares
-				//background red
-				text-align left
-				h3
-					margin-left 15%
-
-			
+			width 48%
+			float right
+			display inline-block
+			position relative
+			padding 0.5em
+			margin-top 0px
+			border-radius 0 0 0.5em 0.5em
+			box-shadow 4px 4px 10px rgba(red,1)
