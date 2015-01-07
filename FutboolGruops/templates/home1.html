@@ -1,43 +1,5 @@
-<!DOCTYPE html>
-<html lang="ES">
-<head>
-	<meta charset="utf-8"/>
-	 <meta name="viewport" content="width=device-width, initial-scale=1"> 
-	<title>El FutbolitoDomingero WEB!!</title>
-	<link rel="stylesheet" href=../static/css/normalize.css>
-	<link rel="stylesheet" href=../static/css/stilos.css>
-</head>	
-<body>
-	   <!--[if lt IE 7]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-
-        <!-- Add your site or application content here -->
-	<header>
-		<div class="agregar_jugador_left">
-			<h5>
-				Invitar Jugadores
-			</h5>
-		</div>
-		<div class="titular">
-			<h1 class="titulo">
-				RunPlayers
-			</h1>
-		</div>
-		<div class="logo_usuario_right">
-			<img src="#">
-		</div>
-	</header>
-	
-	<nav>
-		<ul class="menu">
-			<li class="Nuevo_Grupo"><a href="#">Nuevo Grupo +</a></li>
-			<li class="nombre"><a href="#">nombre del grupo q largo </a></li>
-			<li class="cambiar"><a href="#">cambiar de grupo</a></li>
-		</ul>
-	</nav>
-
-	<section class="wrap_0">
+{% extends "Futbool-template/base.html" %}
+{% block wraper %}
 	<section class="wrap">
 		<article class ="lista">
 			<div class = "menu">
@@ -47,7 +9,7 @@
 					    <TD>asistir_noAsistir</TD>
 				  </TR>
 				  <TR>
-					    <TD>#nombre#</TD>
+					    <TD>#{{usuario}}#</TD>
 					    <TD>#nombre#</TD>
 				  </TR>
 				  <TR>
@@ -194,15 +156,4 @@
 		</section>
 
 	</section>
-</section>
-<footer>
-	<h3>
-		<strong>Powered by FutbolitoDomingero<br></strong>
-		<span class="mejor">v0.1 por chako</span>
-	</h3>
-</footer>
-<script>
-		
-</script>
-</body>
-</html>
+{% endblock %}
