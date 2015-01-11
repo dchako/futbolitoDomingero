@@ -4,4 +4,4 @@ from django.template import RequestContext
 
 # Create your views here.
 def home(request):
-    return render_to_response('home1.html',context_instance=RequestContext(request))
+    return render_to_response('home.html',context_instance=RequestContext(request))

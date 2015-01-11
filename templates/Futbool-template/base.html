@@ -26,7 +26,22 @@
 			</h1>
 		</div>
 		<div class="logo_usuario_right">
-			<img src="#">
+ 			<p>
+   				<ul>
+   					{% if user and not user.is_anonymous %}
+     					<li>
+       						<a>Hello {{ user.get_full_name|default:user.username }}!</a>
+     					</li>
+     					<li>
+       						<a href="{% url 'auth:logout' %}?next={%url 'home' %}">Logout</a>
+     					</li>
+   					{% else %}
+     					<li>
+       						<a href="{% url 'social:begin' 'facebook' %}?next={%url 'home' %}">Login with Facebook</a>
+     					</li>
+   					{% endif %}
+   				</ul>
+ 			</p>
 		</div>
 	</header>
 	
