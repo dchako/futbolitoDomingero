@@ -6,6 +6,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'FutboolGruops.views.home', name='home'),
+    url(r'^error$', 'FutboolGruops.views.error', name='error'),
     # url(r'^blog/', include('blog.urls')),
     url('', include('social.apps.django_app.urls', namespace='social')),
     url('', include('django.contrib.auth.urls', namespace='auth')),

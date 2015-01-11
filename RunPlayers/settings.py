@@ -63,6 +63,7 @@ SOCIAL_AUTH_FACEBOOK_KEY = '1693585214201836'
 SOCIAL_AUTH_FACEBOOK_SECRET = '1e1f5c43f9c653a26c4ce2785865b2a0'
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email', 'publish_actions']
 
+SOCIAL_AUTH_BACKEND_ERROR_URL = 'error' 
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
