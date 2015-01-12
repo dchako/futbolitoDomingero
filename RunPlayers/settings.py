@@ -63,7 +63,10 @@ SOCIAL_AUTH_FACEBOOK_KEY = '1693585214201836'
 SOCIAL_AUTH_FACEBOOK_SECRET = '1e1f5c43f9c653a26c4ce2785865b2a0'
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email', 'publish_actions']
 
-SOCIAL_AUTH_BACKEND_ERROR_URL = 'error' 
+SOCIAL_AUTH_RAISE_EXCEPTIONS = False
+LOGIN_ERROR_URL = '/error'
+SOCIAL_AUTH_BACKEND_ERROR_URL = '/error'
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -72,6 +75,8 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    #'social_auth.middleware.SocialAuthExceptionMiddleware',
+    'social.apps.django_app.middleware.SocialAuthExceptionMiddleware',
 )
 
 ROOT_URLCONF = 'RunPlayers.urls'
