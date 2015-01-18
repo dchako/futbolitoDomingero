@@ -26,10 +26,10 @@
 			</h1>
 		</div>
 		<div class="logo_usuario_right">
- 			
    				<ul>
    					{% if user and not user.is_anonymous %}
      					<li>
+     						<img src="{{user.get_profile.photo}}" width="4px" height="3px" >
        						<a>Hello {{ user.get_full_name|default:user.username }}!</a>
      					</li>
      					<li>

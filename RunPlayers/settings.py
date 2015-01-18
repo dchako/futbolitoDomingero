@@ -68,6 +68,22 @@ LOGIN_ERROR_URL = '/error'
 SOCIAL_AUTH_BACKEND_ERROR_URL = '/error'
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
 
+AUTH_PROFILE_MODULE = 'FutboolGruops.UserProfile'
+
+SOCIAL_AUTH_PIPELINE = (
+    'social.pipeline.social_auth.social_details',
+    'social.pipeline.social_auth.social_uid',
+    'social.pipeline.social_auth.auth_allowed',
+    'social.pipeline.social_auth.social_user',
+    'social.pipeline.user.get_username',
+    'social.pipeline.mail.mail_validation',
+    'social.pipeline.user.create_user',
+    'social.pipeline.social_auth.associate_user',
+    'social.pipeline.social_auth.load_extra_data',
+    'social.pipeline.user.user_details',
+    'FutboolGruops.pipeline.get_profile_picture',
+)
+
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -75,7 +91,6 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    #'social_auth.middleware.SocialAuthExceptionMiddleware',
     'social.apps.django_app.middleware.SocialAuthExceptionMiddleware',
 )
 
