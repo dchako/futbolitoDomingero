@@ -29,8 +29,12 @@
    				<ul>
    					{% if user and not user.is_anonymous %}
      					<li>
-     						<img src="{{user.get_profile.photo}}" width="4px" height="3px" >
-       						<a>Hello {{ user.get_full_name|default:user.username }}!</a>
+     						<ul>
+     							<img src="{{user.get_profile.photo}}">	
+     						</ul>
+     						<ul>
+     							<a>{{ user.get_full_name|default:user.username }}!</a>	
+     						</ul>
      					</li>
      					<li>
        						<a href="{% url 'auth:logout' %}?next={%url 'home' %}">Logout</a>

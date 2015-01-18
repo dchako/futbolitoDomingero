@@ -1,4 +1,5 @@
 from FutboolGruops.models import UserProfile
+
 def get_profile_picture(backend, user, response, details, is_new=False, *args, **kwargs):
     img_url = None
     if backend.name == 'facebook':
