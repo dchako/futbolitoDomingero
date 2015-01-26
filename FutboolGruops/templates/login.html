@@ -1,5 +1,5 @@
 {% extends "Futbool-template/base.html" %}
-
+{% load staticfiles %}
 {% block wraper1 %}
 		<ul class="menu">
 			<li class="Nuevo_Grupo"><a href="#">#</a></li>
@@ -9,5 +9,5 @@
 {% endblock %}
 
 {% block wraper2 %}
-		<IMG SRC="#">
+		<IMG SRC="{% static "imagenes/grupos.jpg" %}" height = "100%" width="100%" >
 {% endblock %}
