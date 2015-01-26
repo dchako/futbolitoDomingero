@@ -15,7 +15,8 @@
 
         <!-- Add your site or application content here -->
 	<header>
-		<div class="agregar_jugador_left">
+		{% block wraper %}
+				<div class="agregar_jugador_left">
 			<h5>
 				Invitar Jugadores
 			</h5>
@@ -47,18 +48,14 @@
    				</ul>
  			
 		</div>
+		{% endblock %}
 	</header>
-	
 	<nav>
-		<ul class="menu">
-			<li class="Nuevo_Grupo"><a href="#">Nuevo Grupo +</a></li>
-			<li class="nombre"><a href="#">nombre del grupo q largo </a></li>
-			<li class="cambiar"><a href="#">cambiar de grupo</a></li>
-		</ul>
+		{% block wraper1 %}
+		{% endblock %}
 	</nav>
-
 	<section class="wrap_0">
-		{% block wraper %}
+		{% block wraper2 %}
 		{% endblock %}
 	</section>
 <footer>
