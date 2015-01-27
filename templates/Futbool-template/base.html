@@ -31,7 +31,7 @@
    					{% if user and not user.is_anonymous %}
      					<li>
      						<ul>
-     							<img src="{{user.get_profile.photo}}">	
+     							<img src="{{user.avatar}}">
      						</ul>
      						<ul>
      							<a>{{ user.get_full_name|default:user.username }}!</a>	
