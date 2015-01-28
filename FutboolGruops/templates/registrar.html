@@ -9,5 +9,28 @@
 {% endblock %}
 
 {% block wraper2 %}
-	<a href="#">aca va el forms de registro</a>
+	<h2>{{ user }} Bienvenido  RunPlayers</h2>
+	<form method = "POST">{% csrf_token %}
+		<p>
+			<label>usuario</label>
+			<input type="text" name="username">
+			{{ error_username}}
+		</p>
+		<p>
+			<label>email</label>
+			<input type = "text" name ="email">
+			{{ error_email}}			
+		</p>
+		<p>
+			<label>primer nombre</label>
+			<input type = "text" name ="first_name">
+			{{ error_first_name}}			
+		</p>
+		<p>
+			<label>segundo nombre</label>
+			<input type = "text" name ="last_name">
+			{{ error_last_name}}			
+		</p>
+        <input type="submit" value="Guardar">
+	</form>
 {% endblock %}
