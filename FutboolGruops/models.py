@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import (
 AbstractBaseUser, BaseUserManager, PermissionsMixin)
 
-
+#custom usuario
 class UserManager(BaseUserManager):
 
 	def _create_user(self, username, email,password,is_staff,is_superuser, **extra_fields):
@@ -21,7 +21,7 @@ class UserManager(BaseUserManager):
 	def create_superuser(self, username, email, password, **extra_fields):
 		return self._create_user(username, email, password, True, True, **extra_fields)
 
-
+#es la tabla de jugadores
 class User(AbstractBaseUser, PermissionsMixin):
        
     username = models.CharField(max_length=30, unique = True)
@@ -30,6 +30,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     last_name = models.CharField( max_length=30, blank=True, null=True)
     avatar = models.URLField()
     status = models.BooleanField(default=False)
+
+#    equipo = models.ForeignKey(Equipos)
 
     objects = UserManager()
 
@@ -48,3 +50,26 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def get_short_name(self):
 		return  self.first_name
+"""
+#tablas super locas
+class Grupos(models.Model):
+    username = models.CharField(max_length=30, unique = True)
+    members = models.ManyToManyField(User, through ='Membership')
+
+    def __unicode__(self):
+    	return self.name
+
+
+class Membership(models.Model):
+	jugador = models.ForeignKey(User)
+	grupo =  models.ForeignKey(Grupos)
+	dias_horas = models.DateField()
+	lugar = models.CharField(max_length=30, unique = True)
+	asistencia = models.BooleanField(default=False)
+
+
+class Equipos(models.Model):
+
+	nombre = models.ForeignKey(Grupos)
+	visitante_local = models.BooleanField(default=False)
+"""

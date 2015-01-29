@@ -16,21 +16,9 @@
 			<input type="text" name="username">
 			{{ error_username}}
 		</p>
-		<p>
-			<label>email</label>
-			<input type = "text" name ="email">
-			{{ error_email}}			
-		</p>
-		<p>
-			<label>primer nombre</label>
-			<input type = "text" name ="first_name">
-			{{ error_first_name}}			
-		</p>
-		<p>
-			<label>segundo nombre</label>
-			<input type = "text" name ="last_name">
-			{{ error_last_name}}			
-		</p>
+			{{form_grupos.as_p}} 
+			{{form_membership.as_p}} 
+			{{form_equipo.as_p}}
         <input type="submit" value="Guardar">
 	</form>
 {% endblock %}
