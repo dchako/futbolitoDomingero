@@ -1,8 +1,7 @@
 from django.db import models
+from datetime import datetime
 from django.contrib.auth.models import (
 AbstractBaseUser, BaseUserManager, PermissionsMixin)
-
-
 
 #custom usuario
 class UserManager(BaseUserManager):
@@ -54,24 +53,31 @@ class User(AbstractBaseUser, PermissionsMixin):
 		return  self.first_name
 
 #tablas super locas
+
 class Grupos(models.Model):
     nombreDelGrupo = models.CharField(max_length=30, unique = True)
     members = models.ManyToManyField(User, through ='Membership')
 
     def __unicode__(self):
-    	return self.name
+    	return self.nombreDelGrupo
 
 #tabla intermedia 
+
 class Membership(models.Model):
 	jugador = models.ForeignKey('User')
 	grupo =  models.ForeignKey('Grupos')
-	dias_horas = models.DateField()
+	dias_horas = models.DateTimeField(default = datetime.now(), blank=True)
 	lugar = models.CharField(max_length=30, unique = True)
 	asistencia = models.BooleanField(default=False)
 
 #tabla equipos
+
 class Equipos(models.Model):
 
-	nombreDelEquipo = models.ForeignKey('Grupos')
+	nombreDelEquipo = models.CharField(max_length=30, unique = True)
+	nombreDelGrupos = models.ForeignKey('Grupos')
 	visitante_local = models.BooleanField(default=False)
+	
+	def __unicode__(self):
+		return self.nombreDelEquipo
 

@@ -12,13 +12,35 @@
 	<h2>{{ user }} Bienvenido  RunPlayers</h2>
 	<form method = "POST">{% csrf_token %}
 		<p>
-			<label>usuario</label>
-			<input type="text" name="username">
+			<label>Cambie su nombre de Usuario!</label>
+			{{form.username}}
 			{{ error_username}}
 		</p>
-			{{form_grupos.as_p}} 
-			{{form_membership.as_p}} 
-			{{form_equipos.as_p}}
+		<p>
+			<label>dias de juego y hora</label>
+			{{form_membership.dias_horas}}
+			{{ error_diaDeJuegoYhoras}}
+		</p>
+		<p>
+			<label>Lugar o Nombre del Lugar</label>
+			{{form_membership.lugar}}
+			{{ error_lugar}}
+		</p>
+		<p>
+			<label>nombre del Grupo</label>
+			{{form_grupos.nombreDelGrupo}}
+			{{ error_nombreDelGrupo}}
+		</p>
+		<p>
+			<label>Nombre del Equipo Local</label>
+			{{form_equipos.nombreDelEquipo}}
+			{{ error_nombreDeEquipoLocal}}
+		</p>
+		<p>
+			<label>Nombre del Equipo Visitante</label>
+			{{form_equipos.nombreDelEquipo}}
+			{{ error_nombreDelEquipoVisitante}}
+		</p>
         <input type="submit" value="Guardar">
 	</form>
 {% endblock %}
