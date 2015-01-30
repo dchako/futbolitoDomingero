@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import (
 AbstractBaseUser, BaseUserManager, PermissionsMixin)
 
+
+
 #custom usuario
 class UserManager(BaseUserManager):
 
@@ -31,7 +33,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     avatar = models.URLField()
     status = models.BooleanField(default=False)
 
-#    equipo = models.ForeignKey(Equipos)
+    equipos = models.ForeignKey('Equipos',null=True)
 
     objects = UserManager()
 
@@ -50,26 +52,26 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def get_short_name(self):
 		return  self.first_name
-"""
+
 #tablas super locas
 class Grupos(models.Model):
-    username = models.CharField(max_length=30, unique = True)
+    nombreDelGrupo = models.CharField(max_length=30, unique = True)
     members = models.ManyToManyField(User, through ='Membership')
 
     def __unicode__(self):
     	return self.name
 
-
+#tabla intermedia 
 class Membership(models.Model):
-	jugador = models.ForeignKey(User)
-	grupo =  models.ForeignKey(Grupos)
+	jugador = models.ForeignKey('User')
+	grupo =  models.ForeignKey('Grupos')
 	dias_horas = models.DateField()
 	lugar = models.CharField(max_length=30, unique = True)
 	asistencia = models.BooleanField(default=False)
 
-
+#tabla equipos
 class Equipos(models.Model):
 
-	nombre = models.ForeignKey(Grupos)
+	nombreDelEquipo = models.ForeignKey('Grupos')
 	visitante_local = models.BooleanField(default=False)
-"""
+

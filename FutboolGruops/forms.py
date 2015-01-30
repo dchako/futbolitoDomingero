@@ -1,5 +1,5 @@
 from django import forms
-from .models import User #, Membership, Grupos, Equipos 
+from .models import User , Membership, Grupos, Equipos 
 
 
 class ExtraDataForm(forms.ModelForm):
@@ -11,13 +11,13 @@ class ExtraDataForm(forms.ModelForm):
 			#'email', 'first_name' , 'last_name'
 			)
 
-"""
+
 class ExtraDataForm_grupos(forms.ModelForm):
 
 
 	class Meta:
 		model = Grupos
-		fields = ('username', 'members')
+		fields = ('nombreDelGrupo', 'members')
 
 
 class ExtraDataForm_Membership(forms.ModelForm):
@@ -25,7 +25,7 @@ class ExtraDataForm_Membership(forms.ModelForm):
 
 	class Meta:
 		model = Membership
-		fields = ('jugador','grupo' ,'dias_horas','lugar', 'asistencia')
+		fields = ('jugador','grupo','dias_horas','lugar')
 
 
 class ExtraDataForm_Equipos(forms.ModelForm):
@@ -33,5 +33,4 @@ class ExtraDataForm_Equipos(forms.ModelForm):
 
 	class Meta:
 		model = Equipos
-		fields = ('nombre','visitante_local')
-"""
+		fields = ('nombreDelEquipo',)
