@@ -67,7 +67,7 @@ class Membership(models.Model):
 	jugador = models.ForeignKey('User')
 	grupo =  models.ForeignKey('Grupos')
 	dias_horas = models.DateTimeField(default = datetime.now(), blank=True)
-	lugar = models.CharField(max_length=30, unique = True)
+	lugar = models.CharField(max_length=30)
 	asistencia = models.BooleanField(default=False)
 
 #tabla equipos

@@ -3,6 +3,7 @@ from django.template import RequestContext
 from django.views.generic import View
 from .forms import ExtraDataForm, ExtraDataForm_grupos, ExtraDataForm_Membership, ExtraDataForm_Equipos
 from django.contrib.auth.decorators import login_required
+from .models import Membership, Equipos, Grupos, User
 
 # Create your views here.
 @login_required(login_url = '/login')
@@ -36,7 +37,7 @@ class ExtraDataView(View):
 	
 		ctx = {'form_grupos':ExtraDataForm_grupos(prefix="Grupos"),
 				'form_equipos':ExtraDataForm_Equipos(instance =request.user.equipos),
-				'form_membership':ExtraDataForm_Membership(prefix="membership"),
+				'form_membership':ExtraDataForm_Membership(prefix="Membership"),
 				'form':ExtraDataForm(request.POST)
 				}
 		return render (request, self.template_name, ctx)
@@ -46,18 +47,30 @@ class ExtraDataView(View):
 		
 		form = ExtraDataForm(request.POST)
 		form_grupos = ExtraDataForm_grupos(request.POST, prefix="Grupos")
-		form_membership = ExtraDataForm_Membership(request.POST,prefix="membership")
+		form_membership = ExtraDataForm_Membership(request.POST,prefix="Membership")
 		form_equipos = ExtraDataForm_Equipos(request.POST,instance =request.user.equipos)
-		if form.is_valid() and form_equipos.is_valid() and form_grupos.is_valid():
-			#aca va la logica de creacion de grupo y equipos y relaciones
+		if form.is_valid() and form_equipos.is_valid() and form_grupos.is_valid() and form_membership.is_valid():
+			#aca guardamos usuario y equipos
 			request.user.username = request.POST['username']
 			request.user.status = True 
-			#request.user.equipos = form_equipos.cleaned_data["nombreDelEquipo"]
-			#aca se graba en la base de datos
-			form_grupos.save()
-			form_membership.save()
-			form_equipos.save()
+			nombre_Equipo = form_equipos.cleaned_data["nombreDelEquipo"]
+			#grupo antes
+			nombre_Grupo=form_grupos.cleaned_data["nombreDelGrupo"]
+			grupos = Grupos.objects.create(nombreDelGrupo= nombre_Grupo)
+			equipo = Equipos.objects.create(nombreDelEquipo = nombre_Equipo, nombreDelGrupos=grupos)
+			equipo.save()
+			request.user.equipos = equipo
 			request.user.save()
+			#creamos la membresia
+			print "entro"
+			usuario = User.objects.get(id = request.user.id)
+			lugarejo = form_membership.cleaned_data.get('lugar')
+			print lugarejo
+			members = Membership(jugador=usuario, grupo=grupos, lugar = lugarejo)
+			members.save()
+			#form_grupos.save()
+			#form_membership.save()
+			#form_equipos.save()
 			return render(request,'home.html')
 		else:
 			ctx = { 

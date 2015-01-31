@@ -17,7 +17,7 @@ class ExtraDataForm_grupos(forms.ModelForm):
 
 	class Meta:
 		model = Grupos
-		fields = ('nombreDelGrupo', 'members')
+		fields = ('nombreDelGrupo',)
 
 
 class ExtraDataForm_Membership(forms.ModelForm):
@@ -25,7 +25,7 @@ class ExtraDataForm_Membership(forms.ModelForm):
 
 	class Meta:
 		model = Membership
-		fields = ('jugador','grupo','dias_horas','lugar')
+		fields = ('dias_horas','lugar')
 
 
 class ExtraDataForm_Equipos(forms.ModelForm):
