@@ -59,7 +59,7 @@ class Grupos(models.Model):
     members = models.ManyToManyField(User, through ='Membership')
 
     def __unicode__(self):
-    	return self.nombreDelGrupo
+    	return self.nombreDelGrupo 
 
 #tabla intermedia 
 
@@ -69,7 +69,9 @@ class Membership(models.Model):
 	dias_horas = models.DateTimeField(default = datetime.now(), blank=True)
 	lugar = models.CharField(max_length=30)
 	asistencia = models.BooleanField(default=False)
-
+   
+	def __unicode__(self):
+	 	return (self.grupo.nombreDelGrupo +  "-" +self.jugador.username)
 #tabla equipos
 
 class Equipos(models.Model):

@@ -9,13 +9,17 @@
 {% endblock %}
 
 {% block wraper2 %}
-	<h2>{{ user }} Bienvenido  RunPlayers</h2>
 	<form method = "POST">{% csrf_token %}
-		<p>
-			<label>Cambie su nombre de Usuario!</label>
-			{{form.username}}
-			{{ error_username}}
-		</p>
+		{% if user.status == False %}
+			<h2>{{ user }} Bienvenido  RunPlayers</h2>
+			<p>
+				<label>Cambie su nombre de Usuario!</label>
+				{{form.username}}
+				{{ error_username}}
+			</p>
+		{% else %}
+			<h2>{{ user }} --- Crea Tu Grupo</h2>
+		{% endif %}
 		<p>
 			<label>dias de juego y hora</label>
 			{{form_membership.dias_horas}}

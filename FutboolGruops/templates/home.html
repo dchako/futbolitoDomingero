@@ -3,7 +3,7 @@
 {% block wraper1 %}
 		<ul class="menu">
 			<li class="Nuevo_Grupo"><a href="{% url 'registrar' %}">Nuevo Grupo +</a></li>
-			<li class="nombre"><a href="#">nombre del grupo q largo </a></li>
+			<li class="nombre"><a href="#">{{nombreDelGrupo}}</a></li>
 			<li class="cambiar"><a href="#">cambiar de grupo</a></li>
 		</ul>
 {% endblock %}
@@ -16,63 +16,13 @@
 				  <TR>
 					    <TD>nombre</TD>
 					    <TD>asistir_noAsistir</TD>
-				  </TR>
+				  </TR>  
+				{% for usuario in usuarios %}
 				  <TR>
-					    <TD>#{{usuario}}#</TD>
-					    <TD>#nombre#</TD>
+					    <TD>{{usuario.jugador.username}}</TD>
+					    <TD>{{usuario.asistencia}}</TD>
 				  </TR>
-				  <TR>
-					    <TD>#nombre#</TD>
-					    <TD>#nombre#</TD>
-				  </TR>
-				  <TR>
-					    <TD>#nombre#</TD>
-					    <TD>#nombre#</TD>
-				  </TR>
-				  <TR>
-					    <TD>#nombre#</TD>
-					    <TD>#nombre#</TD>
-				  </TR>
-				    <TR>
-					    <TD>#nombre#</TD>
-					    <TD>#nombre#</TD>
-				  </TR>
-				  <TR>
-					    <TD>#nombre#</TD>
-					    <TD>#nombre#</TD>
-				  </TR>
-				    <TR>
-					    <TD>#nombre#</TD>
-					    <TD>#nombre#</TD>
-				  </TR>
-				  <TR>
-					    <TD>#nombre#</TD>
-					    <TD>#nombre#</TD>
-				  </TR>
-				    <TR>
-					    <TD>#nombre#</TD>
-					    <TD>#nombre#</TD>
-				  </TR>
-				  <TR>
-					    <TD>#nombre#</TD>
-					    <TD>#nombre#</TD>
-				  </TR>
-				   <TR>
-					    <TD>#nombre#</TD>
-					    <TD>#nombre#</TD>
-				  </TR>
-				   <TR>
-					    <TD>#nombre#</TD>
-					    <TD>#nombre#</TD>
-				  </TR>
-				   <TR>
-					    <TD>#nombre#</TD>
-					    <TD>#nombre#</TD>
-				  </TR>
-				   <TR>
-					    <TD>#nombre#</TD>
-					    <TD>#nombre#</TD>
-				  </TR>
+				{% endfor %}
 				</TABLE>
 			</div>	
 			<div class="acciones">
@@ -109,55 +59,18 @@
 					    <TD>nombre del equipo_1</TD>
 					    <TD>Nombre del equipo_2</TD>
 				  </TR>
-					  <TR>
-					    <TD>#nombre#</TD>
-					    <TD>#nombre#</TD>
-				  </TR>
-					  <TR>
-					    <TD>#nombre#</TD>
-					    <TD>#nombre#</TD>
-				  </TR>
-				    </TR>
-					  <TR>
-					    <TD>#nombre#</TD>
-					    <TD>#nombre#</TD>
-				  </TR>
-					  <TR>
-					    <TD>#nombre#</TD>
-					    <TD>#nombre#</TD>
-				  </TR>
-				    </TR>
-					  <TR>
-					    <TD>#nombre#</TD>
-					    <TD>#nombre#</TD>
-				  </TR>
-					  <TR>
-					    <TD>#nombre#</TD>
-					    <TD>#nombre#</TD>
-				  </TR>
-				    </TR>
-					  <TR>
-					    <TD>#nombre#</TD>
-					    <TD>#nombre#</TD>
-				  </TR>
+				{% for usuario in usuarios %}
 				  <TR>
-					    <TD>#nombre#</TD>
-					    <TD>#nombre#</TD>
-				  </TR>
-				    </TR>
-				  <TR>
-					    <TD>#nombre#</TD>
+					    <TD>{{usuario.jugador.username}}</TD>
 					    <TD>#nombre#</TD>
 				  </TR>
-				   <TR>
-					    <TD>#nombre#</TD>
-					    <TD>#nombre#</TD>
-				  </TR>
+				{% endfor %}
+
 				</TABLE>
 			</div>
 				<div class="acciones">
-					<a class="cambiar_a" href="/logout/">cambiazo</a>
-				</div>
+					<a class="cambiar_a" href="#">cambiazo</a>
+			</div>
 		</aside>
 		
 		<section class="wrap_2">

@@ -9,7 +9,13 @@ from .models import Membership, Equipos, Grupos, User
 @login_required(login_url = '/login')
 def home(request):
 		if request.user.status:
-			return render_to_response('home.html',context_instance=RequestContext(request))
+			usuario = User.objects.get(id = request.user.id)
+			gru = Membership.objects.filter(jugador = usuario)
+			usuarios = Membership.objects.filter(grupo = gru[0])
+			ctx ={'usuarios':usuarios,
+				  'nombreDelGrupo':gru[0].grupo.nombreDelGrupo,
+				 }
+			return render (request, 'home.html', ctx)
 		else:	
 			return redirect ('/registrar')
 
@@ -49,9 +55,13 @@ class ExtraDataView(View):
 		form_grupos = ExtraDataForm_grupos(request.POST, prefix="Grupos")
 		form_membership = ExtraDataForm_Membership(request.POST,prefix="Membership")
 		form_equipos = ExtraDataForm_Equipos(request.POST,instance =request.user.equipos)
-		if form.is_valid() and form_equipos.is_valid() and form_grupos.is_valid() and form_membership.is_valid():
+		if form_equipos.is_valid() and form_grupos.is_valid() and form_membership.is_valid():
 			#aca guardamos usuario y equipos
-			request.user.username = request.POST['username']
+			if form.is_valid(): 
+				request.user.username = request.POST['username']
+			else:
+				request.user.username = request.user.username
+
 			request.user.status = True 
 			nombre_Equipo = form_equipos.cleaned_data["nombreDelEquipo"]
 			#grupo antes
@@ -62,15 +72,10 @@ class ExtraDataView(View):
 			request.user.equipos = equipo
 			request.user.save()
 			#creamos la membresia
-			print "entro"
 			usuario = User.objects.get(id = request.user.id)
 			lugarejo = form_membership.cleaned_data.get('lugar')
-			print lugarejo
 			members = Membership(jugador=usuario, grupo=grupos, lugar = lugarejo)
 			members.save()
-			#form_grupos.save()
-			#form_membership.save()
-			#form_equipos.save()
 			return render(request,'home.html')
 		else:
 			ctx = { 
