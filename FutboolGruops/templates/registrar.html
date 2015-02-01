@@ -1,4 +1,11 @@
 {% extends "Futbool-template/base.html" %}
+{% block wraper_izquierda %}
+	<div class="agregar_jugador_left">
+		<h5>
+			<a href="{% url 'home' %}">volver</a>
+		</h5>
+	</div>
+{% endblock wraper_izquierda %}
 
 {% block wraper1 %}
 		<ul class="menu">
@@ -21,9 +28,9 @@
 			<h2>{{ user }} --- Crea Tu Grupo</h2>
 		{% endif %}
 		<p>
-			<label>dias de juego y hora</label>
-			{{form_membership.dias_horas}}
-			{{ error_diaDeJuegoYhoras}}
+			<label>nombre del Grupo</label>
+			{{form_grupos.nombreDelGrupo}}
+			{{ error_nombreDelGrupo}}
 		</p>
 		<p>
 			<label>Lugar o Nombre del Lugar</label>
@@ -31,19 +38,20 @@
 			{{ error_lugar}}
 		</p>
 		<p>
-			<label>nombre del Grupo</label>
-			{{form_grupos.nombreDelGrupo}}
-			{{ error_nombreDelGrupo}}
+			<label>dias de juego y hora</label>
+			{{form_membership.dias_horas}}
+			{{ error_diaDeJuegoYhoras}}
 		</p>
 		<p>
 			<label>Nombre del Equipo Local</label>
 			{{form_equipos.nombreDelEquipo}}
 			{{ error_nombreDeEquipoLocal}}
 		</p>
+		
 		<p>
 			<label>Nombre del Equipo Visitante</label>
-			{{form_equipos.nombreDelEquipo}}
-			{{ error_nombreDelEquipoVisitante}}
+			<input type = "text" name = "nombreDelEquipo_v">
+			{{ error_form_equipos_visitante}}
 		</p>
         <input type="submit" value="Guardar">
 	</form>

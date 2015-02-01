@@ -16,18 +16,23 @@
         <!-- Add your site or application content here -->
 	<header>
 	{% block wraper %}
-			<div class="agregar_jugador_left">
-				<h5>
-					Invitar Jugadores
-				</h5>
+			{% block wraper_izquierda %}
+				<div class="agregar_jugador_left">
+					<h5>
+						Invitar Jugadores
+					</h5>
+				</div>
+			{% endblock wraper_izquierda %}
+		{% block wraper_centro %}
+			<div class="titular">
+				<h1 class="titulo">
+					RunPlayers
+				</h1>
 			</div>
-		<div class="titular">
-			<h1 class="titulo">
-				RunPlayers
-			</h1>
-		</div>
-		<div class="logo_usuario_right">
-   				<ul>
+		{% endblock wraper_centro %}
+			{% block wraper_derecho %}
+				<div class="logo_usuario_right">
+   					<ul>
    					{% if user and not user.is_anonymous %}
      					<li>
      						<ul>
@@ -45,9 +50,9 @@
        						<a href="{% url 'social:begin' 'facebook' %}?next={%url 'home' %}">Login with Facebook</a>
      					</li>
    					{% endif %}
-   				</ul>
- 			
-		</div>
+   					</ul>
+				</div>
+			{% endblock wraper_derecho %}
 	{% endblock %}
 	</header>
 	<nav>
