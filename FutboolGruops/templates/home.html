@@ -17,7 +17,7 @@
 					    <TD>nombre</TD>
 					    <TD>asistir_noAsistir</TD>
 				  </TR>  
-				{% for usuario in usuarios %}
+				{% for usuario in todos_los_usuarios %}
 				  <TR>
 					    <TD>{{usuario.jugador.username}}</TD>
 					    <TD>{{usuario.asistencia}}</TD>
@@ -45,10 +45,10 @@
 			<section class="partidos_anterior"> 
 				<div class="resultado">
 					<ul class = "equipos_resulado">
-						<li class="equipo">nombre del equipo_1</li>
+						<li class="equipo">{{equipo1}}</li>
 						<li class="goles">123</li>
 						<li class="vs">VS</li>
-						<li class="equipo">nombre del equipo_2</li>
+						<li class="equipo">{{equipo2}}</li>
 						<li class="goles">124</li>
 					</ul>
 				</div> 
@@ -56,16 +56,16 @@
 			<div class="equipos">
 				<TABLE class="tabla" FRAME="void" RULES="cols">
 				  <TR>
-					    <TD>nombre del equipo_1</TD>
-					    <TD>Nombre del equipo_2</TD>
+					    {% for equipo in Todos_los_equipos %}
+					    	<TD>{{equipo}}</TD>
+					    {% endfor %}
 				  </TR>
-				{% for usuario in usuarios %}
+				{% for jugador_v, jugador_l in jugadores %}
 				  <TR>
-					    <TD>{{usuario.jugador.username}}</TD>
-					    <TD>#nombre#</TD>
+					   	<TD>{{jugador_v}}</TD>
+					    <TD>{{jugador_l}}</TD>
 				  </TR>
 				{% endfor %}
-
 				</TABLE>
 			</div>
 				<div class="acciones">

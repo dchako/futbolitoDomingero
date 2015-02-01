@@ -11,10 +11,17 @@ def home(request):
 		if request.user.status:
 			usuario = User.objects.get(id = request.user.id)
 			gru = Membership.objects.filter(jugador = usuario)
-			usuarios = Membership.objects.filter(grupo = gru[0])
-
-			ctx ={'usuarios':usuarios,
+			todos_los_usuarios = Membership.objects.filter(grupo = gru[0])
+			Todos_los_equipos = Equipos.objects.filter(nombreDelGrupos = gru[0])
+			jugador_v = User.objects.filter(equipos =Todos_los_equipos[0])
+			jugador_l = User.objects.filter(equipos =Todos_los_equipos[1])
+			jugadores = zip(jugador_l,jugador_v)
+			ctx ={'todos_los_usuarios':todos_los_usuarios,
 				  'nombreDelGrupo':gru[0].grupo.nombreDelGrupo,
+				  'Todos_los_equipos':Todos_los_equipos,
+				  'jugadores':jugadores,
+				  'equipo1':Todos_los_equipos[0],
+				  'equipo2':Todos_los_equipos[1],
 				 }
 			return render (request, 'home.html', ctx)
 		else:
