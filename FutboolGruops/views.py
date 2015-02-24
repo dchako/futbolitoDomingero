@@ -1,45 +1,50 @@
-from django.shortcuts import render_to_response, render ,redirect
-from django.template import RequestContext 
+from django.shortcuts import render_to_response, render, redirect
+from django.template import RequestContext
 from django.views.generic import View
-from .forms import ExtraDataForm, ExtraDataForm_grupos, ExtraDataForm_Membership, ExtraDataForm_Equipos
+from .forms import *
 from django.contrib.auth.decorators import login_required
 from .models import Membership, Equipos, Grupos, User
 
 # Create your views here.
-@login_required(login_url = '/login')
+
+
+@login_required(login_url='/login')
 def home(request):
-		if request.user.status:
-			usuario = User.objects.get(id = request.user.id)
-			gru = Membership.objects.filter(jugador = usuario)
-			todos_los_usuarios = Membership.objects.filter(grupo = gru[0])
-			Todos_los_equipos = Equipos.objects.filter(nombreDelGrupos = gru[0])
-			jugador_v = User.objects.filter(equipos =Todos_los_equipos[0])
-			jugador_l = User.objects.filter(equipos =Todos_los_equipos[1])
-			jugadores = zip(jugador_l,jugador_v)
-			ctx ={'todos_los_usuarios':todos_los_usuarios,
-				  'nombreDelGrupo':gru[0].grupo.nombreDelGrupo,
-				  'Todos_los_equipos':Todos_los_equipos,
-				  'jugadores':jugadores,
-				  'equipo1':Todos_los_equipos[0],
-				  'equipo2':Todos_los_equipos[1],
-				 }
-			return render (request, 'home.html', ctx)
-		else:
-			return render (request, 'registrar.html')
+    if request.user.status:
+        usuario = User.objects.get(id=request.user.id)
+        gru = Membership.objects.filter(jugador=usuario)
+        todos_los_usuarios = Membership.objects.filter(grupo=gru[0])
+        Todos_los_equipos = Equipos.objects.filter(nombreDelGrupos=gru[0])
+        jugador_v = User.objects.filter(equipos=Todos_los_equipos[0])
+        jugador_l = User.objects.filter(equipos=Todos_los_equipos[1])
+        jugadores = zip(jugador_l,jugador_v)
+        ctx = {'todos_los_usuarios': todos_los_usuarios,
+            'nombreDelGrupo': gru[0].grupo.nombreDelGrupo,
+            'Todos_los_equipos': Todos_los_equipos,
+            'jugadores': jugadores,
+            'equipo1': Todos_los_equipos[0],
+            'equipo2': Todos_los_equipos[1],
+            }
+        return render(request, 'home.html', ctx)
+    else:
+        return render(request, 'registrar.html')
+
 
 def error(request):
-	return render_to_response('error.html',context_instance=RequestContext(request))
+    return render_to_response('error.html', context_instance=RequestContext(request))
 
-@login_required(login_url = '/login')
+
+@login_required(login_url='/login')
 def invitacion(request):
-	return render_to_response('invitacion.html',context_instance=RequestContext(request))
+    return render_to_response('invitacion.html', context_instance=RequestContext(request))
 
-@login_required(login_url = '/login')
+
+@login_required(login_url='/login')
 def invitar(request):
-	return render_to_response('invitar.html',context_instance=RequestContext(request))
+    return render_to_response('invitar.html', context_instance=RequestContext(request))
 
 def login(request):
-	return render_to_response('login.html',context_instance=RequestContext(request))
+	return render_to_response('login.html', context_instance=RequestContext(request))
 
 
 class ExtraDataView(View):
@@ -66,15 +71,15 @@ class ExtraDataView(View):
 		form_equipos_vis = ExtraDataForm_Equipos(request.POST['nombreDelEquipo_v'])
 		if form_equipos.is_valid() and form_grupos.is_valid() and form_membership.is_valid() and form_equipos_vis.is_valid():
 			#aca guardamos usuario y equipos
-			if form.is_valid(): 
+			if form.is_valid():
 				request.user.username = request.POST['username']
 			else:
 				request.user.username = request.user.username
 
-			request.user.status = True 
+			request.user.status = True
 			nombre_Equipo = form_equipos.cleaned_data["nombreDelEquipo"]
 			nombre_Equipo_v = request.POST['nombreDelEquipo_v']
-			print nombre_Equipo 
+			print nombre_Equipo
 			print nombre_Equipo_v
 			#grupo antes
 			nombre_Grupo=form_grupos.cleaned_data["nombreDelGrupo"]
@@ -93,7 +98,7 @@ class ExtraDataView(View):
 			members.save()
 			return redirect('home')
 		else:
-			ctx = { 
+			ctx = {
 				'error_username':form['username'].errors.as_text(),
 				'error_diaDeJuegoYhoras':form_membership['dias_horas'].errors.as_text(),
 				'error_lugar':form_membership['lugar'].errors.as_text(),	
