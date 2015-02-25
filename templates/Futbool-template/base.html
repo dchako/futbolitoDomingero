@@ -18,9 +18,9 @@
 	{% block wraper %}
 			{% block wraper_izquierda %}
 				<div class="agregar_jugador_left">
-					<h5>
-						Invitar Jugadores
-					</h5>
+					<h4>
+						<a href="{% url 'invitar' %}">Invitar Jugadores</a>
+					</h4>
 				</div>
 			{% endblock wraper_izquierda %}
 		{% block wraper_centro %}
@@ -32,25 +32,19 @@
 		{% endblock wraper_centro %}
 			{% block wraper_derecho %}
 				<div class="logo_usuario_right">
-   					<ul>
    					{% if user and not user.is_anonymous %}
-     					<li>
-     						<ul>
-     							<img src="{{user.avatar}}">
-     						</ul>
-     						<ul>
-     							<a>{{ user.get_full_name|default:user.username }}!</a>	
-     						</ul>
-     					</li>
-     					<li>
-       						<a href="{% url 'auth:logout' %}?next={%url 'home' %}">Logout</a>
-     					</li>
+     					<img src="{{user.avatar}}">
+     					<a>{{ user.get_full_name|default:user.username }}!</a>	
+       					<p>
+       					<a href="{% url 'auth:logout' %}?next={%url 'home' %}">Logout</a>
+       					</p>
    					{% else %}
-     					<li>
-       						<a href="{% url 'social:begin' 'facebook' %}?next={%url 'home' %}">Login with Facebook</a>
-     					</li>
+     					<ul>
+     						<li>
+       							<a href="{% url 'social:begin' 'facebook' %}?next={%url 'home' %}">Login with Facebook</a>
+     						</li>
+     					</ul>
    					{% endif %}
-   					</ul>
 				</div>
 			{% endblock wraper_derecho %}
 	{% endblock %}
