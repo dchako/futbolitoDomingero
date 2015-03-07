@@ -72,7 +72,7 @@ class ExtraDataView(View):
             form = ExtraDataForm(request.POST)
             form_grupos = ExtraDataForm_grupos(request.POST, prefix="Grupos")
             form_membership = ExtraDataForm_Membership(
-                                            request.POST, prefix="Membership")
+                                        request.POST, prefix="Membership")
             form_equipos = ExtraDataForm_Equipos(
                                 request.POST, instance=request.user.equipos)
             form_equipos_vis = ExtraDataForm_Equipos(
