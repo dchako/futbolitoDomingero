@@ -3,6 +3,9 @@ gris_oscuro = #444
 gris_texto = #7A7A7A
 naranja = #DD4F24
 
+@import url(http://fonts.googleapis.com/css?family=Ubuntu:400,500italic);
+//@import url(http://fonts.googleapis.com/css?family=Poiret+One);
+
 footer
 	background naranja
 	color rgba(white,0.5)
@@ -23,6 +26,7 @@ footer
 	
 .wrap_0
 	padding 0.5em
+	
 	.wrap_2
 		box-shadow 2px 2px 10px rgba(black,1)
 		width 100%
@@ -33,32 +37,37 @@ footer
 			color white
 			font-size 25px
 			font-family italic
+
 	.wrap
 		width 100%
 		vertical-align top
 		border-radius 0 0 0.5em 0.5em
 		text-align center
-		.resultados_equipos
+		box-shadow 4px 4px 10px rgba(black,0.5)
+		.equipos_resulado
+			height 35px
 			background white
 			color gris_texto
 			box-shadow 2px 2px 10px rgba(black,0.5)
-		.partidos_anterior
-			box-shadow 4px 4px 10px rgba(black,0.5)
-			.resultado
-				.equipos_resulado
-					padding 0
-					li
-						display inline-block
-					.goles
-						border 2px solid  red
-					.vs
-						padding 2px
-						color red 
+			padding 0
+			li
+				display inline-block
+				margin-top 9px
+			.goles
+				border 2px solid  red
+			.vs
+				padding 2px
+				color red
 		.equipos
 			.tabla
 				td 
 					width 50%
 				width 100%
+		.acciones
+			border-top 3px solid naranja
+			padding 0.5em
+			text-align center
+
 		.lista
 			background white 
 			border-radius 0 0 0.5em 0.5em
@@ -85,10 +94,6 @@ footer
 				color red
 				font-size 25px
 				font-family italic				
-		.acciones
-			border-top 3px solid naranja
-			padding 0.5em
-			text-align center
 		.asisto
 			margin 2em
 		
@@ -98,7 +103,8 @@ a
 body
 	background #E8E8E8
 	color gris_oscuro
-	font-family Arial 
+	//font-family: 'Poiret One', cursive;
+	font-family: 'Ubuntu', sans-serif;
 	font-size 14px
 nav
 	background azul
@@ -139,15 +145,17 @@ header
 		display inline-block
 		right 10px
 		top 10px
-		height 39px
-		//width 59px
+		width 140px
 		img
-			height 20%
-			width 11%
-			border-radius 7px
+			height 57%
+			width 47%
+			border-radius 9px
 			margin-top 9px
 		a
 			color red
+			float right
+			margin-top 17px
+		
 	.titular
 		display inline-block
 		margin 10px 40px 15px 70px
@@ -168,9 +176,9 @@ header
 				vertical-align top
 				&:nth-child(odd)
 					margin-right 2%
-				.resultados_equipos
-					display block
-					box-shadow 2px 2px 10px rgba(black,1)
+				.equipos_resulado
+					margin-top 0
+			
 			.wrap_2
 				margin-right 2%
 				border-radius 0 0 0.5em 0.5em
