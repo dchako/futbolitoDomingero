@@ -78,6 +78,9 @@ class Membership(models.Model):
         dias_horas = models.DateTimeField(default=datetime.now(), blank=True)
         lugar = models.CharField(max_length=30)
         asistencia = models.BooleanField(default=False)
+        cancha_5 = models.BooleanField(default=True)
+        cancha_7 = models.BooleanField(default=False)
+        cancha_11 = models.BooleanField(default=False)
 
         def __unicode__(self):
             return (self.grupo.nombreDelGrupo + "-" + self.jugador.username)
@@ -86,9 +89,9 @@ class Membership(models.Model):
 
 class Equipos(models.Model):
 
-    nombreDelEquipo = models.CharField(max_length=30, unique=True)
+    nombreDelEquipo = models.CharField(max_length=30)
     nombreDelGrupos = models.ForeignKey('Grupos')
-    visitante_local = models.BooleanField(default=False)
+    local_visitante = models.BooleanField(default=False)
 
     def __unicode__(self):
-        return self.nombreDelEquipo
+        return (self.nombreDelEquipo)

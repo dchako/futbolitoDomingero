@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ES">
+<head>
+	<!--{% load staticfiles %}-->
+	<meta charset="utf-8"/>
+	 <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>RunPlayers!</title>
+	<!--
+	<link rel="stylesheet" href="{% static "css/normalize.css" %}">
+	<link rel="stylesheet" href="{% static "css/stilos.css" %}">
+	-->
+	<link rel="stylesheet" type="text/css" href="static/css/normalize.css">
+	<link rel="stylesheet" type="text/css" href="static/css/stilos.css">
+</head>	
+<body>
+	   <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- Add your site or application content here -->
+	<header>
+			<div class="agregar_jugador_left">
+				<h2 class="accion_left">
+					<a href="{% url 'home' %}">volver</a>
+				</h2>
+			</div>
+
+			<div class="titular">
+					<h1 class="titulo">
+						RunPlayers
+					</h1>
+				</div>
+			<div class="logo_usuario_right">
+     				<img src="static/imagenes/grupos.jpg">
+     				<a href="{% url 'auth:logout' %}?next={%url 'home' %}">Logout</a>
+					
+			</div>
+	</header>
+	<nav>
+		<ul class="menu">
+			<li class="Nuevo_Grupo"><a href="#">#</a></li>
+			<li class="nombre"><a href="#">CREAR TU GRUPO Y EQUIPOS</a></li>
+			<li class="cambiar"><a href="#">#</a></li>
+		</ul>
+	</nav>
+
+<section class="wrap_0">
+	<div class="formulario">
+		<form method = "POST">{% csrf_token %}
+			{% if user.status == False %}
+				<h2>{{ user }} Bienvenido  RunPlayers</h2>
+				<p>
+					<label>Cambie su nombre de Usuario!</label>
+					{{form.username}}
+					{{ error_username}}
+				</p>
+			{% else %}
+				<h2>{{ user }} --- Crea Tu Grupo</h2>
+			{% endif %}
+		<p>
+			<label>nombre del Grupo</label>
+			{{form_grupos.nombreDelGrupo}}
+			{{ error_nombreDelGrupo}}
+		</p>
+		<p>
+			<label>Lugar o Nombre del Lugar</label>
+			{{form_membership.lugar}}
+			{{ error_lugar}}
+		</p>
+		<p>
+			<label>dias de juego y hora</label>
+			{{form_membership.dias_horas}}
+			{{ error_diaDeJuegoYhoras}}
+		</p>
+		<p>
+			<label>Nombre del Equipo Local</label>
+			{{form_equipos.nombreDelEquipo}}
+			{{ error_nombreDeEquipoLocal}}
+		</p>
+		
+		<p>
+			<label>Nombre del Equipo Visitante</label>
+			{{form_equipos_v.nombreDelEquipo}}
+			{{ error_form_equipos_visitante}}
+		</p>
+
+	
+		<label>En que cancha jugas</label>
+			
+		<ul id="canchas">
+			<li>
+                Futbool 5<br><input name="asistencia" type="checkbox" checked="True"/>
+			</li>
+			<li>
+                 Futbool 7<br><input name="asistencia" type="checkbox" checked=""/>
+			</li>
+			<li>
+                 Futbool 11<br><input name="asistencia" type="checkbox" checked="False"/>
+			</li>
+		</ul>
+
+		
+
+        <input class="boton-guardar" type="submit" value="GUARDAR">
+	</form>
+
+	</div>
+
+</section>
+
+<footer>
+	<h3>
+		<strong>Powered by FutbolitoDomingero<br></strong>
+		<span class="mejor">v0.1 por chako</span>
+	</h3>
+</footer>
+
+<script>
+		
+</script>
+
+</body>
+</html>

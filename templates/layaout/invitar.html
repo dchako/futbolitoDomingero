@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ES">
+<head>
+	<!--{% load staticfiles %}-->
+	<meta charset="utf-8"/>
+	 <meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<title>RunPlayers!</title>
+	<!--
+	<link rel="stylesheet" href="{% static "css/normalize.css" %}">
+	<link rel="stylesheet" href="{% static "css/stilos.css" %}">
+	-->
+	<link rel="stylesheet" type="text/css" href="static/css/normalize.css"> 
+	<link rel="stylesheet" type="text/css" href="static/css/stilos.css">
+</head>	
+<body>
+	   <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- Add your site or application content here -->
+	<header>
+			<div class="agregar_jugador_left">
+				<h2 class="accion_left">
+					<a href="{% url 'home' %}">volver</a>
+				</h2>
+			</div>
+			<div class="titular">
+					<h1 class="titulo">
+						RunPlayers
+					</h1>
+				</div>
+			<div class="logo_usuario_right">
+     				<img src="static/imagenes/grupos.jpg">
+     				<a href="{% url 'auth:logout' %}?next={%url 'home' %}">Logout</a>
+					
+			</div>
+	</header>
+	<nav>
+		<ul class="menu">
+			<li class="Nuevo_Grupo"><a href="#">#</a></li>
+			<li class="nombre"><a href="#">{{nombreDelGrupo}}</a></li>
+			<li class="cambiar"><a href="#">#</a></li>
+		</ul>
+	</nav>
+
+<section class="wrap_0">
+		<div class="invitar">
+			<div class="buscador">
+				<label>Nombre Del Amigo Jugador!</label>
+				<input type = "text" name = "jugador">
+				<input class="boton-buscar" type="submit" value="Buscar">
+			</div>
+			<div class="usuario">
+				
+
+				<TABLE class="datos" FRAME="void" RULES="cols"  WIDTH = "100" >
+				 	 <TR class="titulo">
+						   <TD><label>Nombre Del Jugador</label></TD>
+					 	   <TD><label>Equipo al que pertenece</label></TD>
+					 	   <TD><label>grupo al que pertenece</label></TD>
+					 	   <TD><label>invitar</label></TD>
+				 	 </TR>  
+				
+				  	<TR class="dato-jugador">
+					    <TD>{{nombre_jugador}}</TD>
+					 	<TD> {{equipo_local}}</TD>
+					 	<TD>{{nombreDelGrupo}}</TD>
+					 	<TD><input class="boton-invitar" type="submit" value="Invitar"></TD>
+				  	</TR>
+
+				  	<TR class="dato-jugador">
+					    <TD>{{nombre_jugador}}</TD>
+					 	<TD> {{equipo_local}}</TD>
+					 	<TD>{{nombreDelGrupo}}</TD>
+					 	<TD><input class="boton-invitar" type="submit" value="Invitar"></TD>
+				  	</TR>
+
+				  	<TR class="dato-jugador">
+					    <TD>{{nombre_jugador}}</TD>
+					 	<TD> {{equipo_local}}</TD>
+					 	<TD>{{nombreDelGrupo}}</TD>
+					 	<TD><input class="boton-invitar" type="submit" value="Invitar"></TD>
+				  	</TR>
+
+				  	<TR class="dato-jugador">
+					    <TD>{{nombre_jugador}}</TD>
+					 	<TD> {{equipo_local}}</TD>
+					 	<TD>{{nombreDelGrupo}}</TD>
+					 	<TD><input class="boton-invitar" type="submit" value="Invitar"></TD>
+				  	</TR>
+
+				</TABLE>
+				
+			</div>
+		</div>
+</section>
+
+<footer>
+	<h3>
+		<strong>Powered by FutbolitoDomingero<br></strong>
+		<span class="mejor">v0.1 por chako</span>
+	</h3>
+</footer>
+
+<script>
+		
+</script>
+
+</body>
+</html>

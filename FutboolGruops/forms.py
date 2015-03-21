@@ -22,11 +22,11 @@ class ExtraDataForm_Membership(forms.ModelForm):
 
     class Meta:
         model = Membership
-        fields = ('dias_horas', 'lugar')
+        fields = ('dias_horas', 'lugar', 'cancha_5', 'cancha_7', 'cancha_11')
 
 
 class ExtraDataForm_Equipos(forms.ModelForm):
 
     class Meta:
         model = Equipos
-        fields = ('nombreDelEquipo',)
+        fields = ('nombreDelEquipo', )

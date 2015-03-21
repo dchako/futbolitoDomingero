@@ -17,29 +17,28 @@
 	<header>
 	{% block wraper %}
 			{% block wraper_izquierda %}
-				<div class="agregar_jugador_left">
-					<h4>
-						<a href="{% url 'invitar' %}">Invitar Jugadores</a>
+			<div class="agregar_jugador_left">
+					<h4 class="accion_left">
+						<a href="{% url 'invitar' %}">Invitar Jugador</a>
 					</h4>
-				</div>
+			</div>
 			{% endblock wraper_izquierda %}
+
 			{% block wraper_centro %}
-				<div class="titular">
+			<div class="titular">
 					<h1 class="titulo">
 						RunPlayers
 					</h1>
-				</div>
+			</div>
 			{% endblock wraper_centro %}
+
 			{% block wraper_derecho %}
 				<div class="logo_usuario_right">
-   					{% if user and not user.is_anonymous %}
-     					<img src="{{user.avatar}}">
-     					<a>{{ user.get_full_name|default:user.username }}!</a>	
-       					<p>
-       					<a href="{% url 'auth:logout' %}?next={%url 'home' %}">Logout</a>
-       					</p>
-   					{% else %}
-     					<ul>
+					{% if user and not user.is_anonymous %}
+     				<img src="{{user.avatar}}">
+     				<a href="{% url 'auth:logout' %}?next={%url 'home' %}">Logout</a>
+					{% else %}
+						<ul>
      						<li>
        							<a href="{% url 'social:begin' 'facebook' %}?next={%url 'home' %}">Login with Facebook</a>
      						</li>

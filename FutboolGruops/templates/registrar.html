@@ -1,32 +1,33 @@
 {% extends "Futbool-template/base.html" %}
 {% block wraper_izquierda %}
 	<div class="agregar_jugador_left">
-		<h5>
+		<h2 class="accion_left">
 			<a href="{% url 'home' %}">volver</a>
-		</h5>
+		</h2>	
 	</div>
 {% endblock wraper_izquierda %}
 
 {% block wraper1 %}
-		<ul class="menu">
-			<li class="Nuevo_Grupo"><a href="#">#</a></li>
-			<li class="nombre"><a href="#">CREAR TU GRUPO Y EQUIPOS</a></li>
-			<li class="cambiar"><a href="#">#</a></li>
-		</ul>
+	<ul class="menu">
+		<li class="Nuevo_Grupo"><a href="#">#</a></li>
+		<li class="nombre"><a href="#">CREAR TU GRUPO Y EQUIPOS</a></li>
+		<li class="cambiar"><a href="#">#</a></li>
+	</ul>
 {% endblock %}
 
 {% block wraper2 %}
-	<form method = "POST">{% csrf_token %}
-		{% if user.status == False %}
-			<h2>{{ user }} Bienvenido  RunPlayers</h2>
-			<p>
-				<label>Cambie su nombre de Usuario!</label>
-				{{form.username}}
-				{{ error_username}}
-			</p>
-		{% else %}
-			<h2>{{ user }} --- Crea Tu Grupo</h2>
-		{% endif %}
+	<div class="formulario">
+		<form method = "POST">{% csrf_token %}
+			{% if user.status == False %}
+				<h1>{{ user }} Bienvenido  RunPlayers</h1>
+				<p>
+					<label>Cambie su nombre de Usuario!</label>
+					{{form.username}}
+					{{ error_username}}
+				</p>
+			{% else %}
+				<h2>{{ user }} --- Crea Tu Grupo</h2>
+			{% endif %}
 		<p>
 			<label>nombre del Grupo</label>
 			{{form_grupos.nombreDelGrupo}}
@@ -42,17 +43,34 @@
 			{{form_membership.dias_horas}}
 			{{ error_diaDeJuegoYhoras}}
 		</p>
+		<p>{{mensajeDeError}}</p>
 		<p>
 			<label>Nombre del Equipo Local</label>
 			{{form_equipos.nombreDelEquipo}}
-			{{ error_nombreDeEquipoLocal}}
+			{{error_nombreDeEquipoLocal}}
 		</p>
 		
 		<p>
 			<label>Nombre del Equipo Visitante</label>
-			<input type = "text" name = "nombreDelEquipo_v">
-			{{ error_form_equipos_visitante}}
+			{{form_equipos_v.nombreDelEquipo}}
+			{{ error_nombreDelEquipoVisitante}}
 		</p>
-        <input type="submit" value="Guardar">
+
+		<label>En que cancha jugas</label>
+		<ul id="canchas">
+			<li>
+                Futbool 5<br>{{form_membership.cancha_5}}
+			</li>
+			<li>
+                 Futbool 7<br>{{form_membership.cancha_7}}
+			</li>
+			<li>
+                 Futbool 11<br>{{form_membership.cancha_11}}
+			</li>
+		</ul>
+        <input class="boton-guardar" type="submit" value="GUARDAR">
 	</form>
+
+	</div>
+
 {% endblock %}

@@ -1,2 +1,327 @@
 @import url("http://fonts.googleapis.com/css?family=Ubuntu:400,500italic");
-#canchas{color:#147032;text-decoration:none;}#canchas li{display:inline-block;margin-right:50px}footer{background:#dd4f24;color:rgba(255,255,255,0.5);text-align:center;padding:1em 0;width:100%}footer h3{font-size:14px;font-weigt:normal;margin-bottom:0;margin-top:0;}footer h3 strong{display:block}footer h3 .mejor:before,footer h3 .mejor:after{content:" - "}.wrap_0 .invitar{text-align:center;margin-top:10px;}.wrap_0 .invitar .usuario .datos{width:95%;margin-left:2%;margin-top:2%;}.wrap_0 .invitar .usuario .datos .titulo{font-size:14px;box-shadow:2px 2px 10px #000}.wrap_0 .invitar .usuario .datos .dato-jugador td{height:70px;margin-top:60px}.wrap_0 .carta{width:100%;text-align:center;margin-top:10px;font-size:14px;}.wrap_0 .carta .rechazar{color:#dd4f24;text-decoration:none;margin-left:18px;float:left}.wrap_0 .carta a{color:#00f}.wrap_0 .formulario{box-shadow:2px 2px 10px #000;text-align:center;}.wrap_0 .formulario .boton-guardar{border-radiusbox-shadow:4px 4px 10px rgba(0,0,0,0.5);width:20%;background:#398525;background:-moz-linear-gradient(top,#8dd297 0%,#398525 100%);background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#8dd297),color-stop(100%,#398525));margin-bottom:12px;height:50px;box-shadow:inset 0 0 6px #fff}-webkit-box-shadow: inset 0px 0px 6px #fff,border 1px solid #5ea617,border-radius 10px,font-weight bold 55px/25px Helvetica,Sans-Serif,text-align center,text-transform uppercase,text-decoration none,color #147032,text-shadow 0px 1px 2px #b4d1ad,a{color:#dd4f24;text-decoration:none}body{background:#e8e8e8;color:#444;font-family:'Ubuntu',sans-serif;font-size:14px;}body a{color:#dd4f24;text-decoration:none}body .wrap_0{padding:.5em;}body .wrap_0 .wrap{width:100%;vertical-align:top;border-radius:0 0 .5em .5em;text-align:center;box-shadow:4px 4px 10px rgba(0,0,0,0.5);}body .wrap_0 .wrap .equipos_resulado{height:35px;background:#fff;color:#7a7a7a;box-shadow:2px 2px 10px rgba(0,0,0,0.5);padding:0;}body .wrap_0 .wrap .equipos_resulado li{display:inline-block;margin-top:9px}body .wrap_0 .wrap .equipos_resulado .goles{border:2px solid #f00}body .wrap_0 .wrap .equipos_resulado .vs{padding:2px;color:#f00}body .wrap_0 .wrap .equipos .tabla{width:100%}body .wrap_0 .wrap .equipos .tabla td{width:50%}body .wrap_0 .wrap .acciones{border-top:3px solid #dd4f24;padding:.5em;text-align:center}body .wrap_0 .wrap .lista{background:#fff;border-radius:0 0 .5em .5em;color:#7a7a7a;box-shadow:2px 2px 10px rgba(0,0,0,0.5);}body .wrap_0 .wrap .lista .menu{text-align:center;}body .wrap_0 .wrap .lista .menu .asistencia{width:100%;text-align:center}body .wrap_0 .wrap .lista .menu .asistencia td{width:50%}body .wrap_0 .wrap .titulares{text-align:center;box-shadow:2px 2px 10px #000;width:100%;height:40px;}body .wrap_0 .wrap .titulares .titulo{color:#22bce0;margin-right:10px;font-size:25px;font-weigt:normal}body .wrap_0 .wrap .titulares .cantidad{color:#f00;font-size:25px;font-family:italic}body .wrap_0 .wrap .asisto{margin:2em}body .wrap_0 .wrap_2{box-shadow:2px 2px 10px #000;width:100%;height:40px;text-align:center;background:#05e617;}body .wrap_0 .wrap_2 a{color:#fff;font-size:25px;font-family:italic}nav{background:#22bce0;text-align:center;}nav .menu{margin:0;height:30px;line-heigth:30px;padding:0;}nav .menu li{display:inline-block;}nav .menu li a{color:#fff;display:inline-block;margin:0 0,5em;padding:.5em}nav .menu .Nuevo_Grupo{float:left}nav .menu .cambiar{float:right}header{background:#444;color:#fff;overflow:hidden;padding:.5em;text-align:center;}header .agregar_jugador_left{display:inline-block;float:left;border-right:1px solid #22bce0;left:10px;top:10px;width:120px;h5font-size:28px;}header .agregar_jugador_left a{color:#dd4f24;text-decoration:none}header .logo_usuario_right{float:right;display:inline-block;right:10px;top:10px;width:140px;}header .logo_usuario_right img{height:57%;width:47%;border-radius:9px;margin-top:9px}header .logo_usuario_right a{color:#f00;float:right;margin-top:17px}header .titular{display:inline-block;margin:10px 40px 15px 70px;}header .titular .titulo{font-size:2em;font-weigt:normal;font-style:italic;text-align:center;margin:0;padding:0}@media screen and (min-width:768px){body .wrap_0 .invitar .buscador{font-size:23px}body .wrap_0 .invitar .usuario .datos{width:50%;margin-top:2%;margin-left:25%;}body .wrap_0 .invitar .usuario .datos .titulo{font-size:24px}body .wrap_0 .wrap{display:inline-block;width:48%;vertical-align:top;}body .wrap_0 .wrap:nth-child(odd){margin-right:2%}body .wrap_0 .wrap .equipos_resulado{margin-top:0}body .wrap_0 .wrap_2{margin-right:2%;border-radius:0 0 .5em .5em;box-shadow:4px 4px 10px #f00}body .wrap_0 .carta{width:50%;margin-left:25%;font-size:24px;}body .wrap_0 .carta .rechazar{color:#dd4f24;text-decoration:none;margin-left:15%;float:left}}
+html {
+  height: 100%;
+}
+#canchas {
+  color: #147032;
+  text-decoration: none;
+}
+#canchas li {
+  display: inline-block;
+  margin-right: 50px;
+}
+footer {
+  background: #dd4f24;
+  color: rgba(255,255,255,0.5);
+  text-align: center;
+  padding: 1em 0em;
+  width: 100%;
+}
+footer h3 {
+  font-size: 14px;
+  margin-bottom: 0px;
+  margin-top: 0px;
+}
+footer h3 strong {
+  display: block;
+}
+footer h3 .mejor:before,
+footer h3 .mejor:after {
+  content: " - ";
+}
+.wrap_0 .invitar {
+  text-align: center;
+  margin-top: 10px;
+}
+.wrap_0 .invitar .usuario .datos {
+  width: 95%;
+  margin-left: 2%;
+  margin-top: 2%;
+}
+.wrap_0 .invitar .usuario .datos .titulo {
+  font-size: 14px;
+  box-shadow: 2px 2px 10px #000;
+}
+.wrap_0 .invitar .usuario .datos .dato-jugador td {
+  height: 70px;
+  margin-top: 60px;
+}
+.wrap_0 .carta {
+  width: 100%;
+  text-align: center;
+  margin-top: 10px;
+  font-size: 14px;
+}
+.wrap_0 .carta .rechazar {
+  color: #dd4f24;
+  text-decoration: none;
+  margin-left: 18px;
+  float: left;
+}
+.wrap_0 .carta a {
+  color: #00f;
+}
+.wrap_0 .formulario {
+  box-shadow: 2px 2px 10px #000;
+  text-align: center;
+}
+.wrap_0 .formulario .boton-guardar {
+border-radius
+  box-shadow: 4px 4px 10px rgba(0,0,0,0.5);
+  width: 20%;
+  background: #398525;
+  background: -moz-linear-gradient(top, #8dd297 0%, #398525 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #8dd297), color-stop(100%, #398525));
+  margin-bottom: 12px;
+  height: 50px;
+  box-shadow: inset 0px 0px 6px #fff;
+}
+-webkit-box-shadow: inset 0px 0px 6px #fff,
+border 1px solid #5ea617,
+border-radius 10px,
+font-weight bold 55px/25px Helvetica,
+Sans-Serif,
+text-align center,
+text-transform uppercase,
+text-decoration none,
+color #147032,
+text-shadow 0px 1px 2px #b4d1ad,
+a {
+  color: #dd4f24;
+  text-decoration: none;
+}
+body {
+  background: #e8e8e8;
+  color: #444;
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 14px;
+}
+body a {
+  color: #dd4f24;
+  text-decoration: none;
+}
+body .wrap_0 {
+  padding: 0.5em;
+}
+body .wrap_0 .wrap {
+  width: 100%;
+  vertical-align: top;
+  border-radius: 0 0 0.5em 0.5em;
+  text-align: center;
+  box-shadow: 4px 4px 10px rgba(0,0,0,0.5);
+}
+body .wrap_0 .wrap .equipos_resulado {
+  height: 35px;
+  background: #fff;
+  color: #7a7a7a;
+  box-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+  padding: 0;
+}
+body .wrap_0 .wrap .equipos_resulado li {
+  display: inline-block;
+  margin-top: 9px;
+}
+body .wrap_0 .wrap .equipos_resulado .goles {
+  border: 2px solid #f00;
+}
+body .wrap_0 .wrap .equipos_resulado .vs {
+  padding: 2px;
+  color: #f00;
+}
+body .wrap_0 .wrap .equipos .tabla {
+  width: 100%;
+}
+body .wrap_0 .wrap .equipos .tabla td {
+  width: 50%;
+}
+body .wrap_0 .wrap .acciones {
+  border-top: 3px solid #dd4f24;
+  padding: 0.5em;
+  text-align: center;
+}
+body .wrap_0 .wrap .lista {
+  background: #fff;
+  border-radius: 0 0 0.5em 0.5em;
+  color: #7a7a7a;
+  box-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+}
+body .wrap_0 .wrap .lista .menu {
+  text-align: center;
+}
+body .wrap_0 .wrap .lista .menu .asistencia {
+  width: 100%;
+  text-align: center;
+}
+body .wrap_0 .wrap .lista .menu .asistencia tr {
+  height: 30px;
+}
+body .wrap_0 .wrap .lista .menu .asistencia td {
+  width: 50%;
+}
+body .wrap_0 .wrap .titulares {
+  text-align: center;
+  box-shadow: 2px 2px 10px #000;
+  width: 100%;
+  height: 40px;
+}
+body .wrap_0 .wrap .titulares .titulo {
+  color: #22bce0;
+  margin-right: 10px;
+  font-size: 25px;
+}
+body .wrap_0 .wrap .titulares .cantidad {
+  color: #f00;
+  font-size: 25px;
+  font-family: italic;
+}
+body .wrap_0 .wrap .asisto {
+  margin: 2em;
+}
+body .wrap_0 .wrap_2 {
+  box-shadow: 2px 2px 10px #000;
+  width: 100%;
+  height: 40px;
+  text-align: center;
+  background: #05e617;
+}
+body .wrap_0 .wrap_2 a {
+  color: #fff;
+  font-size: 25px;
+  font-family: italic;
+}
+nav {
+  background: #22bce0;
+  text-align: center;
+}
+nav .menu {
+  margin: 0;
+  height: 30px;
+  padding: 0;
+}
+nav .menu li {
+  display: inline-block;
+}
+nav .menu li a {
+  color: #fff;
+  display: inline-block;
+  padding: 0.5em;
+}
+nav .menu .Nuevo_Grupo {
+  float: left;
+}
+nav .menu .cambiar {
+  float: right;
+}
+header {
+  background: #444;
+  color: #fff;
+  overflow: hidden;
+  padding: 0.5em;
+  text-align: center;
+}
+header .agregar_jugador_left {
+  display: inline-block;
+  float: left;
+  border-right: 1px solid #22bce0;
+  left: 10px;
+  top: 10px;
+  width: 25%;
+}
+header .agregar_jugador_left .accion_left,
+header .agregar_jugador_left font-size 3em,
+header .agregar_jugador_left color red,
+header .agregar_jugador_left a {
+  color: #dd4f24;
+  text-decoration: none;
+}
+header .logo_usuario_right {
+  float: right;
+  display: inline-block;
+  right: 10px;
+  top: 10px;
+  width: 140px;
+}
+header .logo_usuario_right img {
+  height: 30px;
+  width: 25%;
+  border-radius: 9px;
+  margin-top: 9px;
+}
+header .logo_usuario_right a {
+  color: #f00;
+  float: right;
+  margin-top: 17px;
+}
+header .titular {
+  display: inline-block;
+}
+header .titular .titulo {
+  font-size: 2em;
+  font-style: italic;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+@media screen and (min-width: 768px) {
+  body {
+    height: 100%;
+  }
+  body .wrap_0 {
+    height: 100%;
+  }
+  body .wrap_0 .invitar .buscador {
+    font-size: 23px;
+  }
+  body .wrap_0 .invitar .usuario .datos {
+    width: 50%;
+    margin-top: 2%;
+    margin-left: 25%;
+  }
+  body .wrap_0 .invitar .usuario .datos .titulo {
+    font-size: 24px;
+  }
+  body .wrap_0 .wrap {
+    display: inline-block;
+    width: 48%;
+    vertical-align: top;
+  }
+  body .wrap_0 .wrap:nth-child(odd) {
+    margin-right: 2%;
+  }
+  body .wrap_0 .wrap .equipos_resulado {
+    margin-top: 0;
+  }
+  body .wrap_0 .wrap_2 {
+    margin-right: 2%;
+    border-radius: 0 0 0.5em 0.5em;
+    box-shadow: 4px 4px 10px #f00;
+  }
+  body .wrap_0 .carta {
+    width: 50%;
+    margin-left: 25%;
+    font-size: 24px;
+  }
+  body .wrap_0 .carta .rechazar {
+    color: #dd4f24;
+    text-decoration: none;
+    margin-left: 15%;
+    float: left;
+  }
+  body header .agregar_jugador_left {
+    width: 20%;
+  }
+  body header .titular {
+    margin: 10px 40px 15px 70px;
+  }
+  body header .titular .titulo {
+    font-size: 24px;
+  }
+}
+@media screen and (min-width: 1050px) {
+  body {
+    height: 100%;
+  }
+  body .wrap_0 {
+    height: 100%;
+  }
+}

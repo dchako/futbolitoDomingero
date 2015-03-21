@@ -3,8 +3,8 @@
 <head>
 	<!--{% load staticfiles %}-->
 	<meta charset="utf-8"/>
-	 <meta name="viewport" content="width=device-width, initial-scale=1"> 
-	<title>El FutbolitoDomingero WEB!!</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<title>RunPlayers!</title>
 	<!--
 	<link rel="stylesheet" href="{% static "css/normalize.css" %}">
 	<link rel="stylesheet" href="{% static "css/stilos.css" %}">
@@ -19,22 +19,23 @@
 
         <!-- Add your site or application content here -->
 	<header>
+
 			<div class="agregar_jugador_left">
-					<h4>
-						<a href="{% url 'invitar' %}">Invitar Jugadores</a>
+					<h4 class="accion_left">
+						<a href="{% url 'invitar' %}">Invitar Jugador</a>
 					</h4>
-				</div>
+			</div>
+
 			<div class="titular">
 					<h1 class="titulo">
 						RunPlayers
 					</h1>
-				</div>
+			</div>
+
 			<div class="logo_usuario_right">
-     				<img src="#">
-     				<a>Chako PyThonico</a>	
-       				<p>
-       					<a href="{% url 'auth:logout' %}?next={%url 'home' %}">Logout</a>
-       				</p>
+     				<img src="static/imagenes/grupos.jpg">
+     				<a href="{% url 'auth:logout' %}?next={%url 'home' %}">Logout</a>
+					
 			</div>
 	</header>
 	<nav>
@@ -44,22 +45,151 @@
 			<li class="cambiar"><a href="#">cambiar de grupo</a></li>
 		</ul>
 	</nav>
-	
-	<section class="wrap_0">
+
+<section class="wrap_0">
 		<section class="wrap">
 			<div class ="lista">
 				<div class = "menu">
-					<TABLE class="asistencia" FRAME="void" RULES="cols" HEIGHT = 430>
+					<TABLE class="asistencia" FRAME="void" RULES="cols" >
 				 	 <TR>
 						   <TD>nombre</TD>
-					 	   <TD>asistir_noAsistir</TD>
+					 	   <TD>Asistira!</TD>
 				 	 </TR>  
-					{% for usuario in todos_los_usuarios %}
+					
 				  	<TR>
 					    <TD>{{usuario.jugador.username}}</TD>
-					    <TD>{{usuario.asistencia}}</TD>
+					    <TD><input name="asistencia" type="checkbox" checked="{{usuario.asistencia}}" />
+					    </TD>
 				  	</TR>
-				{% endfor %}
+
+				  		<TR>
+					    <TD>{{usuario.jugador.username}}</TD>
+					    <TD><input name="asistencia" type="checkbox" checked="{{usuario.asistencia}}" />
+					    </TD>
+				  	</TR>
+
+				  		<TR>
+					    <TD>{{usuario.jugador.username}}</TD>
+					    <TD><input name="asistencia" type="checkbox" checked="{{usuario.asistencia}}" />
+					    </TD>
+				  	</TR>
+
+				  		<TR>
+					    <TD>{{usuario.jugador.username}}</TD>
+					    <TD><input name="asistencia" type="checkbox" checked="{{usuario.asistencia}}" />
+					    </TD>
+				  	</TR>
+				  
+				  	<TR>
+					    <TD>{{usuario.jugador.username}}</TD>
+					    <TD><input name="asistencia" type="checkbox" checked="{{usuario.asistencia}}" />
+					    </TD>
+				  	</TR>
+
+				  		<TR>
+					    <TD>{{usuario.jugador.username}}</TD>
+					    <TD><input name="asistencia" type="checkbox" checked="{{usuario.asistencia}}" />
+					    </TD>
+				  	</TR>
+
+				  		<TR>
+					    <TD>{{usuario.jugador.username}}</TD>
+					    <TD><input name="asistencia" type="checkbox" checked="{{usuario.asistencia}}" />
+					    </TD>
+				  	</TR>
+
+				  		<TR>
+					    <TD>{{usuario.jugador.username}}</TD>
+					    <TD><input name="asistencia" type="checkbox" checked="{{usuario.asistencia}}" />
+					    </TD>
+				  	</TR>
+
+				  	<TR>
+					    <TD>{{usuario.jugador.username}}</TD>
+					    <TD><input name="asistencia" type="checkbox" checked="{{usuario.asistencia}}" />
+					    </TD>
+				  	</TR>
+
+				  		<TR>
+					    <TD>{{usuario.jugador.username}}</TD>
+					    <TD><input name="asistencia" type="checkbox" checked="{{usuario.asistencia}}" />
+					    </TD>
+				  	</TR>
+
+				  		<TR>
+					    <TD>{{usuario.jugador.username}}</TD>
+					    <TD><input name="asistencia" type="checkbox" checked="{{usuario.asistencia}}" />
+					    </TD>
+				  	</TR>
+
+				  		<TR>
+					    <TD>{{usuario.jugador.username}}</TD>
+					    <TD><input name="asistencia" type="checkbox" checked="{{usuario.asistencia}}" />
+					    </TD>
+				  	</TR>
+
+				  	<TR>
+					    <TD>{{usuario.jugador.username}}</TD>
+					    <TD><input name="asistencia" type="checkbox" checked="{{usuario.asistencia}}" />
+					    </TD>
+				  	</TR>
+
+				  		<TR>
+					    <TD>{{usuario.jugador.username}}</TD>
+					    <TD><input name="asistencia" type="checkbox" checked="{{usuario.asistencia}}" />
+					    </TD>
+				  	</TR>
+
+				  		<TR>
+					    <TD>{{usuario.jugador.username}}</TD>
+					    <TD><input name="asistencia" type="checkbox" checked="{{usuario.asistencia}}" />
+					    </TD>
+				  	</TR>
+
+				  		<TR>
+					    <TD>{{usuario.jugador.username}}</TD>
+					    <TD><input name="asistencia" type="checkbox" checked="{{usuario.asistencia}}" />
+					    </TD>
+				  	</TR>
+
+				  	<TR>
+					    <TD>{{usuario.jugador.username}}</TD>
+					    <TD><input name="asistencia" type="checkbox" checked="{{usuario.asistencia}}" />
+					    </TD>
+				  	</TR>
+
+				  		<TR>
+					    <TD>{{usuario.jugador.username}}</TD>
+					    <TD><input name="asistencia" type="checkbox" checked="{{usuario.asistencia}}" />
+					    </TD>
+				  	</TR>
+
+				  		<TR>
+					    <TD>{{usuario.jugador.username}}</TD>
+					    <TD><input name="asistencia" type="checkbox" checked="{{usuario.asistencia}}" />
+					    </TD>
+				  	</TR>
+
+				  		<TR>
+					    <TD>{{usuario.jugador.username}}</TD>
+					    <TD><input name="asistencia" type="checkbox" checked="{{usuario.asistencia}}" />
+					    </TD>
+				  	</TR>
+
+				  		  		<TR>
+					    <TD>{{usuario.jugador.username}}</TD>
+					    <TD><input name="asistencia" type="checkbox" checked="{{usuario.asistencia}}" />
+					    </TD>
+				  	</TR>
+
+				  		<TR>
+					    <TD>{{usuario.jugador.username}}</TD>
+					    <TD><input name="asistencia" type="checkbox" checked="{{usuario.asistencia}}" />
+					    </TD>
+				  	</TR>
+
+
+				
 					</TABLE>
 				</div>	
 				<div class="acciones">
@@ -69,27 +199,25 @@
 					</div>
 				</div>
 			</div>
-		<div class="titulares">
+			<div class="titulares">
 				<h3>
 					<strong class="titulo">cantidad!:</strong>
 					<strong class="cantidad">23</strong>
 				</h3>			
-		</div>
+			</div>
  		</section >
 	
 	<section class="wrap">
-		<div class="resultados_equipos">
-			<section class="partidos_anterior"> 
-				<div class="resultado">
-					<ul class = "equipos_resulado">
-						<li class="equipo">{{equipo1}}</li>
-						<li class="goles">123</li>
-						<li class="vs">VS</li>
-						<li class="equipo">{{equipo2}}</li>
-						<li class="goles">124</li>
-					</ul>
-				</div> 
-			</section>
+	
+			<ul class = "equipos_resulado">
+				<li class="equipo">{{equipo1}}</li>
+				<li class="goles">123</li>
+				<li class="vs">VS</li>
+				<li class="equipo">{{equipo2}}</li>
+				<li class="goles">124</li>
+			</ul>
+		
+			
 			<div class="equipos">
 				<TABLE class="tabla" FRAME="void" RULES="cols">
 				  <TR>
@@ -105,24 +233,30 @@
 				{% endfor %}
 				</TABLE>
 			</div>
-				<div class="acciones">
-					<a class="cambiar_a" href="#">cambiazo</a>
+			
+			<div class="acciones">
+				<a class="cambiar_a" href="#">cambiazo</a>
 			</div>
-		</div>
+
 		
-		<section class="wrap_2">
+		<div class="wrap_2">
 			<a class="estrategia" href="#">Estrategia</a>
-		</section>
+		</div>
+
 	</section>
+
 </section>
+
 <footer>
 	<h3>
 		<strong>Powered by FutbolitoDomingero<br></strong>
 		<span class="mejor">v0.1 por chako</span>
 	</h3>
 </footer>
+
 <script>
 		
 </script>
+
 </body>
 </html>

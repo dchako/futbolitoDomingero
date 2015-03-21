@@ -1,13 +1,28 @@
 {% extends "Futbool-template/base.html" %}
-
+{% block wraper_izquierda %}
+	<div class="agregar_jugador_left">
+		<h2 class="accion_left">
+				<a href="{% url 'home' %}">volver</a>
+			</h2>
+		</div>
+{% endblock wraper_izquierda %}
 {% block wraper1 %}
-		<ul class="menu">
-			<li class="Nuevo_Grupo"><a href="#">#</a></li>
-			<li class="nombre"><a href="#">INVITACION</a></li>
-			<li class="cambiar"><a href="#">#</a></li>
-		</ul>
+	<ul class="menu">
+		<li class="Nuevo_Grupo"><a href="#">#</a></li>
+		<li class="nombre"><a href="#">INVITACION</a></li>
+		<li class="cambiar"><a href="#">#</a></li>
+	</ul>
 {% endblock %}
 
 {% block wraper2 %}
-	<a href="#">ACA LLEGA LA CARTA DE INVITACION A OTRO GRUPO E INFO</a>
+	<div class="carta">
+			<p>
+				Usted {{usuario_username}} a sido invitado a jugar en el grupo {{nombreDelGRUPO}}
+				que lo administra {{usuario_username_grupo}} que se juega {{lugar}} los dias {{horarios}},
+				si acepta la invitacion sus datos personales como posicion, cantidad de goles y partidos podran ser visto 
+				por este grupo.
+			</p>
+			<a class="rechazar" href="#">rechazar</a>
+			<a href="#">acepta INVITACION Al GRUPO</a>
+		</div>
 {% endblock %}

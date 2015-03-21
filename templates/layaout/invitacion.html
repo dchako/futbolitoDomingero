@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ES">
+<head>
+	<!--{% load staticfiles %}-->
+	<meta charset="utf-8"/>
+	 <meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<title>RunPlayers!</title>
+	<!--
+	<link rel="stylesheet" href="{% static "css/normalize.css" %}">
+	<link rel="stylesheet" href="{% static "css/stilos.css" %}">
+	-->
+	<link rel="stylesheet" type="text/css" href="static/css/normalize.css"> 
+	<link rel="stylesheet" type="text/css" href="static/css/stilos.css">
+</head>	
+<body>
+	   <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- Add your site or application content here -->
+	<header>
+			<div class="agregar_jugador_left">
+				<h2 class="accion_left">
+					<a href="{% url 'home' %}">volver</a>
+				</h2>
+			</div>
+			<div class="titular">
+					<h1 class="titulo">
+						RunPlayers
+					</h1>
+				</div>
+			<div class="logo_usuario_right">
+     				<img src="static/imagenes/grupos.jpg">
+     				<a href="{% url 'auth:logout' %}?next={%url 'home' %}">Logout</a>
+					
+			</div>
+	</header>
+	<nav>
+		<ul class="menu">
+			<li class="Nuevo_Grupo"><a href="#">#</a></li>
+			<li class="nombre"><a href="#">INVITACION</a></li>
+			<li class="cambiar"><a href="#">#</a></li>
+		</ul>
+	</nav>
+
+<section class="wrap_0">
+		<div class="carta">
+			<p>
+				Usted {{usuario_username}} a sido invitado a jugar en el grupo {{nombreDelGRUPO}}
+				que lo administra {{usuario_username_grupo}} que se juega {{lugar}} los dias {{horarios}},
+				si acepta la invitacion sus datos personales como posicion, cantidad de goles y partidos podran ser visto 
+				por este grupo.
+			</p>
+			<a class="rechazar" href="#">rechazar</a>
+			<a href="#">acepta INVITACION Al GRUPO</a>
+		</div>
+
+		<div class="carta">
+			<p>
+				Usted {{usuario_username}} a sido invitado a jugar en el grupo {{nombreDelGRUPO}}
+				que lo administra {{usuario_username_grupo}} que se juega {{lugar}} los dias {{horarios}},
+				si acepta la invitacion sus datos personales como posicion, cantidad de goles y partidos podran ser visto 
+				por este grupo.
+			</p>
+			<a class="rechazar" href="#">rechazar</a>
+			<a href="#">acepta INVITACION Al GRUPO</a>
+		</div>
+
+		<div class="carta">
+			<p>
+				Usted {{usuario_username}} a sido invitado a jugar en el grupo {{nombreDelGRUPO}}
+				que lo administra {{usuario_username_grupo}} que se juega {{lugar}} los dias {{horarios}},
+				si acepta la invitacion sus datos personales como posicion, cantidad de goles y partidos podran ser visto 
+				por este grupo.
+			</p>
+			<a class="rechazar" href="#">rechazar</a>
+			<a href="#">acepta INVITACION Al GRUPO</a>
+		</div>
+</section>
+
+<footer>
+	<h3>
+		<strong>Powered by FutbolitoDomingero<br></strong>
+		<span class="mejor">v0.1 por chako</span>
+	</h3>
+</footer>
+
+<script>
+		
+</script>
+
+</body>
+</html>

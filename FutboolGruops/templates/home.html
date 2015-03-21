@@ -1,64 +1,62 @@
 {% extends "Futbool-template/base.html" %}
 
 {% block wraper1 %}
-		<ul class="menu">
+	<ul class="menu">
 			<li class="Nuevo_Grupo"><a href="{% url 'registrar' %}">Nuevo Grupo +</a></li>
 			<li class="nombre"><a href="#">{{nombreDelGrupo}}</a></li>
 			<li class="cambiar"><a href="#">cambiar de grupo</a></li>
-		</ul>
+	</ul>
 {% endblock %}
 
 {% block wraper2 %}
-	<section class="wrap">
-		<article class ="lista">
-			<div class = "menu">
-				<TABLE class="asistencia" FRAME="void" RULES="cols" HEIGHT = 430>
-				  <TR>
-					    <TD>nombre</TD>
-					    <TD>asistir_noAsistir</TD>
-				  </TR>  
-				{% for usuario in todos_los_usuarios %}
-				  <TR>
+<section class="wrap">
+			<div class ="lista">
+				<div class = "menu">
+					<TABLE class="asistencia" FRAME="void" RULES="cols" >
+				 	 <TR>
+						   <TD>nombre</TD>
+					 	   <TD>Asistira!</TD>
+				 	 </TR>
+					{% for usuario in todos_los_usuarios %}
+				  	<TR>
 					    <TD>{{usuario.jugador.username}}</TD>
-					    <TD>{{usuario.asistencia}}</TD>
-				  </TR>
-				{% endfor %}
-				</TABLE>
-			</div>	
-			<div class="acciones">
-				<div class="asistir_noAsistir">
-					<a class="asisto" href="#">Asistir</a>
-					<a class="no_asisto" href="#">No Asistir</a>
+					    <TD><input name="asistencia" type="checkbox" value={{usuario.asistencia}} />
+					    </TD>
+					{% endfor %}
+					</TABLE>
+				</div>	
+				<div class="acciones">
+					<div class="asistir_noAsistir">
+						<a class="asisto" href="#">Asistir</a>
+						<a class="no_asisto" href="#">No Asistir</a>
+					</div>
 				</div>
 			</div>
-		</article>
-		<div class="titulares">
+			<div class="titulares">
 				<h3>
 					<strong class="titulo">cantidad!:</strong>
 					<strong class="cantidad">23</strong>
 				</h3>			
-		</div>
- 	</section >
+			</div>
+ 		</section >
 	
 	<section class="wrap">
-		<aside class="resultados_equipos">
-			<section class="partidos_anterior"> 
-				<div class="resultado">
-					<ul class = "equipos_resulado">
-						<li class="equipo">{{equipo1}}</li>
-						<li class="goles">123</li>
-						<li class="vs">VS</li>
-						<li class="equipo">{{equipo2}}</li>
-						<li class="goles">124</li>
-					</ul>
-				</div> 
-			</section>
+	
+			<ul class = "equipos_resulado">
+				<li class="equipo">{{equipo1}}</li>
+				<li class="goles">123</li>
+				<li class="vs">VS</li>
+				<li class="equipo">{{equipo2}}</li>
+				<li class="goles">124</li>
+			</ul>
+		
+			
 			<div class="equipos">
 				<TABLE class="tabla" FRAME="void" RULES="cols">
 				  <TR>
 					    {% for equipo in Todos_los_equipos %}
-					    	<TD>{{equipo}}</TD>
-					    {% endfor %}
+					  <TD>{{equipo}}</TD>
+					     {% endfor %}
 				  </TR>
 				{% for jugador_v, jugador_l in jugadores %}
 				  <TR>
@@ -68,13 +66,15 @@
 				{% endfor %}
 				</TABLE>
 			</div>
-				<div class="acciones">
-					<a class="cambiar_a" href="#">cambiazo</a>
+			
+			<div class="acciones">
+				<a class="cambiar_a" href="#">cambiazo</a>
 			</div>
-		</aside>
+
 		
-		<section class="wrap_2">
+		<div class="wrap_2">
 			<a class="estrategia" href="#">Estrategia</a>
-		</section>
+		</div>
+
 	</section>
 {% endblock %}

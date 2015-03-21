@@ -5,6 +5,8 @@ naranja = #DD4F24
 
 @import url(http://fonts.googleapis.com/css?family=Ubuntu:400,500italic);
 
+html
+	height 100%
 #canchas
 	color #147032
 	text-decoration none
@@ -17,9 +19,10 @@ footer
 	color rgba(white,0.5)
 	text-align center
 	padding 1em 0em
+	//margin-bottom 0px
 	h3
 		font-size 14px
-		font-weigt normal
+		//font-weigt normal
 		margin-bottom 0px
 		margin-top 0px
 		strong
@@ -108,6 +111,7 @@ body
 				color gris_texto
 				box-shadow 2px 2px 10px rgba(black,0.5)
 				padding 0
+				
 				li
 					display inline-block
 					margin-top 9px
@@ -134,6 +138,8 @@ body
 				.menu
 					text-align center
 					.asistencia
+						tr
+							height 30px
 						td 
 							width 50%	
 						width 100%
@@ -147,7 +153,7 @@ body
 					color azul
 					margin-right 10px
 					font-size 25px
-					font-weigt normal
+					//font-weigt normal
 				.cantidad
 					color red
 					font-size 25px
@@ -171,14 +177,14 @@ nav
 	.menu
 		margin 0;
 		height 30px
-		line-heigth 30px
+		//line-heigth 30px
 		padding 0
 		li
 			display inline-block
 			a
 				color white
 				display inline-block
-				margin 0 0,5em
+				//margin 0 0,5em
 				padding 0.5em		
 		.Nuevo_Grupo
 			float left
@@ -196,9 +202,10 @@ header
 		border-right 1px solid azul 
 		left 10px
 		top 10px
-		width 120px
-		h5
-		  	font-size 28px
+		width 25%
+		.accion_left
+		  	font-size 3em
+		  	color red
 		a
 			color naranja
 			text-decoration none
@@ -210,8 +217,8 @@ header
 		top 10px
 		width 140px
 		img
-			height 57%
-			width 47%
+			height 30px
+			width 25%
 			border-radius 9px
 			margin-top 9px
 		a
@@ -221,17 +228,19 @@ header
 		
 	.titular
 		display inline-block
-		margin 10px 40px 15px 70px
+		//margin 10px 40px 15px 70px
 		.titulo
 			font-size 2em
-			font-weigt normal
+			//font-weigt normal
 			font-style italic
 			text-align center
 			margin 0
 			padding 0
 @media screen and (min-width: 768px)
 	body
+		height 100%
 		.wrap_0
+			height 100%
 			.invitar
 				.buscador
 					font-size: 23px;
@@ -265,3 +274,16 @@ header
 					text-decoration none
 					margin-left 15%
 					float left
+		header 
+			.agregar_jugador_left
+				width 20%
+			.titular
+				margin 10px 40px 15px 70px
+				.titulo
+					font-size 24px			
+@media screen and (min-width: 1050px)
+	body
+		height 100%
+		.wrap_0
+			height 100%
+		
