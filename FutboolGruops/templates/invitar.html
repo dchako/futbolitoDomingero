@@ -1,5 +1,7 @@
 {% extends "Futbool-template/base.html" %}
 
+
+
 {% block wraper_izquierda %}
 	<div class="agregar_jugador_left">
 		<h2 class="accion_left">
@@ -19,9 +21,11 @@
 {% block wraper2 %}
 	<div class="invitar">
 			<div class="buscador">
-				<label>Nombre Del Amigo Jugador!</label>
-				<input type = "text" name = "jugador">
+				<form method="post" action="/invitar/" >{% csrf_token %}
+				{{form.username}}
+				{{error}}
 				<input class="boton-buscar" type="submit" value="Buscar">
+				</form>
 			</div>
 			<div class="usuario">
 				
@@ -32,7 +36,7 @@
 					 	   <TD><label>Equipo al que pertenece</label></TD>
 					 	   <TD><label>grupo al que pertenece</label></TD>
 					 	   <TD><label>invitar</label></TD>
-				 	 </TR>  
+				 	 </TR>
 				
 				  	<TR class="dato-jugador">
 					    <TD>{{nombre_jugador}}</TD>
@@ -45,4 +49,10 @@
 				
 			</div>
 		</div>
+{% endblock %}
+
+{% block javascript%}
+   <!--
+   <script type="text/javascript" src="{{ STATIC_URL }}js/codigo.js"></script>
+   -->
 {% endblock %}

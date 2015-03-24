@@ -4,6 +4,8 @@ from django.views.generic import View
 from .forms import *
 from django.contrib.auth.decorators import login_required
 from .models import Membership, Equipos, Grupos, User
+from django.http import HttpResponse
+import json
 
 # Create your views here.
 
@@ -47,14 +49,45 @@ def invitacion(request):
                                context_instance=RequestContext(request))
 
 
+def busqueda(request):
+    if request.is_ajax():
+        usu = User.objects.filter(
+         username__startswith=request.POST['username']).values('username', 'id')
+        print ("asdasd")
+        return HttpResponse(json.dumps(usu), content_type='application/json')
+    else:
+        print ("aca entro")
+        return HttpResponse("Solo Ajax")
+
+
 @login_required(login_url='/login')
 def invitar(request):
-    #aca va la logica de la invitacion!
-    #usuario = User.objects.get(user=request.user.id)
-    #traigo con el usuario los grupo
-    #gru = Membership.objects.filter(jugador=usuario)
-    return render_to_response('invitar.html',
-                                context_instance=RequestContext(request))
+    if request.POST:
+        try:
+            usuario = User.objects.get(username=request.POST["username"])
+        except User.DoesNotExist:
+            mensaje = "No Existe el usuario"
+            ctx = {'form': ExtraDataForm(request.POST),
+                'error': mensaje, }
+            return render(request, 'invitar.html', ctx,
+                                    context_instance=RequestContext(request))
+        gru = Membership.objects.get(jugador=usuario)
+        mensaje = ""
+        ctx = {'nombre_jugador': usuario,
+            'nombreDelGrupo': gru.grupo.nombreDelGrupo,
+            'equipo_local': usuario.equipos,
+            'error': mensaje,
+            'form': ExtraDataForm(request.POST),
+            }
+        return render(request, 'invitar.html', ctx,
+                                    context_instance=RequestContext(request))
+    mensaje = ""
+    ctx = {
+        'form': ExtraDataForm(request.POST),
+        'error': mensaje
+        }
+    return render_to_response('invitar.html', ctx,
+                                    context_instance=RequestContext(request))
 
 
 def login(request):
