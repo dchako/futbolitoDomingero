@@ -8,7 +8,7 @@
 	<link rel="stylesheet" href="{% static "css/normalize.css" %}">
 	<link rel="stylesheet" href="{% static "css/stilos.css" %}">
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 	
 
 </head>	
@@ -20,36 +20,6 @@
         <!-- Add your site or application content here -->
 	<header>
 	{% block wraper %}
-			{% block wraper_izquierda %}
-			<div class="agregar_jugador_left">
-					<h4 class="accion_left">
-						<a href="{% url 'invitar' %}">Invitar Jugador</a>
-					</h4>
-			</div>
-			{% endblock wraper_izquierda %}
-
-			{% block wraper_centro %}
-			<div class="titular">
-					<h1 class="titulo">
-						RunPlayers
-					</h1>
-			</div>
-			{% endblock wraper_centro %}
-
-			{% block wraper_derecho %}
-				<div class="logo_usuario_right">
-					{% if user and not user.is_anonymous %}
-     				<img src="{{user.avatar}}">
-     				<a href="{% url 'auth:logout' %}?next={%url 'home' %}">Logout</a>
-					{% else %}
-						<ul>
-     						<li>
-       							<a href="{% url 'social:begin' 'facebook' %}?next={%url 'home' %}">Login with Facebook</a>
-     						</li>
-     					</ul>
-   					{% endif %}
-				</div>
-			{% endblock wraper_derecho %}
 	{% endblock %}
 	</header>
 	<nav>

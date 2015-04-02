@@ -3,35 +3,53 @@ from django.template import RequestContext
 from django.views.generic import View
 from .forms import *
 from django.contrib.auth.decorators import login_required
-from .models import Membership, Equipos, Grupos, User
+from .models import Eventos, Equipos, Grupos, User, Jugador, Invitacion
 from django.http import HttpResponse
 import json
-
+from django.http import Http404
 # Create your views here.
 
 
 @login_required(login_url='/login')
 def home(request):
     if request.user.status:
-        #traigo al objeto usuario
-        usuario = User.objects.get(id=request.user.id)
-        #traigo con el usuario los grupo
-        gru = Membership.objects.filter(jugador=usuario)
-        #traigo con un grupo todo los jugadores de ese grupo
-        todos_los_usuarios = Membership.objects.filter(grupo=gru[0])
-        #traigo con el grupo todo los equipos
-        Todos_los_equipos = Equipos.objects.filter(nombreDelGrupos=gru[0])
+        #traigo con el usuario todos los  evento del usuario!
+        eventoDadmin = Eventos.objects.filter(usuarioCreador=request.user.id)
+        #traigo con un evento todo los jugadores de ese evento
+        todos_los_usuarios = Jugador.objects.filter(eventos=eventoDadmin[0])
+        cantidad = todos_los_usuarios.count
+        asis = Jugador.objects.filter(eventos=eventoDadmin[0], asistencia=True)
+        asisten = asis.count
+        #traigo con el evento todo los equipos
+        Todos_los_equipos = Equipos.objects.filter(
+                    nombreDelGrupos=eventoDadmin[0])
         #traigo todo los jugadores por equipos
-        jugador_v = User.objects.filter(equipos=Todos_los_equipos[0])
-        jugador_l = User.objects.filter(equipos=Todos_los_equipos[1])
+        jugador_v = Jugador.objects.filter(
+                        eventos=eventoDadmin[0].id,
+                        equipo=Todos_los_equipos[0])
+        jugador_l = Jugador.objects.filter(
+                        eventos=eventoDadmin[0].id,
+                        equipo=Todos_los_equipos[1])
         #jugadores = zip(jugador_l,jugador_v)
         jugadores = list(zip(jugador_l, jugador_v))
+        #cantidad de invitados
+        obj_invit = Invitacion.objects.filter(
+        usuario_invitado=request.user.id,
+        estado=False,
+        )
+        cant = obj_invit.count
         ctx = {'todos_los_usuarios': todos_los_usuarios,
-            'nombreDelGrupo': gru[0].grupo.nombreDelGrupo,
+            'nombreDelGrupos': eventoDadmin,
+            'nombreDelGrupo': eventoDadmin[0].nombreDGrupos.nombreDelGrupo,
             'Todos_los_equipos': Todos_los_equipos,
             'jugadores': jugadores,
+            #'jugador_v': jugador_v,
+            #'jugador_l': jugador_l,
             'equipo1': Todos_los_equipos[0],
             'equipo2': Todos_los_equipos[1],
+            'asisten': asisten,
+            'cantidad': cantidad,
+            'cant': cant,
             }
         return render(request, 'home.html', ctx)
     else:
@@ -45,19 +63,74 @@ def error(request):
 
 @login_required(login_url='/login')
 def invitacion(request):
-    return render_to_response('invitacion.html',
-                               context_instance=RequestContext(request))
+    Invitacion
+    obj_invit = Invitacion.objects.filter(
+        usuario_invitado=request.user.id,
+        estado=False,
+        )
+    ctx = {'obj_invit': obj_invit,
+            }
+    return render(request, 'invitacion.html', ctx)
 
 
-def busqueda(request):
+def asistencia_ajax(request):
     if request.is_ajax():
-        usu = User.objects.filter(
-         username__startswith=request.POST['username']).values('username', 'id')
-        print ("asdasd")
-        return HttpResponse(json.dumps(usu), content_type='application/json')
+        nombre = request.GET['nombre']
+        grupete = request.GET['grupo']
+        accionista = request.GET['accion']
+        data = {}
+        try:
+            obj_usuario = User.objects.get(username=nombre)
+            grupe = Grupos.objects.get(nombreDelGrupo=grupete)
+            print(grupe)
+            obj_evento = Eventos.objects.get(
+                            usuarioCreador=obj_usuario, nombreDGrupos=grupe)
+            g = Jugador.objects.get(
+                        usuario=obj_usuario, eventos=obj_evento.id)
+            if(accionista == '1'):
+                g.asistencia = True
+            else:
+                g.asistencia = False
+            g.save()
+            data['code'] = 'OK'
+        except User.DoesNotExist:
+            data['code'] = 'ERROR'
+            data['message'] = 'No se encontro ningun registro'
+        return HttpResponse(
+                json.dumps(data), content_type='application/json')
     else:
-        print ("aca entro")
-        return HttpResponse("Solo Ajax")
+        raise Http404
+
+
+def cambioDeEquipo_ajax(request):
+    if request.is_ajax():
+        nombre = request.GET['nombre']
+        grupete = request.GET['grupo']
+        data = {}
+        try:
+            obj_usuario = User.objects.get(username=nombre)
+            grupe = Grupos.objects.get(
+                    nombreDelGrupo=grupete, usuarioCreador=obj_usuario)
+            obj_evento = Eventos.objects.get(
+                            usuarioCreador=obj_usuario, nombreDGrupos=grupe)
+            obj_equipos = Equipos.objects.filter(
+                            nombreDelGrupos=obj_evento.id)
+            g = Jugador.objects.get(
+                        usuario=obj_usuario,
+                         eventos=obj_evento.id,)
+            if(g.equipo.id == obj_equipos[0].id):
+                g.equipo = obj_equipos[1]
+            else:
+                g.equipo = obj_equipos[0]
+            g.save()
+            data['code'] = 'OK'
+        except User.DoesNotExist:
+            data['code'] = 'ERROR'
+            data['message'] = 'No se encontro ningun registro'
+        return HttpResponse(
+                json.dumps(data), content_type='application/json')
+    else:
+        raise Http404
 
 
 @login_required(login_url='/login')
@@ -65,17 +138,18 @@ def invitar(request):
     if request.POST:
         try:
             usuario = User.objects.get(username=request.POST["username"])
+            grupoAdmin = Eventos.objects.filter(usuarioCreador=usuario)
+            EventoAdmin = Jugador.objects.filter(eventos=grupoAdmin[0].id)
         except User.DoesNotExist:
             mensaje = "No Existe el usuario"
             ctx = {'form': ExtraDataForm(request.POST),
                 'error': mensaje, }
             return render(request, 'invitar.html', ctx,
                                     context_instance=RequestContext(request))
-        gru = Membership.objects.get(jugador=usuario)
         mensaje = ""
         ctx = {'nombre_jugador': usuario,
-            'nombreDelGrupo': gru.grupo.nombreDelGrupo,
-            'equipo_local': usuario.equipos,
+            'nombreDelGrupo': grupoAdmin[0].nombreDGrupos,
+            'equipo_local': EventoAdmin[0].equipo,
             'error': mensaje,
             'form': ExtraDataForm(request.POST),
             }
@@ -145,34 +219,39 @@ class ExtraDataView(View):
                         request.user.status = True
                         #creo el grupo
                         grupos = Grupos.objects.create(
-                     nombreDelGrupo=form_grupos.cleaned_data["nombreDelGrupo"])
-                        #creo equipo local y visitante
-                        equipo = Equipos.objects.create(
-                            nombreDelEquipo=nombre_Equipo,
-                            nombreDelGrupos=grupos,
-                            local_visitante=True,
-                            )
-                        equipo_v = Equipos.objects.create(
-                            nombreDelEquipo=nombre_Equipo_v,
-                            nombreDelGrupos=grupos,
-                            )
-                        #guardamos equipo y usuario
-                        equipo.save()
-                        equipo_v.save()
-                        request.user.equipos = equipo
-                        request.user.save()
-                        #guardamos los grupos
+                     nombreDelGrupo=form_grupos.cleaned_data["nombreDelGrupo"],
+                     usuarioCreador=User.objects.get(id=request.user.id))
                         grupos.save()
-                        #creo--
-                        members = Membership(
-                          jugador=User.objects.get(id=request.user.id),
-                          grupo=grupos,
+                        request.user.save()
+                         #creo el evento
+                        evento = Eventos.objects.create(
+                          usuarioCreador=User.objects.get(id=request.user.id),
+                          nombreDGrupos=grupos,
                           lugar=form_membership.cleaned_data.get('lugar'),
                           cancha_5=form_membership.cleaned_data.get('cancha_5'),
                           cancha_7=form_membership.cleaned_data.get('cancha_7'),
                         cancha_11=form_membership.cleaned_data.get('cancha_11'),
                           )
-                        members.save()
+                        evento.save()
+                        #creo equipo local y visitante
+                        equipo_l = Equipos.objects.create(
+                            nombreDelEquipo=nombre_Equipo,
+                            nombreDelGrupos=evento,
+                            local_visitante=True,
+                            )
+                        equipo_v = Equipos.objects.create(
+                            nombreDelEquipo=nombre_Equipo_v,
+                            nombreDelGrupos=evento,
+                            )
+                        #guardamos equipo y usuario
+                        equipo_l.save()
+                        equipo_v.save()
+                        jug = Jugador.objects.create(
+                             eventos=evento,
+                             usuario=User.objects.get(id=request.user.id),
+                             equipo=equipo_l,
+                            )
+                        jug.save()
                         return redirect('home')
                     else:
                         mensaje = "los equipos deven ser diferentes"

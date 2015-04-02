@@ -1,11 +1,31 @@
 {% extends "Futbool-template/base.html" %}
-{% block wraper_izquierda %}
-	<div class="agregar_jugador_left">
-		<h2 class="accion_left">
-				<a href="{% url 'home' %}">volver</a>
-			</h2>
-		</div>
-{% endblock wraper_izquierda %}
+
+{% block wraper %}
+		        {% block wraper_izquierda %}
+	                    <div class="agregar_jugador_left">
+		                  <h2 class="accion_left">
+				    <a href="{% url 'home' %}">volver</a>
+			        </h2>
+		        </div>
+                        {% endblock wraper_izquierda %}
+
+			{% block wraper_centro %}
+			<div class="titular">
+				<h1 class="titulo">
+					RunPlayers
+				</h1>
+			</div>
+			{% endblock wraper_centro %}
+
+			{% block wraper_derecho %}
+				<div class="logo_usuario_right">
+     				    <img src="{{user.avatar}}">
+     				    <a href="{% url 'auth:logout' %}?next={%url 'home' %}">Logout</a>
+				</div>
+			{% endblock wraper_derecho %}
+{% endblock %}
+
+
 {% block wraper1 %}
 	<ul class="menu">
 		<li class="Nuevo_Grupo"><a href="#">#</a></li>
@@ -15,14 +35,16 @@
 {% endblock %}
 
 {% block wraper2 %}
+        {% for invitacion in obj_invit %}
 	<div class="carta">
 			<p>
-				Usted {{usuario_username}} a sido invitado a jugar en el grupo {{nombreDelGRUPO}}
-				que lo administra {{usuario_username_grupo}} que se juega {{lugar}} los dias {{horarios}},
-				si acepta la invitacion sus datos personales como posicion, cantidad de goles y partidos podran ser visto 
+				Usted {{invitacion.usuario_invitado}} a sido invitado a jugar en el grupo {{invitacion.evento.nombreDGrupos.nombreDelGrupo}}
+				que se juega en {{invitacion.evento.lugar}} los dias {{invitacion.evento.dias_horas}},
+				si acepta la invitacion sus datos personales como posicion, cantidad de goles y partidos podran ser visto
 				por este grupo.
 			</p>
 			<a class="rechazar" href="#">rechazar</a>
-			<a href="#">acepta INVITACION Al GRUPO</a>
-		</div>
+			<a class="aceptar" href="#">acepta INVITACION Al GRUPO</a>
+	</div>
+	{% endfor %}
 {% endblock %}

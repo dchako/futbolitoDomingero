@@ -1,5 +1,28 @@
 {% extends "Futbool-template/base.html" %}
 {% load staticfiles %}
+
+{% block wraper %}
+		{% block wraper_izquierda %}
+			<div class="agregar_jugador_left">
+				<h1 class="titulo">
+				    RunPlayers
+				</h1>
+			</div>
+			{% endblock wraper_izquierda %}
+
+			{% block wraper_centro %}
+			<div class="titular">
+				
+			</div>
+			{% endblock wraper_centro %}
+
+			{% block wraper_derecho %}
+				<div class="logo_usuario_right">
+
+				</div>
+			{% endblock wraper_derecho %}
+{% endblock %}
+	
 {% block wraper1 %}
 		<ul class="menu">
 			<li class="Nuevo_Grupo"><a href="#">#</a></li>
@@ -9,5 +32,10 @@
 {% endblock %}
 
 {% block wraper2 %}
-		<IMG SRC="{% static "imagenes/grupos.jpg" %}" height = "100%" width="100%" >
+                <div class="login"> 
+                	<IMG SRC="{% static "imagenes/grupos.jpg" %}" height = "100%" width="100%" />
+                	<a href="{% url 'social:begin' 'facebook' %}?next={%url 'home' %}">Login with Facebook</a>
+                	
+                        
+                </div>
 {% endblock %}

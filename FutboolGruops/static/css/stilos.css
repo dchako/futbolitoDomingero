@@ -1,7 +1,4 @@
 @import url("http://fonts.googleapis.com/css?family=Ubuntu:400,500italic");
-html {
-  height: 100%;
-}
 #canchas {
   color: #147032;
   text-decoration: none;
@@ -95,6 +92,7 @@ body {
   color: #444;
   font-family: 'Ubuntu', sans-serif;
   font-size: 14px;
+  height: 100%;
 }
 body a {
   color: #dd4f24;
@@ -102,6 +100,16 @@ body a {
 }
 body .wrap_0 {
   padding: 0.5em;
+}
+body .wrap_0 .login {
+  background: url("../imagenes/grupos.jpg");
+}
+body .wrap_0 .login a {
+  font-size: 1.2em;
+  box-shadow: 2px 2px 10px #000;
+  position: absolute;
+  left: 50%;
+  top: 50%;
 }
 body .wrap_0 .wrap {
   width: 100%;
@@ -212,6 +220,26 @@ nav .menu .Nuevo_Grupo {
 nav .menu .cambiar {
   float: right;
 }
+nav .menu .cambiar a {
+  display: block;
+}
+nav .menu .cambiar a:hover {
+  background: #174459;
+}
+nav .menu .cambiar .sub {
+  display: block;
+  float: left;
+  display: none;
+  background: #22bce0;
+  position: absolute;
+}
+nav .menu .cambiar:hover > ul {
+  display: block;
+  float: left;
+  margin: auto;
+  margin: 0px;
+  padding: 0px;
+}
 header {
   background: #444;
   color: #fff;
@@ -219,20 +247,24 @@ header {
   padding: 0.5em;
   text-align: center;
 }
+header .accion_left {
+  font-size: 1em;
+  color: #f00;
+}
+header .accion_left a {
+  color: #dd4f24;
+  text-decoration: none;
+  margin-right: 15px;
+}
 header .agregar_jugador_left {
   display: inline-block;
   float: left;
   border-right: 1px solid #22bce0;
   left: 10px;
   top: 10px;
-  width: 25%;
 }
-header .agregar_jugador_left .accion_left,
-header .agregar_jugador_left font-size 3em,
-header .agregar_jugador_left color red,
-header .agregar_jugador_left a {
-  color: #dd4f24;
-  text-decoration: none;
+header .agregar_jugador_left .titulo {
+  margin-right: 15px;
 }
 header .logo_usuario_right {
   float: right;

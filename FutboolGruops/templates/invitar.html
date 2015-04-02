@@ -1,14 +1,30 @@
 {% extends "Futbool-template/base.html" %}
 
 
+{% block wraper %}
+		        {% block wraper_izquierda %}
+	                    <div class="agregar_jugador_left">
+		                    <h2 class="accion_left">
+				    <a href="{% url 'home' %}">volver</a>
+			        </h2>
+		        </div>
+                        {% endblock wraper_izquierda %}
 
-{% block wraper_izquierda %}
-	<div class="agregar_jugador_left">
-		<h2 class="accion_left">
-			<a href="{% url 'home' %}">volver</a>
-		</h2>
-	</div>
-{% endblock wraper_izquierda %}
+			{% block wraper_centro %}
+			<div class="titular">
+				<h1 class="titulo">
+					RunPlayers
+				</h1>
+			</div>
+			{% endblock wraper_centro %}
+
+			{% block wraper_derecho %}
+				<div class="logo_usuario_right">
+     				    <img src="{{user.avatar}}">
+     				    <a href="{% url 'auth:logout' %}?next={%url 'home' %}">Logout</a>
+				</div>
+			{% endblock wraper_derecho %}
+{% endblock %}
 
 {% block wraper1 %}
 	<ul class="menu">
