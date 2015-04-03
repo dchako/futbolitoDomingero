@@ -29,7 +29,7 @@
 {% block wraper1 %}
 	<ul class="menu">
 		<li class="Nuevo_Grupo"><a href="#">#</a></li>
-		<li class="nombre"><a href="#">INVITACION</a></li>
+		<li id="nombre_de_grupo" class="nombre"><a href="#">INVITACION</a></li>
 		<li class="cambiar"><a href="#">#</a></li>
 	</ul>
 {% endblock %}
@@ -47,4 +47,9 @@
 			<a class="aceptar" href="#">acepta INVITACION Al GRUPO</a>
 	</div>
 	{% endfor %}
+{% endblock %}
+{% block javascript%}
+
+   <script type="text/javascript" src="{{ STATIC_URL }}js/invitacionAjax.js"></script>
+
 {% endblock %}

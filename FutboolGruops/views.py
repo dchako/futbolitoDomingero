@@ -133,11 +133,40 @@ def cambioDeEquipo_ajax(request):
         raise Http404
 
 
+def invitar_ajax(request):
+    if request.is_ajax():
+        nombre = request.GET['usuario_invitado']
+        grupete = request.GET['grupete']
+        data = {}
+        try:
+            obj_usuario_invitado = User.objects.get(username=nombre)
+            obj_usuario = User.objects.get(username=request.user)
+            grupe = Grupos.objects.get(
+                    nombreDelGrupo=grupete, usuarioCreador=obj_usuario)
+            obj_evento = Eventos.objects.get(
+                            usuarioCreador=obj_usuario, nombreDGrupos=grupe)
+            invitacion = Invitacion.objects.create(
+                evento=obj_evento,
+                usuario_invitado=obj_usuario_invitado,
+                )
+            invitacion.save()
+            data['code'] = 'OK'
+        except User.DoesNotExist:
+            data['code'] = 'ERROR'
+            data['message'] = 'No se encontro ningun registro'
+        return HttpResponse(
+                json.dumps(data), content_type='application/json')
+    else:
+        raise Http404
+
+
 @login_required(login_url='/login')
 def invitar(request):
     if request.POST:
         try:
             usuario = User.objects.get(username=request.POST["username"])
+            eventoDadmin = Eventos.objects.filter(
+                                usuarioCreador=request.user.id)
             grupoAdmin = Eventos.objects.filter(usuarioCreador=usuario)
             EventoAdmin = Jugador.objects.filter(eventos=grupoAdmin[0].id)
         except User.DoesNotExist:
@@ -148,7 +177,8 @@ def invitar(request):
                                     context_instance=RequestContext(request))
         mensaje = ""
         ctx = {'nombre_jugador': usuario,
-            'nombreDelGrupo': grupoAdmin[0].nombreDGrupos,
+            'nombreDelGrupos': grupoAdmin[0].nombreDGrupos,
+            'nombreDelGrupo': eventoDadmin[0].nombreDGrupos.nombreDelGrupo,
             'equipo_local': EventoAdmin[0].equipo,
             'error': mensaje,
             'form': ExtraDataForm(request.POST),
@@ -160,7 +190,7 @@ def invitar(request):
         'form': ExtraDataForm(request.POST),
         'error': mensaje
         }
-    return render_to_response('invitar.html', ctx,
+    return render(request, 'invitar.html', ctx,
                                     context_instance=RequestContext(request))
 
 

@@ -29,7 +29,7 @@
 {% block wraper1 %}
 	<ul class="menu">
 		<li class="Nuevo_Grupo"><a href="#">#</a></li>
-		<li class="nombre"><a href="#">{{nombreDelGrupo}}</a></li>
+		<li id="nombre_de_grupo" class="nombre"><a href="#">{{nombreDelGrupo}}</a></li>
 		<li class="cambiar"><a href="#">#</a></li>
 	</ul>
 {% endblock %}
@@ -55,10 +55,10 @@
 				 	 </TR>
 				
 				  	<TR class="dato-jugador">
-					    <TD>{{nombre_jugador}}</TD>
-					 	<TD> {{equipo_local}}</TD>
-					 	<TD>{{nombreDelGrupo}}</TD>
-					 	<TD><input class="boton-invitar" type="submit" value="Invitar"></TD>
+					    <TD id="nombre">{{nombre_jugador}}</TD>
+					    <TD id="equipo"> {{equipo_local}}</TD>
+					    <TD id="grupo">{{nombreDelGrupos}}</TD>
+					 <TD><input class="boton-invitar" type="submit" value="Invitar"></TD>
 				  	</TR>
 				  	
 				</TABLE>
@@ -68,7 +68,7 @@
 {% endblock %}
 
 {% block javascript%}
-   <!--
-   <script type="text/javascript" src="{{ STATIC_URL }}js/codigo.js"></script>
-   -->
+
+   <script type="text/javascript" src="{{ STATIC_URL }}js/invitarAjax.js"></script>
+
 {% endblock %}

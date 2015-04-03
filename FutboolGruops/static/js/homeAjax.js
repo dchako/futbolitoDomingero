@@ -17,6 +17,7 @@ $(document).on('ready',function (){
                  	if(data.code=='OK'){
                  		
                  		alert("agira asiste");
+                 		location.reload()
                  	}else{
                  		alert(data.message);
                  	}
@@ -47,6 +48,7 @@ $(document).on('ready',function (){
                  	if(data.code=='OK'){
                  		
                  		alert("ya no asiste");
+                 		location.reload()
                  	}else{
                  		alert(data.message);
                  	}
@@ -74,6 +76,7 @@ $(document).on('ready',function (){
              success : function(data) {
                  	if(data.code=='OK'){
                  	    alert("cambiaste de equipo");
+                 	    location.reload()
                  	}else{
                  		alert(data.message);
                  	}
@@ -89,9 +92,10 @@ $(document).on('ready',function (){
 	
         });
 
-    $(".cambiar").on("click",function()
+    $(".cambiarlo").on("click",function()
         {
-	alert ("aca va el ajax de cambiar de grupo a otros grupos pero no se todavua")
+	var nombre = $(this).text();
+	alert (nombre)
         });
 
 
