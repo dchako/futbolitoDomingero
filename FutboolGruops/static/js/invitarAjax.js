@@ -13,7 +13,7 @@ $(document).on('ready',function (){
              success : function(data) {
                  	if(data.code=='OK'){
                  	    alert("invitaste al usuario ");
-                 	    location.href =/home;
+                 	    location.href = /invitar/ ;
                  	}else{
                  		alert(data.message);
                  	}

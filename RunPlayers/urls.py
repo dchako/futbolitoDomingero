@@ -6,6 +6,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'FutboolGruops.views.home', name='home'),
+    url(r'^homes/(?P<id>\d+)$', 'FutboolGruops.views.homes', name='homes'),
     url(r'^invitacion$', 'FutboolGruops.views.invitacion', name='invitacion'),
     url(r'^invitar/$', 'FutboolGruops.views.invitar', name='invitar'),
     url(r'^asistencia_ajax/$',

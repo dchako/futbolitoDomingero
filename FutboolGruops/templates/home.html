@@ -37,7 +37,7 @@
 			<ul class="sub">
 				{% for grupos in nombreDelGrupos %}
 				    {%if grupos.nombreDGrupos.nombreDelGrupo != nombreDelGrupo%}
-				        <li><a class="cambiarlo" href="" >{{grupos.nombreDGrupos.nombreDelGrupo}}</a></li>
+				        <li><a class="cambiarlo" href="/homes/{{grupos.nombreDGrupos.id}}" >{{grupos.nombreDGrupos.nombreDelGrupo}}</a></li>
                                          {%endif%}
 				{% endfor %}
 			</ul>

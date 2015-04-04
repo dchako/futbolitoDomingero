@@ -56,6 +56,46 @@ def home(request):
         return redirect('registrar')
 
 
+@login_required(login_url='/login')
+def homes(request, id):
+    if request.user.status:
+        eventoDadmins = Eventos.objects.filter(usuarioCreador=request.user.id)
+        eventoDadmin = Eventos.objects.get(
+                            usuarioCreador=request.user.id, id=id)
+        #traigo con un evento todo los jugadores de ese evento
+        todos_los_usuarios = Jugador.objects.filter(eventos=eventoDadmin)
+        cantidad = todos_los_usuarios.count
+        asis = Jugador.objects.filter(eventos=eventoDadmin, asistencia=True)
+        asisten = asis.count
+        Todos_los_equipos = Equipos.objects.filter(
+                    nombreDelGrupos=eventoDadmin)
+        jugador_v = Jugador.objects.filter(
+                        eventos=eventoDadmin.id,
+                        equipo=Todos_los_equipos[0])
+        jugador_l = Jugador.objects.filter(
+                        eventos=eventoDadmin.id,
+                        equipo=Todos_los_equipos[1])
+        jugadores = list(zip(jugador_l, jugador_v))
+        obj_invit = Invitacion.objects.filter(
+        usuario_invitado=request.user.id,
+        estado=False,)
+        cant = obj_invit.count
+        ctx = {'todos_los_usuarios': todos_los_usuarios,
+            'nombreDelGrupos': eventoDadmins,
+            'nombreDelGrupo': eventoDadmin.nombreDGrupos.nombreDelGrupo,
+            'Todos_los_equipos': Todos_los_equipos,
+            'jugadores': jugadores,
+            'equipo1': Todos_los_equipos[0],
+            'equipo2': Todos_los_equipos[1],
+            'asisten': asisten,
+            'cantidad': cantidad,
+            'cant': cant,
+            }
+        return render(request, 'home.html', ctx)
+    else:
+        return redirect('registrar')
+
+
 def error(request):
     return render_to_response('error.html',
                                 context_instance=RequestContext(request))
@@ -185,12 +225,15 @@ def invitar(request):
             }
         return render(request, 'invitar.html', ctx,
                                     context_instance=RequestContext(request))
+    eventoDadmin = Eventos.objects.filter(
+                                usuarioCreador=request.user.id)
     mensaje = ""
     ctx = {
         'form': ExtraDataForm(request.POST),
-        'error': mensaje
+        'error': mensaje,
+        'nombreDelGrupo': eventoDadmin[0].nombreDGrupos.nombreDelGrupo,
         }
-    return render(request, 'invitar.html', ctx,
+    return render_to_response('invitar.html', ctx,
                                     context_instance=RequestContext(request))
 
 
