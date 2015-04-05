@@ -36,8 +36,8 @@
 		<li class="cambiar"><a href="#">cambiar de grupo</a>
 			<ul class="sub">
 				{% for grupos in nombreDelGrupos %}
-				    {%if grupos.nombreDGrupos.nombreDelGrupo != nombreDelGrupo%}
-				        <li><a class="cambiarlo" href="/homes/{{grupos.nombreDGrupos.id}}" >{{grupos.nombreDGrupos.nombreDelGrupo}}</a></li>
+				    {%if grupos.eventos.nombreDGrupos.nombreDelGrupo != nombreDelGrupo%}
+				        <li><a class="cambiarlo" href="/homes/{{grupos.eventos.id}}" >{{grupos.eventos.nombreDGrupos.nombreDelGrupo}}</a></li>
                                          {%endif%}
 				{% endfor %}
 			</ul>

@@ -38,10 +38,15 @@
         {% for invitacion in obj_invit %}
 	<div class="carta">
 			<p>
-				Usted {{invitacion.usuario_invitado}} a sido invitado a jugar en el grupo {{invitacion.evento.nombreDGrupos.nombreDelGrupo}}
-				que se juega en {{invitacion.evento.lugar}} los dias {{invitacion.evento.dias_horas}},
+				Usted <span class="usuario">{{invitacion.usuario_invitado}}</span>
+				a sido invitado a jugar en el grupo
+				<span class="grupo">{{invitacion.evento.nombreDGrupos.nombreDelGrupo}}</span>
+				que se juega en
+				<span class="lugar">{{invitacion.evento.lugar}}</span>
+				 los dias
+				<span class="dias">{{invitacion.evento.dias_horas}},</span>
 				si acepta la invitacion sus datos personales como posicion, cantidad de goles y partidos podran ser visto
-				por este grupo.
+				por este grupo.<span class="id">{{invitacion.id}}</span>
 			</p>
 			<a class="rechazar" href="#">rechazar</a>
 			<a class="aceptar" href="#">acepta INVITACION Al GRUPO</a>

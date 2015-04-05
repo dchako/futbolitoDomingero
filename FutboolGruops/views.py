@@ -14,7 +14,7 @@ from django.http import Http404
 def home(request):
     if request.user.status:
         #traigo con el usuario todos los  evento del usuario!
-        eventoDadmin = Eventos.objects.filter(usuarioCreador=request.user.id)
+        eventoDadmin = Jugador.objects.filter(usuario=request.user.id)
         #traigo con un evento todo los jugadores de ese evento
         todos_los_usuarios = Jugador.objects.filter(eventos=eventoDadmin[0])
         cantidad = todos_los_usuarios.count
@@ -40,7 +40,7 @@ def home(request):
         cant = obj_invit.count
         ctx = {'todos_los_usuarios': todos_los_usuarios,
             'nombreDelGrupos': eventoDadmin,
-            'nombreDelGrupo': eventoDadmin[0].nombreDGrupos.nombreDelGrupo,
+        'nombreDelGrupo': eventoDadmin[0].eventos.nombreDGrupos.nombreDelGrupo,
             'Todos_los_equipos': Todos_los_equipos,
             'jugadores': jugadores,
             #'jugador_v': jugador_v,
@@ -59,9 +59,8 @@ def home(request):
 @login_required(login_url='/login')
 def homes(request, id):
     if request.user.status:
-        eventoDadmins = Eventos.objects.filter(usuarioCreador=request.user.id)
-        eventoDadmin = Eventos.objects.get(
-                            usuarioCreador=request.user.id, id=id)
+        eventoDadmins = Jugador.objects.filter(usuario=request.user.id)
+        eventoDadmin = Eventos.objects.get(id=id)
         #traigo con un evento todo los jugadores de ese evento
         todos_los_usuarios = Jugador.objects.filter(eventos=eventoDadmin)
         cantidad = todos_los_usuarios.count
@@ -80,6 +79,7 @@ def homes(request, id):
         usuario_invitado=request.user.id,
         estado=False,)
         cant = obj_invit.count
+
         ctx = {'todos_los_usuarios': todos_los_usuarios,
             'nombreDelGrupos': eventoDadmins,
             'nombreDelGrupo': eventoDadmin.nombreDGrupos.nombreDelGrupo,
@@ -132,6 +132,38 @@ def asistencia_ajax(request):
             else:
                 g.asistencia = False
             g.save()
+            data['code'] = 'OK'
+        except User.DoesNotExist:
+            data['code'] = 'ERROR'
+            data['message'] = 'No se encontro ningun registro'
+        return HttpResponse(
+                json.dumps(data), content_type='application/json')
+    else:
+        raise Http404
+
+
+def invitacion_ajax(request):
+    if request.is_ajax():
+        ids = request.GET['id']
+        accionista = request.GET['accion']
+        print(ids)
+        data = {}
+        try:
+            obj_invit = Invitacion.objects.get(id=ids)
+            print("acasdas")
+            equipos = Equipos.objects.filter(nombreDelGrupos=obj_invit)
+            if(accionista == '1'):
+                print("aca entro")
+                jug = Jugador.objects.create(
+                             eventos=obj_invit.evento,
+                             usuario=obj_invit.usuario_invitado,
+                             equipo=equipos[0],
+                            )
+                jug.save()
+                obj_invit.estado = True
+            else:
+                obj_invit.estado = True
+            obj_invit.save()
             data['code'] = 'OK'
         except User.DoesNotExist:
             data['code'] = 'ERROR'
@@ -202,16 +234,18 @@ def invitar_ajax(request):
 
 @login_required(login_url='/login')
 def invitar(request):
+    eventoDadmin = Eventos.objects.filter(
+                                usuarioCreador=request.user.id)
     if request.POST:
         try:
             usuario = User.objects.get(username=request.POST["username"])
-            eventoDadmin = Eventos.objects.filter(
-                                usuarioCreador=request.user.id)
             grupoAdmin = Eventos.objects.filter(usuarioCreador=usuario)
             EventoAdmin = Jugador.objects.filter(eventos=grupoAdmin[0].id)
         except User.DoesNotExist:
             mensaje = "No Existe el usuario"
             ctx = {'form': ExtraDataForm(request.POST),
+                    'nombreDelGruposs': eventoDadmin,
+                 'nombreDelGrupo': eventoDadmin[0].nombreDGrupos.nombreDelGrupo,
                 'error': mensaje, }
             return render(request, 'invitar.html', ctx,
                                     context_instance=RequestContext(request))
@@ -220,18 +254,58 @@ def invitar(request):
             'nombreDelGrupos': grupoAdmin[0].nombreDGrupos,
             'nombreDelGrupo': eventoDadmin[0].nombreDGrupos.nombreDelGrupo,
             'equipo_local': EventoAdmin[0].equipo,
+            'nombreDelGruposs': eventoDadmin,
             'error': mensaje,
             'form': ExtraDataForm(request.POST),
             }
         return render(request, 'invitar.html', ctx,
                                     context_instance=RequestContext(request))
-    eventoDadmin = Eventos.objects.filter(
-                                usuarioCreador=request.user.id)
     mensaje = ""
     ctx = {
         'form': ExtraDataForm(request.POST),
         'error': mensaje,
         'nombreDelGrupo': eventoDadmin[0].nombreDGrupos.nombreDelGrupo,
+        'nombreDelGruposs': eventoDadmin,
+        }
+    return render_to_response('invitar.html', ctx,
+                                    context_instance=RequestContext(request))
+
+
+@login_required(login_url='/login')
+def invitas(request, id):
+    eventoDadmin = Eventos.objects.filter(
+                                usuarioCreador=request.user.id)
+    eventoDadmins = Eventos.objects.get(id=id)
+    if request.POST:
+        try:
+            usuario = User.objects.get(username=request.POST["username"])
+            grupoAdmin = Eventos.objects.filter(usuarioCreador=usuario)
+            EventoAdmin = Jugador.objects.filter(eventos=grupoAdmin[0].id)
+        except User.DoesNotExist:
+            mensaje = "No Existe el usuario"
+            ctx = {'form': ExtraDataForm(request.POST),
+                    'nombreDelGruposs': eventoDadmin,
+                 'nombreDelGrupo': eventoDadmins.nombreDGrupos.nombreDelGrupo,
+                'error': mensaje, }
+            return render(request, 'invitar.html', ctx,
+                                    context_instance=RequestContext(request))
+        mensaje = ""
+        ctx = {'nombre_jugador': usuario,
+            'nombreDelGrupos': grupoAdmin[0].nombreDGrupos,
+            'nombreDelGrupo': eventoDadmins.nombreDGrupos.nombreDelGrupo,
+            'equipo_local': EventoAdmin[0].equipo,
+            'nombreDelGruposs': eventoDadmin,
+            'error': mensaje,
+            'form': ExtraDataForm(request.POST),
+            }
+        return render(request, 'invitar.html', ctx,
+                                    context_instance=RequestContext(request))
+    mensaje = ""
+    ctx = {
+        'form': ExtraDataForm(request.POST),
+        'error': mensaje,
+        'nombreDelGrupo': eventoDadmins.nombreDGrupos.nombreDelGrupo,
+        'nombreDelGruposs': eventoDadmin,
         }
     return render_to_response('invitar.html', ctx,
                                     context_instance=RequestContext(request))

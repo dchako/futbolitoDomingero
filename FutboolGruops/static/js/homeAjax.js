@@ -3,6 +3,8 @@ $(document).on('ready',function (){
 
        $("#asistir").on("click",function(e){
         e.preventDefault();
+        //var usuario_invitado = $("#nombre").text();
+        //var grupete = $("#nombre_de_grupo").text();
         var usuario ="dchakos";
         var grupo = "Team Campito";
         var accion = 1;

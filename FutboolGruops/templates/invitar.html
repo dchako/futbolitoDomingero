@@ -26,13 +26,28 @@
 			{% endblock wraper_derecho %}
 {% endblock %}
 
+
 {% block wraper1 %}
 	<ul class="menu">
 		<li class="Nuevo_Grupo"><a href="#">#</a></li>
-		<li id="nombre_de_grupo" class="nombre"><a href="#">{{nombreDelGrupo}}</a></li>
-		<li class="cambiar"><a href="#">#</a></li>
+		<li class="nombre">
+		<a id="nombre_de_grupo" href="#">{{nombreDelGrupo}}</a>
+		    {%if cant > 0%}
+                             <a href="{% url 'invitacion' %}">{{cant}}</a>
+                        {%endif%}
+		</li>
+		<li class="cambiar"><a href="#">cambiar de grupo</a>
+			<ul class="sub">
+				{% for grupos in nombreDelGruposs %}
+				    {%if grupos.nombreDGrupos.nombreDelGrupo != nombreDelGrupo%}
+				        <li><a class="cambiarlo" href="/invitas/{{grupos.id}}" >{{grupos.nombreDGrupos.nombreDelGrupo}}</a></li>
+                                         {%endif%}
+				{% endfor %}
+			</ul>
+		</li>
 	</ul>
 {% endblock %}
+
 
 {% block wraper2 %}
 	<div class="invitar">
