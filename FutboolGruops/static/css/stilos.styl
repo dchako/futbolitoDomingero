@@ -66,18 +66,13 @@ footer
 		box-shadow 2px 2px 10px rgba(black,1)
 		text-align center
 		.boton-guardar
-			border-radius
 			box-shadow 4px 4px 10px rgba(black,0.5)
 			width 20%
-			background: #398525
-			background: -moz-linear-gradient(top, #8DD297 0%, #398525 100%);
-			background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#8DD297), color-stop(100%,#398525));
+			background #398525
 			margin-bottom 12px
 			height 50px
 			box-shadow inset 0px 0px 6px #fff
-    		-webkit-box-shadow: inset 0px 0px 6px #fff
-    		border  1px solid #5ea617
-    		border-radius  10px
+    		//border-radius  10px
     		font-weight bold 55px/25px Helvetica, Sans-Serif
     		text-align center
     		text-transform uppercase
@@ -87,6 +82,7 @@ footer
 a 
 	color naranja
 	text-decoration none
+
 body
 	background #E8E8E8
 	color gris_oscuro
@@ -98,13 +94,13 @@ body
 		text-decoration none
 	.wrap_0
 		.login
-			background url(../imagenes/grupos.jpg)
-			a
+			.acceso
 				font-size 1.2em 
 				box-shadow 2px 2px 10px rgba(black,1)
 				position absolute
-				left 50%
+				left 10%
 				top 50%
+				padding 3% 3% 3% 3%		
 		padding 0.5em
 		.wrap
 			width 100%
@@ -263,51 +259,56 @@ header
 			text-align center
 			margin 0
 			padding 0
-@media screen and (min-width: 768px)
-	body
-		height 100%
-		.wrap_0
-			height 100%
-			.invitar
-				.buscador
-					font-size: 23px;
-				.usuario
-					.datos
-						width 50%
-						margin-top  2%
-						margin-left 25%
-						.titulo
-							font-size 24px
+html
+	height 100%
 	
-			.wrap
-				display inline-block
-				width 48%
-				vertical-align top
-				&:nth-child(odd)
+@media screen and (min-width: 768px)
+	html
+		height 100%
+		body
+			height 82.3%
+			.wrap_0
+				height 100%
+				.invitar
+					.buscador
+						font-size: 23px;
+					.usuario
+						.datos
+							width 50%
+							margin-top  2%
+							margin-left 25%
+							.titulo
+								font-size 24px
+		
+				.wrap
+					display inline-block
+					width 48%
+					vertical-align top
+					&:nth-child(odd)
+						margin-right 2%
+					.equipos_resulado
+						margin-top 0
+				
+				.wrap_2
 					margin-right 2%
-				.equipos_resulado
-					margin-top 0
-			
-			.wrap_2
-				margin-right 2%
-				border-radius 0 0 0.5em 0.5em
-				box-shadow 4px 4px 10px rgba(red,1)
-			.carta
-				width 50%
-				margin-left 25%
-				font-size 24px
-				.rechazar
-					color naranja
-					text-decoration none
-					margin-left 15%
-					float left
-		header 
-			.agregar_jugador_left
-				width 20%
-			.titular
-				margin 10px 40px 15px 70px
-				.titulo
-					font-size 24px			
+					border-radius 0 0 0.5em 0.5em
+					box-shadow 4px 4px 10px rgba(red,1)
+				.carta
+					width 50%
+					margin-left 25%
+					font-size 24px
+					.rechazar
+						color naranja
+						text-decoration none
+						margin-left 15%
+						float left
+			header 
+				.agregar_jugador_left
+					width 20%
+				.titular
+					margin 10px 40px 15px 70px
+					.titulo
+						font-size 24px			
 @media screen and (min-width: 1050px)
 	body
 		height 100%
