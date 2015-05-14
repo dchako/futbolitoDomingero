@@ -11,58 +11,25 @@ from django.http import Http404
 
 
 @login_required(login_url='/login')
-def home(request):
+def home(request, id):
     if request.user.status:
         #traigo con el usuario todos los  evento del usuario!
-        eventoDadmin = Jugador.objects.filter(usuario=request.user.id)
-        #traigo con un evento todo los jugadores de ese evento
-        todos_los_usuarios = Jugador.objects.filter(eventos=eventoDadmin[0])
-        cantidad = todos_los_usuarios.count
-        asis = Jugador.objects.filter(eventos=eventoDadmin[0], asistencia=True)
-        asisten = asis.count
-        #traigo con el evento todo los equipos
-        Todos_los_equipos = Equipos.objects.filter(
-                    nombreDelGrupos=eventoDadmin[0])
-        #traigo todo los jugadores por equipos
-        jugador_v = Jugador.objects.filter(
-                        eventos=eventoDadmin[0].id,
-                        equipo=Todos_los_equipos[0])
-        jugador_l = Jugador.objects.filter(
-                        eventos=eventoDadmin[0].id,
-                        equipo=Todos_los_equipos[1])
-        #jugadores = zip(jugador_l,jugador_v)
-        jugadores = list(zip(jugador_l, jugador_v))
-        #cantidad de invitados
-        obj_invit = Invitacion.objects.filter(
-        usuario_invitado=request.user.id,
-        estado=False,
-        )
-        cant = obj_invit.count
-        ctx = {'todos_los_usuarios': todos_los_usuarios,
-            'nombreDelGrupos': eventoDadmin,
-        'nombreDelGrupo': eventoDadmin[0].eventos.nombreDGrupos.nombreDelGrupo,
-            'Todos_los_equipos': Todos_los_equipos,
-            'jugadores': jugadores,
-            #'jugador_v': jugador_v,
-            #'jugador_l': jugador_l,
-            'equipo1': Todos_los_equipos[0],
-            'equipo2': Todos_los_equipos[1],
-            'asisten': asisten,
-            'cantidad': cantidad,
-            'cant': cant,
-            }
-        return render(request, 'home.html', ctx)
-    else:
-        return redirect('registrar')
-
-
-@login_required(login_url='/login')
-def homes(request, id):
-    if request.user.status:
         eventoDadmins = Jugador.objects.filter(usuario=request.user.id)
-        eventoDadmin = Eventos.objects.get(id=id)
-        #traigo con un evento todo los jugadores de ese evento
-        todos_los_usuarios = Jugador.objects.filter(eventos=eventoDadmin)
+        #esta es la linea diferente de home
+        #cosas raras
+        if id == '0':
+            print(id)
+            print("aca entro")
+            todos_los_usuarios = Jugador.objects.filter(
+                                                  eventos=eventoDadmins[0])
+            eventoDadmin = Eventos.objects.get(id=eventoDadmins[0].id)
+        else:
+            print (id)
+            print("distinto de cero")
+            eventoDadmin = Eventos.objects.get(id=id)
+            #traigo con un evento todo los jugadores de ese evento
+            todos_los_usuarios = Jugador.objects.filter(eventos=eventoDadmin)
+
         cantidad = todos_los_usuarios.count
         asis = Jugador.objects.filter(eventos=eventoDadmin, asistencia=True)
         asisten = asis.count
@@ -103,7 +70,6 @@ def error(request):
 
 @login_required(login_url='/login')
 def invitacion(request):
-    Invitacion
     obj_invit = Invitacion.objects.filter(
         usuario_invitado=request.user.id,
         estado=False,
@@ -399,7 +365,7 @@ class ExtraDataView(View):
                              equipo=equipo_l,
                             )
                         jug.save()
-                        return redirect('home')
+                        return redirect('home' '0')
                     else:
                         mensaje = "los equipos deven ser diferentes"
                         ctx = {

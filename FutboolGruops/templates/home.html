@@ -20,7 +20,7 @@
 			{% block wraper_derecho %}
 				<div class="logo_usuario_right">
      				    <img src="{{user.avatar}}">
-     				    <a href="{% url 'auth:logout' %}?next={%url 'home' %}">Logout</a>
+     				    <a href="{% url 'auth:logout' %}?next={%url 'login' %}">Logout</a>
 				</div>
 			{% endblock wraper_derecho %}
 	{% endblock %}
@@ -37,7 +37,7 @@
 			<ul class="sub">
 				{% for grupos in nombreDelGrupos %}
 				    {%if grupos.eventos.nombreDGrupos.nombreDelGrupo != nombreDelGrupo%}
-				        <li><a class="cambiarlo" href="/homes/{{grupos.eventos.id}}" >{{grupos.eventos.nombreDGrupos.nombreDelGrupo}}</a></li>
+				        <li><a class="cambiarlo" href="/{{grupos.eventos.id}}" >{{grupos.eventos.nombreDGrupos.nombreDelGrupo}}</a></li>
                                          {%endif%}
 				{% endfor %}
 			</ul>
