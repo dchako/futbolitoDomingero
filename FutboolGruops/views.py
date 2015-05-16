@@ -199,46 +199,7 @@ def invitar_ajax(request):
 
 
 @login_required(login_url='/login')
-def invitar(request):
-    eventoDadmin = Eventos.objects.filter(
-                                usuarioCreador=request.user.id)
-    if request.POST:
-        try:
-            usuario = User.objects.get(username=request.POST["username"])
-            grupoAdmin = Eventos.objects.filter(usuarioCreador=usuario)
-            EventoAdmin = Jugador.objects.filter(eventos=grupoAdmin[0].id)
-        except User.DoesNotExist:
-            mensaje = "No Existe el usuario"
-            ctx = {'form': ExtraDataForm(request.POST),
-                    'nombreDelGruposs': eventoDadmin,
-                 'nombreDelGrupo': eventoDadmin[0].nombreDGrupos.nombreDelGrupo,
-                'error': mensaje, }
-            return render(request, 'invitar.html', ctx,
-                                    context_instance=RequestContext(request))
-        mensaje = ""
-        ctx = {'nombre_jugador': usuario,
-            'nombreDelGrupos': grupoAdmin[0].nombreDGrupos,
-            'nombreDelGrupo': eventoDadmin[0].nombreDGrupos.nombreDelGrupo,
-            'equipo_local': EventoAdmin[0].equipo,
-            'nombreDelGruposs': eventoDadmin,
-            'error': mensaje,
-            'form': ExtraDataForm(request.POST),
-            }
-        return render(request, 'invitar.html', ctx,
-                                    context_instance=RequestContext(request))
-    mensaje = ""
-    ctx = {
-        'form': ExtraDataForm(request.POST),
-        'error': mensaje,
-        'nombreDelGrupo': eventoDadmin[0].nombreDGrupos.nombreDelGrupo,
-        'nombreDelGruposs': eventoDadmin,
-        }
-    return render_to_response('invitar.html', ctx,
-                                    context_instance=RequestContext(request))
-
-
-@login_required(login_url='/login')
-def invitas(request, id):
+def invitar(request, id):
     eventoDadmin = Eventos.objects.filter(
                                 usuarioCreador=request.user.id)
     eventoDadmins = Eventos.objects.get(id=id)

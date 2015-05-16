@@ -40,7 +40,7 @@
 			<ul class="sub">
 				{% for grupos in nombreDelGruposs %}
 				    {%if grupos.nombreDGrupos.nombreDelGrupo != nombreDelGrupo%}
-				        <li><a class="cambiarlo" href="/invitas/{{grupos.id}}" >{{grupos.nombreDGrupos.nombreDelGrupo}}</a></li>
+				        <li><a class="cambiarlo" href="/invitar/{{grupos.id}}" >{{grupos.nombreDGrupos.nombreDelGrupo}}</a></li>
                                          {%endif%}
 				{% endfor %}
 			</ul>
@@ -52,7 +52,7 @@
 {% block wraper2 %}
 	<div class="invitar">
 			<div class="buscador">
-				<form method="post" action="/invitar/" >{% csrf_token %}
+				<form method="post" action="/invitar/{{grupos.id}}" >{% csrf_token %}
 				{{form.username}}
 				{{error}}
 				<input class="boton-buscar" type="submit" value="Buscar">
