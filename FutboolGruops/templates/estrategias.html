@@ -1,0 +1,60 @@
+{% extends "Futbool-template/base.html" %}
+
+
+{% block wraper %}
+		        {% block wraper_izquierda %}
+	                    <div class="agregar_jugador_left">
+		                    <h2 class="accion_left">
+				    <a href="{% url 'home' '0'%}">volver</a>
+			        </h2>
+		        </div>
+                        {% endblock wraper_izquierda %}
+
+			{% block wraper_centro %}
+			<div class="titular">
+				<h1 class="titulo">
+					RunPlayers
+				</h1>
+			</div>
+			{% endblock wraper_centro %}
+
+			{% block wraper_derecho %}
+				<div class="logo_usuario_right">
+     				    <img src="{{user.avatar}}">
+     				    <a href="{% url 'auth:logout' %}?next={%url 'login' %}">Logout</a>
+				</div>
+			{% endblock wraper_derecho %}
+{% endblock %}
+
+
+{% block wraper1 %}
+	<ul class="menu">
+		<li class="Nuevo_Grupo"><a href="#">#</a></li>
+		<li class="nombre">
+		<a id="nombre_de_grupo" href="#">{{nombreDelGrupo}}</a>
+		    {%if cant > 0%}
+                             <a href="{% url 'invitacion' %}">{{cant}}</a>
+                        {%endif%}
+		</li>
+		<li class="cambiar"><a href="#">cambiar de grupo</a>
+			<ul class="sub">
+				{% for grupos in nombreDelGrupos %}
+				    {%if grupos.eventos.nombreDGrupos.nombreDelGrupo != nombreDelGrupo%}
+				        <li><a class="cambiarlo" href="estrategias/{{grupos.eventos.id}}" >{{grupos.eventos.nombreDGrupos.nombreDelGrupo}}</a></li>
+                                         {%endif%}
+				{% endfor %}
+			</ul>
+		</li>
+	</ul>
+{% endblock %}
+
+
+{% block wraper2 %}
+<p>
+    aca va la estrategia magica
+</p>
+{% endblock %}
+
+{% block javascript%}
+
+{% endblock %}

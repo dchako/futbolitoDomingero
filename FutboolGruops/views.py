@@ -57,6 +57,7 @@ def home(request, id):
             'asisten': asisten,
             'cantidad': cantidad,
             'cant': cant,
+            'ids': id,
             }
         return render(request, 'home.html', ctx)
     else:
@@ -236,6 +237,31 @@ def invitar(request, id):
         }
     return render_to_response('invitar.html', ctx,
                                     context_instance=RequestContext(request))
+
+
+@login_required(login_url='/login')
+def estrategias(request, id):
+        #traigo con el usuario todos los  evento del usuario!
+        eventoDadmins = Jugador.objects.filter(usuario=request.user.id)
+        #esta es la linea diferente de home
+        #cosas raras
+        if id == '0':
+            eventoDadmin = Eventos.objects.get(id=eventoDadmins[0].id)
+        else:
+            eventoDadmin = Eventos.objects.get(id=id)
+            #traigo con un evento todo los jugadores de ese evento
+
+        obj_invit = Invitacion.objects.filter(
+                    usuario_invitado=request.user.id,
+                    estado=False,)
+        cant = obj_invit.count
+        ctx = {
+            'nombreDelGrupos': eventoDadmins,
+            'nombreDelGrupo': eventoDadmin.nombreDGrupos.nombreDelGrupo,
+            'cant': cant,
+            'ids': id,
+            }
+        return render(request, 'estrategias.html', ctx)
 
 
 def login(request):
