@@ -352,7 +352,7 @@ class ExtraDataView(View):
                              equipo=equipo_l,
                             )
                         jug.save()
-                        return redirect('home' '0')
+                        return redirect('/0')
                     else:
                         mensaje = "los equipos deven ser diferentes"
                         ctx = {

@@ -40,7 +40,7 @@
 			<ul class="sub">
 				{% for grupos in nombreDelGrupos %}
 				    {%if grupos.eventos.nombreDGrupos.nombreDelGrupo != nombreDelGrupo%}
-				        <li><a class="cambiarlo" href="estrategias/{{grupos.eventos.id}}" >{{grupos.eventos.nombreDGrupos.nombreDelGrupo}}</a></li>
+				        <li><a class="cambiarlo" href="/estrategias/{{grupos.eventos.id}}" >{{grupos.eventos.nombreDGrupos.nombreDelGrupo}}</a></li>
                                          {%endif%}
 				{% endfor %}
 			</ul>
