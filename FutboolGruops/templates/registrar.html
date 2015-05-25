@@ -2,10 +2,16 @@
 {% block wraper %}
 		        {% block wraper_izquierda %}
 	                    <div class="agregar_jugador_left">
-		                    <h2 class="accion_left">
-				    <a href="{% url 'home' '0'%}">volver</a>
-			        </h2>
-		        </div>
+	                            {% if user.status == False %}
+				    <h2 class="accion_left">
+				        <a href="#">Volver-No</a>
+			             </h2>
+			          {% else %}
+				    <h2 class="accion_left">
+				        <a href="{% url 'home' '0'%}">volver</a>
+			             </h2>
+			          {% endif %}
+		            </div>
                         {% endblock wraper_izquierda %}
 
 			{% block wraper_centro %}

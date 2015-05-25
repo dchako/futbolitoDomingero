@@ -15,29 +15,27 @@ def home(request, id):
     if request.user.status:
         #traigo con el usuario todos los  evento del usuario!
         eventoDadmins = Jugador.objects.filter(usuario=request.user.id)
-        #esta es la linea diferente de home
-        #cosas raras
         if id == '0':
-            print(id)
-            print("aca entro")
             todos_los_usuarios = Jugador.objects.filter(
-                                                  eventos=eventoDadmins[0])
-            eventoDadmin = Eventos.objects.get(id=eventoDadmins[0].id)
+                                            eventos=eventoDadmins[0].eventos)
+            eventoDadmin = Jugador.objects.get(
+                                        eventos=eventoDadmins[0].eventos.id,
+                                        usuario=request.user.id).eventos
         else:
-            print (id)
-            print("distinto de cero")
-            eventoDadmin = Eventos.objects.get(id=id)
+            #ACA EXPLOTA CUANDO EL ID Y EL USUARIO NO PERTENECE AL ID
+            eventoDadmin = Jugador.objects.get(eventos=id,
+                                            usuario=request.user.id).eventos
             #traigo con un evento todo los jugadores de ese evento
-            todos_los_usuarios = Jugador.objects.filter(eventos=eventoDadmin)
-
+            todos_los_usuarios = Jugador.objects.filter(
+                                                eventos=eventoDadmin)
         cantidad = todos_los_usuarios.count
         asis = Jugador.objects.filter(eventos=eventoDadmin, asistencia=True)
         asisten = asis.count
         Todos_los_equipos = Equipos.objects.filter(
-                    nombreDelGrupos=eventoDadmin)
+                                            nombreDelGrupos=eventoDadmin)
         jugador_v = Jugador.objects.filter(
-                        eventos=eventoDadmin.id,
-                        equipo=Todos_los_equipos[0])
+                                    eventos=eventoDadmin.id,
+                                    equipo=Todos_los_equipos[0])
         jugador_l = Jugador.objects.filter(
                         eventos=eventoDadmin.id,
                         equipo=Todos_los_equipos[1])
@@ -46,10 +44,9 @@ def home(request, id):
         usuario_invitado=request.user.id,
         estado=False,)
         cant = obj_invit.count
-
         ctx = {'todos_los_usuarios': todos_los_usuarios,
             'nombreDelGrupos': eventoDadmins,
-            'nombreDelGrupo': eventoDadmin.nombreDGrupos.nombreDelGrupo,
+            'nombreDelGrupo': eventoDadmin,
             'Todos_los_equipos': Todos_los_equipos,
             'jugadores': jugadores,
             'equipo1': Todos_los_equipos[0],
@@ -57,7 +54,6 @@ def home(request, id):
             'asisten': asisten,
             'cantidad': cantidad,
             'cant': cant,
-            'ids': id,
             }
         return render(request, 'home.html', ctx)
     else:
@@ -67,6 +63,20 @@ def home(request, id):
 def error(request):
     return render_to_response('error.html',
                                 context_instance=RequestContext(request))
+
+
+@login_required(login_url='/login')
+def configurar(request, id):
+    mensaje = ""
+    ctx = {
+        'form_grupos': ExtraDataForm_grupos(prefix="Grupos"),
+        'form_equipos': ExtraDataForm_Equipos(prefix='Equipos'),
+        'form_equipos_v': ExtraDataForm_Equipos(prefix='Equipo_visitante'),
+        'form_membership': ExtraDataForm_Membership(prefix="Membership"),
+        'form': ExtraDataForm(request.POST),
+        'mensajeDeError': mensaje
+                  }
+    return render(request, 'registrar.html', ctx)
 
 
 @login_required(login_url='/login')
@@ -201,9 +211,18 @@ def invitar_ajax(request):
 
 @login_required(login_url='/login')
 def invitar(request, id):
-    eventoDadmin = Eventos.objects.filter(
-                                usuarioCreador=request.user.id)
-    eventoDadmins = Eventos.objects.get(id=id)
+
+    #eventoDadmins = Eventos.objects.get(id=id)
+    admineventos = Jugador.objects.filter(usuario=request.user.id)
+    eventoDadmin = Eventos.objects.filter(usuarioCreador=request.user.id)
+    if id == '0':
+        eventoDadmins = Jugador.objects.get(
+                                eventos=admineventos[0].eventos.id,
+                                usuario=request.user.id).eventos
+    else:
+        eventoDadmins = Jugador.objects.get(eventos=id,
+                                            usuario=request.user.id).eventos
+    mensaje = ""
     if request.POST:
         try:
             usuario = User.objects.get(username=request.POST["username"])
@@ -213,14 +232,13 @@ def invitar(request, id):
             mensaje = "No Existe el usuario"
             ctx = {'form': ExtraDataForm(request.POST),
                     'nombreDelGruposs': eventoDadmin,
-                 'nombreDelGrupo': eventoDadmins.nombreDGrupos.nombreDelGrupo,
+                 'nombreDelGrupo': eventoDadmins.nombreDGrupos,
                 'error': mensaje, }
             return render(request, 'invitar.html', ctx,
                                     context_instance=RequestContext(request))
-        mensaje = ""
         ctx = {'nombre_jugador': usuario,
             'nombreDelGrupos': grupoAdmin[0].nombreDGrupos,
-            'nombreDelGrupo': eventoDadmins.nombreDGrupos.nombreDelGrupo,
+            'nombreDelGrupo': eventoDadmins.nombreDGrupos,
             'equipo_local': EventoAdmin[0].equipo,
             'nombreDelGruposs': eventoDadmin,
             'error': mensaje,
@@ -228,11 +246,10 @@ def invitar(request, id):
             }
         return render(request, 'invitar.html', ctx,
                                     context_instance=RequestContext(request))
-    mensaje = ""
     ctx = {
         'form': ExtraDataForm(request.POST),
         'error': mensaje,
-        'nombreDelGrupo': eventoDadmins.nombreDGrupos.nombreDelGrupo,
+        'nombreDelGrupo': eventoDadmins.nombreDGrupos,
         'nombreDelGruposs': eventoDadmin,
         }
     return render_to_response('invitar.html', ctx,
@@ -243,23 +260,25 @@ def invitar(request, id):
 def estrategias(request, id):
         #traigo con el usuario todos los  evento del usuario!
         eventoDadmins = Jugador.objects.filter(usuario=request.user.id)
-        #esta es la linea diferente de home
-        #cosas raras
         if id == '0':
-            eventoDadmin = Eventos.objects.get(id=eventoDadmins[0].id)
+ #todos_los_usuarios = Jugador.objects.filter(eventos=eventoDadmins[0].eventos)
+            eventoDadmin = Jugador.objects.get(
+                                        eventos=eventoDadmins[0].eventos.id,
+                                        usuario=request.user.id).eventos
         else:
-            eventoDadmin = Eventos.objects.get(id=id)
+            #ACA EXPLOTA CUANDO EL ID Y EL USUARIO NO PERTENECE AL ID
+            eventoDadmin = Jugador.objects.get(eventos=id,
+                                           usuario=request.user.id).eventos
             #traigo con un evento todo los jugadores de ese evento
-
+            #todos_los_usuarios = Jugador.objects.filter(eventos=eventoDadmin)
         obj_invit = Invitacion.objects.filter(
                     usuario_invitado=request.user.id,
                     estado=False,)
         cant = obj_invit.count
         ctx = {
             'nombreDelGrupos': eventoDadmins,
-            'nombreDelGrupo': eventoDadmin.nombreDGrupos.nombreDelGrupo,
+            'nombreDelGrupo': eventoDadmin.nombreDGrupos,
             'cant': cant,
-            'ids': id,
             }
         return render(request, 'estrategias.html', ctx)
 

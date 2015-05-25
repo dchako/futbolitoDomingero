@@ -5,7 +5,7 @@
 		        {% block wraper_izquierda %}
 	                    <div class="agregar_jugador_left">
 		                    <h2 class="accion_left">
-				    <a href="{% url 'home' '0'%}">volver</a>
+				    <a href="{% url 'home' nombreDelGrupo.id %}">volver</a>
 			        </h2>
 		        </div>
                         {% endblock wraper_izquierda %}
@@ -31,7 +31,7 @@
 	<ul class="menu">
 		<li class="Nuevo_Grupo"><a href="#">#</a></li>
 		<li class="nombre">
-		<a id="nombre_de_grupo" href="#">{{nombreDelGrupo}}</a>
+		<a id="nombre_de_grupo" href="#">{{nombreDelGrupo.nombreDelGrupo}}</a>
 		    {%if cant > 0%}
                              <a href="{% url 'invitacion' %}">{{cant}}</a>
                         {%endif%}
@@ -39,7 +39,7 @@
 		<li class="cambiar"><a href="#">cambiar de grupo</a>
 			<ul class="sub">
 				{% for grupos in nombreDelGrupos %}
-				    {%if grupos.eventos.nombreDGrupos.nombreDelGrupo != nombreDelGrupo%}
+				    {%if grupos.eventos.nombreDGrupos.nombreDelGrupo != nombreDelGrupo.nombreDelGrupo %}
 				        <li><a class="cambiarlo" href="/estrategias/{{grupos.eventos.id}}" >{{grupos.eventos.nombreDGrupos.nombreDelGrupo}}</a></li>
                                          {%endif%}
 				{% endfor %}

@@ -5,7 +5,7 @@
 		        {% block wraper_izquierda %}
 	                    <div class="agregar_jugador_left">
 		                    <h2 class="accion_left">
-				    <a href="{% url 'home' '0'%}">volver</a>
+				    <a href="{% url 'home' nombreDelGrupo.id %}">volver</a>
 			        </h2>
 		        </div>
                         {% endblock wraper_izquierda %}
@@ -31,7 +31,7 @@
 	<ul class="menu">
 		<li class="Nuevo_Grupo"><a href="#">#</a></li>
 		<li class="nombre">
-		<a id="nombre_de_grupo" href="#">{{nombreDelGrupo}}</a>
+		<a id="nombre_de_grupo" href="#">{{nombreDelGrupo.nombreDelGrupo}}</a>
 		    {%if cant > 0%}
                              <a href="{% url 'invitacion' %}">{{cant}}</a>
                         {%endif%}
@@ -39,7 +39,7 @@
 		<li class="cambiar"><a href="#">cambiar de grupo</a>
 			<ul class="sub">
 				{% for grupos in nombreDelGruposs %}
-				    {%if grupos.nombreDGrupos.nombreDelGrupo != nombreDelGrupo%}
+				    {%if grupos.nombreDGrupos.nombreDelGrupo != nombreDelGrupo.nombreDelGrupo%}
 				        <li><a class="cambiarlo" href="/invitar/{{grupos.id}}" >{{grupos.nombreDGrupos.nombreDelGrupo}}</a></li>
                                          {%endif%}
 				{% endfor %}
@@ -52,7 +52,7 @@
 {% block wraper2 %}
 	<div class="invitar">
 			<div class="buscador">
-				<form method="post" action="/invitar/{{grupos.id}}" >{% csrf_token %}
+				<form method="post" action="/invitar/{{nombreDelGrupo.id}}" >{% csrf_token %}
 				{{form.username}}
 				{{error}}
 				<input class="boton-buscar" type="submit" value="Buscar">

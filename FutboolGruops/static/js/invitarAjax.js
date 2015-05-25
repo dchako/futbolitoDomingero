@@ -4,6 +4,7 @@ $(document).on('ready',function (){
         {
          var usuario_invitado = $("#nombre").text();
          var grupete = $("#nombre_de_grupo").text();
+         alert(grupete);
          $.ajax({
              data: {'usuario_invitado': usuario_invitado,
                      'grupete': grupete,
@@ -13,7 +14,7 @@ $(document).on('ready',function (){
              success : function(data) {
                  	if(data.code=='OK'){
                  	    alert("invitaste al usuario ");
-                 	    location.href = /invitar/ ;
+                 	    location.href = /invitar/;
                  	}else{
                  		alert(data.message);
                  	}
