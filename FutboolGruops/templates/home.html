@@ -56,7 +56,11 @@
 				 	 </TR>
 					{% for usuario in todos_los_usuarios %}
 				  	<TR>
-					    <TD>{{usuario.usuario.username}}</TD>
+				  	    {%if usuario.usuario.username == user.username%}
+					        <TD id="nombre_usuario">{{usuario.usuario.username}}</TD>
+	                                         {%else%}
+	                                             <TD>{{usuario.usuario.username}}</TD>
+	                                         {%endif%}
 					    {%if usuario.asistencia == True%}
 					        {%if usuario.usuario.username == user.username%}
 					            <TD><input name="asistencia" type="checkbox" checked/>
@@ -107,13 +111,21 @@
 					  <TD>{{equipo}}</TD>
 					     {% endfor %}
 				  </TR>
-				
+				<!--
 				{% for jugador_v, jugador_l in jugadores %}
 				  <TR>
 				       <TD>{{jugador_l.usuario}}</TD>
 				       <TD>{{jugador_v.usuario}}</TD>
 				  </TR>
 				{% endfor %}
+                                    -->
+				{% for jugadorv in jugadores %}
+				  <TR>
+				       <TD>{{jugadorv.0.usuario}}</TD>
+				       <TD>{{jugadorv.1.usuario}}</TD>
+				  </TR>
+				{% endfor %}
+				
 				<!--
 				{% for jugadorv in jugador_v %}
 				  <TR>
@@ -142,7 +154,12 @@
 		<div>
                            <p>{{nombreDelGrupo.lugar }}</p>
 			<p>{{nombreDelGrupo.dias_horas }}</p>
-			<a class="estrategia" href="{%url 'configurar' nombreDelGrupo.nombreDGrupos.id %}">configurar</a>
+			{%if nombreDelGrupo.usuarioCreador.id == user.id %}
+			    <a class="estrategia" href="{%url 'configurar' nombreDelGrupo.nombreDGrupos.id %}">configurar</a>
+			{%else%}
+			    <a class="estrategia" href="">No Configurable</a>
+			{%endif%}
+			
 		</div>
 
 	</section>

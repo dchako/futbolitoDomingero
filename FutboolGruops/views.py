@@ -33,17 +33,21 @@ def home(request, id):
         asisten = asis.count
         Todos_los_equipos = Equipos.objects.filter(
                                             nombreDelGrupos=eventoDadmin)
+        #print(Todos_los_equipos[1].id)
         jugador_v = Jugador.objects.filter(
                                     eventos=eventoDadmin.id,
-                                    equipo=Todos_los_equipos[0])
+                                    equipo=Todos_los_equipos[0].id)
+        #print(jugador_v[0].usuario)
         jugador_l = Jugador.objects.filter(
                         eventos=eventoDadmin.id,
-                        equipo=Todos_los_equipos[1])
+                        equipo=Todos_los_equipos[1].id)
+        #print(jugador_l[0].usuario)
         jugadores = list(zip(jugador_l, jugador_v))
         obj_invit = Invitacion.objects.filter(
         usuario_invitado=request.user.id,
         estado=False,)
         cant = obj_invit.count
+        print(jugadores)
         ctx = {'todos_los_usuarios': todos_los_usuarios,
             'nombreDelGrupos': eventoDadmins,
             'nombreDelGrupo': eventoDadmin,
@@ -101,7 +105,8 @@ def asistencia_ajax(request):
             grupe = Grupos.objects.get(nombreDelGrupo=grupete)
             print(grupe)
             obj_evento = Eventos.objects.get(
-                            usuarioCreador=obj_usuario, nombreDGrupos=grupe)
+                            #usuarioCreador=obj_usuario,
+                            nombreDGrupos=grupe)
             g = Jugador.objects.get(
                         usuario=obj_usuario, eventos=obj_evento.id)
             if(accionista == '1'):
@@ -159,9 +164,12 @@ def cambioDeEquipo_ajax(request):
         try:
             obj_usuario = User.objects.get(username=nombre)
             grupe = Grupos.objects.get(
-                    nombreDelGrupo=grupete, usuarioCreador=obj_usuario)
+                    nombreDelGrupo=grupete,
+                    #usuarioCreador=obj_usuario
+                    )
             obj_evento = Eventos.objects.get(
-                            usuarioCreador=obj_usuario, nombreDGrupos=grupe)
+                            #usuarioCreador=obj_usuario,
+                            nombreDGrupos=grupe)
             obj_equipos = Equipos.objects.filter(
                             nombreDelGrupos=obj_evento.id)
             g = Jugador.objects.get(

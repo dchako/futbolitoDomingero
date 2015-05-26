@@ -1,5 +1,5 @@
 {% extends "Futbool-template/base.html" %}
-
+{% load staticfiles %}
 
 {% block wraper %}
 		        {% block wraper_izquierda %}
@@ -51,7 +51,7 @@
 
 {% block wraper2 %}
 <p>
-    aca va la estrategia magica
+   <IMG SRC="{% static "imagenes/cancha.jpg" %}" height = "50%" width="50%" />
 </p>
 {% endblock %}
 

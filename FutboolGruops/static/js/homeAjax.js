@@ -3,10 +3,11 @@ $(document).on('ready',function (){
 
        $("#asistir").on("click",function(e){
         e.preventDefault();
-        //var usuario_invitado = $("#nombre").text();
-        //var grupete = $("#nombre_de_grupo").text();
-        var usuario ="dchakos";
-        var grupo = "Team Campito";
+        var usuario = $("#nombre_usuario").text();
+        var grupo = $("#nombre_de_grupo").text();
+        //alert(usuario);
+        //var usuario ="dchakos";
+        //var grupo = "Team Campito";
         var accion = 1;
 	$.ajax({
              data: {'nombre': usuario,
@@ -36,8 +37,8 @@ $(document).on('ready',function (){
 
     $("#no_asistir").on("click",function(e){
         e.preventDefault();
-        var usuario ="dchakos";
-        var grupo = "Team Campito";
+        var usuario = $("#nombre_usuario").text();
+        var grupo = $("#nombre_de_grupo").text();
         var accion = 0;
 	$.ajax({
              data: {'nombre': usuario,
@@ -67,8 +68,8 @@ $(document).on('ready',function (){
 
     $("#cambiazo").on("click",function(e){
         e.preventDefault();
-        var usuario ="dchakos";
-        var grupo = "Team Campito";
+        var usuario = $("#nombre_usuario").text();
+        var grupo = $("#nombre_de_grupo").text();
 	$.ajax({
              data: {'nombre': usuario,
                      'grupo': grupo,
