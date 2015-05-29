@@ -161,9 +161,9 @@ def configurar(request, id):
 @login_required(login_url='/login')
 def invitacion(request):
     obj_invit = Invitacion.objects.filter(
-        usuario_invitado=request.user.id,
-        estado=False,
-        )
+            usuario_invitado=request.user.id,
+            estado=False,
+            )
     ctx = {'obj_invit': obj_invit,
             }
     return render(request, 'invitacion.html', ctx)
@@ -176,11 +176,9 @@ def asistencia_ajax(request):
         accionista = request.GET['accion']
         data = {}
         try:
-            obj_usuario = get_object_or_404(User, username=nombre)
-            grupe = get_object_or_404(Grupos,nombreDelGrupo=grupete)
-            print(grupe)            obj_evento = Eventos.objects.get(
-                            #usuarioCreador=obj_usuario,
-                            nombreDGrupos=grupe)
+            obj_usuario = User.objects.get(username=nombre)
+            grupe = Grupos.objects.get(nombreDelGrupo=grupete)
+            obj_evento = Eventos.objects.get(nombreDGrupos=grupe)
             g = Jugador.objects.get(
                         usuario=obj_usuario, eventos=obj_evento.id)
             if(accionista == '1'):
@@ -189,7 +187,8 @@ def asistencia_ajax(request):
                 g.asistencia = False
             g.save()
             data['code'] = 'OK'
-        except User.DoesNotExist:
+        except e:
+            print(e)
             data['code'] = 'ERROR'
             data['message'] = 'No se encontro ningun registro'
         return HttpResponse(
@@ -294,11 +293,11 @@ def invitar(request, id):
     admineventos = Jugador.objects.filter(usuario=request.user.id)
     eventoDadmin = Eventos.objects.filter(usuarioCreador=request.user.id)
     if id == '0':
-        eventoDadmins = Jugador.objects.get(
+        eventoDadmins = get_object_or_404(Jugador,
                                 eventos=admineventos[0].eventos.id,
                                 usuario=request.user.id).eventos
     else:
-        eventoDadmins = Jugador.objects.get(
+        eventoDadmins = get_object_or_404(Jugador,
                                             eventos=id,
                                             usuario=request.user.id).eventos
     mensaje = ""
