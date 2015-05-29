@@ -2,7 +2,7 @@ $(document).on('ready',function (){
 
     $(".aceptar").on("click",function()
         {
-         var id = $(".id").text();
+         var id = $("#id").text();
          var accion = 1;
          $.ajax({
              data: {'id': id,
@@ -13,7 +13,7 @@ $(document).on('ready',function (){
              success : function(data) {
                  	if(data.code=='OK'){
                  		
-                 		alert("agira asiste");
+                 		alert("as aceptado la invitacion");
                  		location.reload()
                  	}else{
                  		alert(data.message);
@@ -33,7 +33,7 @@ $(document).on('ready',function (){
 
     $(".rechazar").on("click",function()
         {
-         var id = $(".id").text();
+         var id = $("#id").text();
          var accion = 0;
          $.ajax({
              data: {'id': id,
@@ -44,7 +44,7 @@ $(document).on('ready',function (){
              success : function(data) {
                  	if(data.code=='OK'){
                  		
-                 		alert("agira asiste");
+                 		alert("as rechazado la invitacion");
                  		location.reload()
                  	}else{
                  		alert(data.message);
