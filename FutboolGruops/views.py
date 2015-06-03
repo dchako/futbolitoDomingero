@@ -35,13 +35,20 @@ def home(request, id):
         asisten = asis.count
         Todos_los_equipos = Equipos.objects.filter(
                                             nombreDelGrupos=eventoDadmin)
-        jugador_v = Jugador.objects.filter(
+        ju_v = Jugador.objects.filter(
                                     eventos=eventoDadmin.id,
                                     equipo=Todos_los_equipos[0].id)
-        jugador_l = Jugador.objects.filter(
+        ju_l = Jugador.objects.filter(
                         eventos=eventoDadmin.id,
                         equipo=Todos_los_equipos[1].id)
-        jugadores = list(zip(jugador_l, jugador_v))
+        #jugadores = list(zip(ju_l, ju_v))
+        jug_v = list(ju_v)
+        jug_l = list(ju_l)
+        l, L = (jug_v, jug_l) if len(ju_l) > len(ju_v) else (jug_l, jug_v)
+        l = l + [None for x in range(len(L) - len(l))]
+        jugadores = [{'j1':L[x], 'j2':l[x]} for x in range(len(L))]
+        #print(jugadores)
+
         obj_invit = Invitacion.objects.filter(
         usuario_invitado=request.user.id,
         estado=False,)

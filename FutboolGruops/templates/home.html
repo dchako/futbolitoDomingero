@@ -111,11 +111,18 @@
 					  <TD>{{equipo}}</TD>
 					     {% endfor %}
 				  </TR>
-				
+				<!--
 				{% for jugador_v, jugador_l in jugadores %}
 				  <TR>
 				       <TD>{{jugador_l.usuario}}</TD>
 				       <TD>{{jugador_v.usuario}}</TD>
+				  </TR>
+				{% endfor %}
+				-->
+				{% for jugador in jugadores %}
+				  <TR>
+				       <TD>{{jugador.j1.usuario}}</TD>
+				       <TD>{{jugador.j2.usuario}}</TD>
 				  </TR>
 				{% endfor %}
 				</TABLE>
