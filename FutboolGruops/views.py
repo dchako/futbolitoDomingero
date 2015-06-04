@@ -8,6 +8,9 @@ from .models import Eventos, Equipos, Grupos, User, Jugador, Invitacion
 from django.http import HttpResponse
 import json
 from django.http import Http404
+from dateutil.rrule import *
+from datetime import datetime
+from dateutil.tz import tzutc
 # Create your views here.
 
 
@@ -42,12 +45,20 @@ def home(request, id):
                         eventos=eventoDadmin.id,
                         equipo=Todos_los_equipos[1].id)
         #jugadores = list(zip(ju_l, ju_v))
-        jug_v = list(ju_v)
-        jug_l = list(ju_l)
-        l, L = (jug_v, jug_l) if len(ju_l) > len(ju_v) else (jug_l, jug_v)
-        l = l + [None for x in range(len(L) - len(l))]
+        l, L = (list(ju_v), list(ju_l))
+        if len(l) > len(L):
+            L = L + [None for x in range(len(l) - len(L))]
+        else:
+            l = l + [None for x in range(len(L) - len(l))]
         jugadores = [{'j1':L[x], 'j2':l[x]} for x in range(len(L))]
-        #print(jugadores)
+        #Aca el calculo recurrente
+
+        dias_recurrente = rrule(WEEKLY,
+                         byweekday=(1, 5), dtstart=eventoDadmin.dias_horas)
+
+        dia_cercano = dias_recurrente.before(dt=datetime.now(tzutc()),
+                                             inc=True)
+        print(dia_cercano)
 
         obj_invit = Invitacion.objects.filter(
         usuario_invitado=request.user.id,
