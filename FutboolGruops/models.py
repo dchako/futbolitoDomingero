@@ -123,3 +123,17 @@ class Invitacion(models.Model):
 
     def __unicode__(self):
         return (self.usuario_invitado.username)
+
+
+#tabla partidos pasados para estadisticas etc
+
+
+class Partidos(models.Model):
+
+    eventos = models.ForeignKey('Eventos', )
+    local = models.PositiveIntegerField(default=0, )
+    visitante = models.PositiveIntegerField(default=0, )
+    fechaCreacion = models.DateTimeField(default=datetime.now(), blank=True)
+
+    def __unicode__(self):
+        return (self.nombreDelGrupos)

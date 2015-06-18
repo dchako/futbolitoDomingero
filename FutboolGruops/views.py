@@ -5,6 +5,7 @@ from django.views.generic import View
 from .forms import *
 from django.contrib.auth.decorators import login_required
 from .models import Eventos, Equipos, Grupos, User, Jugador, Invitacion
+from .models import Partidos
 from django.http import HttpResponse
 import json
 from django.http import Http404
@@ -25,11 +26,15 @@ def home(request, id):
             eventoDadmin = get_object_or_404(Jugador,
                                         eventos=eventoDadmins[0].eventos.id,
                                         usuario=request.user.id).eventos
+            partido = Partidos.objects.order_by(
+                    'fechaCreacion').get(eventos=eventoDadmins[0].eventos.id,)
         else:
             #ACA EXPLOTA CUANDO EL ID Y EL USUARIO NO PERTENECE AL ID
             eventoDadmin = get_object_or_404(Jugador,
                                             eventos=id,
                                             usuario=request.user.id).eventos
+            partido = Partidos.objects.order_by('fechaCreacion'
+                            ).get(eventos=id)
             #traigo con un evento todo los jugadores de ese evento
             todos_los_usuarios = Jugador.objects.filter(
                                                 eventos=eventoDadmin)
@@ -69,11 +74,15 @@ def home(request, id):
             'nombreDelGrupo': eventoDadmin,
             'Todos_los_equipos': Todos_los_equipos,
             'jugadores': jugadores,
-            'equipo1': Todos_los_equipos[0],
-            'equipo2': Todos_los_equipos[1],
+            'equipo_local': Todos_los_equipos.get(
+                                        local_visitante=True).nombreDelEquipo,
+            'equipo_visitante': Todos_los_equipos.get(
+                                        local_visitante=False).nombreDelEquipo,
             'asisten': asisten,
             'cantidad': cantidad,
             'cant': cant,
+            'gol_visitante': partido.visitante,
+            'gol_local': partido.local,
             }
         return render(request, 'home.html', ctx)
     else:
@@ -443,6 +452,7 @@ class ExtraDataView(View):
                         evento = Eventos.objects.create(
                           usuarioCreador=User.objects.get(id=request.user.id),
                           nombreDGrupos=grupos,
+                      dias_horas=form_membership.cleaned_data.get('dias_horas'),
                           lugar=form_membership.cleaned_data.get('lugar'),
                           cancha_5=form_membership.cleaned_data.get('cancha_5'),
                           cancha_7=form_membership.cleaned_data.get('cancha_7'),
@@ -467,6 +477,12 @@ class ExtraDataView(View):
                              usuario=User.objects.get(id=request.user.id),
                              equipo=equipo_l,
                             )
+                        #creo el registro de partidos
+                        partidos = Partidos.objects.create(
+                            eventos=evento,
+                  fechaCreacion=form_membership.cleaned_data.get('dias_horas'),
+                            )
+                        partidos.save()
                         jug.save()
                         return redirect('/0')
                     else:
