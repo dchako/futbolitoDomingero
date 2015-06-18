@@ -58,16 +58,17 @@ def home(request, id):
         jugadores = [{'j1':L[x], 'j2':l[x]} for x in range(len(L))]
         #Aca el calculo recurrente
 
-        dias_recurrente = rrule(WEEKLY,
-                         byweekday=(1, 5), dtstart=eventoDadmin.dias_horas)
+        dias_recurrente = rrule(DAILY,
+                         byweekday=(1, 5),
+                          dtstart=eventoDadmin.dias_horas)
 
-        dia_cercano = dias_recurrente.before(dt=datetime.now(tzutc()),
+        dia_cercano = dias_recurrente.after(dt=datetime.now(tzutc()),
                                              inc=True)
         print(dia_cercano)
 
         obj_invit = Invitacion.objects.filter(
-        usuario_invitado=request.user.id,
-        estado=False,)
+                                            usuario_invitado=request.user.id,
+                                            estado=False,)
         cant = obj_invit.count
         ctx = {'todos_los_usuarios': todos_los_usuarios,
             'nombreDelGrupos': eventoDadmins,
@@ -81,8 +82,12 @@ def home(request, id):
             'asisten': asisten,
             'cantidad': cantidad,
             'cant': cant,
+<<<<<<< HEAD
             'gol_visitante': partido.visitante,
             'gol_local': partido.local,
+=======
+            'dia_cercano': dia_cercano,
+>>>>>>> 30a3ada50a63cb1e23db7ab9bea64ee9b3f96997
             }
         return render(request, 'home.html', ctx)
     else:

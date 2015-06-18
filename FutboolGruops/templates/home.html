@@ -139,7 +139,8 @@
 		
 		<div>
                            <p>{{nombreDelGrupo.lugar }}</p>
-			<p>{{nombreDelGrupo.dias_horas }}</p>
+			<!--<p>{{nombreDelGrupo.dias_horas }}</p>-->
+			<p>{{dia_cercano}}</p>
 			{%if nombreDelGrupo.usuarioCreador.id == user.id %}
 			    <a class="estrategia" href="{%url 'configurar' nombreDelGrupo.nombreDGrupos.id %}">configurar</a>
 			{%else%}
