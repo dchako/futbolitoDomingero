@@ -82,12 +82,9 @@ def home(request, id):
             'asisten': asisten,
             'cantidad': cantidad,
             'cant': cant,
-<<<<<<< HEAD
             'gol_visitante': partido.visitante,
             'gol_local': partido.local,
-=======
-            'dia_cercano': dia_cercano,
->>>>>>> 30a3ada50a63cb1e23db7ab9bea64ee9b3f96997
+             'dia_cercano': dia_cercano,
             }
         return render(request, 'home.html', ctx)
     else:
