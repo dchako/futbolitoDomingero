@@ -59,7 +59,7 @@ def home(request, id):
         #Aca el calculo recurrente
 
         dias_recurrente = rrule(DAILY,
-                         byweekday=(1, 5),
+                         byweekday=(1, 3),
                           dtstart=eventoDadmin.dias_horas)
 
         dia_cercano = dias_recurrente.after(dt=datetime.now(tzutc()),
