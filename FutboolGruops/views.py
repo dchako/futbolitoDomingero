@@ -65,7 +65,7 @@ def home(request, id):
         dia_cercano = dias_recurrente.after(dt=datetime.now(tzutc()),
                                              inc=True)
         print(dia_cercano)
-
+        #tengo ...
         obj_invit = Invitacion.objects.filter(
                                             usuario_invitado=request.user.id,
                                             estado=False,)
