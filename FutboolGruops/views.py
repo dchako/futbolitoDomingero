@@ -27,14 +27,14 @@ def home(request, id):
                                         eventos=eventoDadmins[0].eventos.id,
                                         usuario=request.user.id).eventos
             partido = Partidos.objects.order_by(
-                    'fechaCreacion').get(eventos=eventoDadmins[0].eventos.id,)
+              '-fechaCreacion').filter(eventos=eventoDadmins[0].eventos.id,)
         else:
             #ACA EXPLOTA CUANDO EL ID Y EL USUARIO NO PERTENECE AL ID
             eventoDadmin = get_object_or_404(Jugador,
                                             eventos=id,
                                             usuario=request.user.id).eventos
-            partido = Partidos.objects.order_by('fechaCreacion'
-                            ).get(eventos=id)
+            partido = Partidos.objects.order_by('-fechaCreacion'
+                            ).filter(eventos=id)
             #traigo con un evento todo los jugadores de ese evento
             todos_los_usuarios = Jugador.objects.filter(
                                                 eventos=eventoDadmin)
@@ -64,7 +64,22 @@ def home(request, id):
 
         dia_cercano = dias_recurrente.after(dt=datetime.now(tzutc()),
                                              inc=True)
+        #cosas raras
+        cant_p = len(partido)
+        if cant_p > 1:
+            partido_proximo = partido[0]
+            partido_anterior = partido[1]
+        else:
+            partido_proximo = partido[0]
+            partido_anterior = partido[0]
+
+        print(partido_anterior.fechaCreacion)
+        print(partido_proximo.fechaCreacion)
         print(dia_cercano)
+        if  datetime.now(tzutc()) > partido_proximo.fechaCreacion:
+            cargar_goles = 1
+        else:
+            cargar_goles = 0
         #tengo ...
         obj_invit = Invitacion.objects.filter(
                                             usuario_invitado=request.user.id,
@@ -82,9 +97,11 @@ def home(request, id):
             'asisten': asisten,
             'cantidad': cantidad,
             'cant': cant,
-            'gol_visitante': partido.visitante,
-            'gol_local': partido.local,
-             'dia_cercano': dia_cercano,
+            'gol_visitante': partido_anterior.visitante,
+            'gol_local': partido_anterior.local,
+            'dia_cercano': dia_cercano,
+            'cargar_goles': cargar_goles,
+            'id_evento': partido_anterior.id,
             }
         return render(request, 'home.html', ctx)
     else:
@@ -215,6 +232,34 @@ def asistencia_ajax(request):
             else:
                 g.asistencia = False
             g.save()
+            data['code'] = 'OK'
+        except e:
+            print(e)
+            data['code'] = 'ERROR'
+            data['message'] = 'No se encontro ningun registro'
+        return HttpResponse(
+                json.dumps(data), content_type='application/json')
+    else:
+        raise Http404
+
+
+def cargar_goles(request):
+    if request.is_ajax():
+        fecha_proximo = request.GET['fecha_proximo']
+        id_evento = request.GET['id_evento']
+        gol_v = request.GET['gol_v']
+        gol_l = request.GET['gol_l']
+        data = {}
+        try:
+            partido_anterior = Partidos.objects.get(id=id_evento)
+            partido_anterior.local = gol_l
+            partido_anterior.visitante = gol_v
+            proximo_partido = Partidos.objects.create(
+                            eventos=partido_anterior.eventos.id,
+                  fechaCreacion=fecha_proximo,
+                            )
+            partido_anterior.save()
+            proximo_partido.save()
             data['code'] = 'OK'
         except e:
             print(e)

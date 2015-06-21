@@ -155,4 +155,42 @@
 
    <script type="text/javascript" src="{{ STATIC_URL }}js/homeAjax.js"></script>
 
+    <script>
+    $(document).on('ready',function (){
+
+            var cargar_goles = "{{ cargar_goles }} ";
+            var gol_v = 12;
+            var gol_l = 23;
+            if( cargar_goles == 1){
+                alert("se tiene q cargar los goles");
+                $.ajax({
+                     data: { 'fecha_proximo':"{{ dia_cercano }} " ,
+                             'id_evento': "{{ id_evento }} ",
+                             'gol_v': gol_v,
+                             'gol_l': gol_l,
+                            },
+                     url: '/cargar_goles/',
+                     type: 'get',
+                     success : function(data) {
+                     if(data.code=='OK'){
+                         alert("Datos cargados");
+                         }
+                    else
+                        {
+                         alert(data.message);
+                        }
+                     },
+                    error : function(data) {
+                    console.log('ERROR EN LA COMUNICACION CON EL SERVIDOR')
+                      },
+                complete: function(jqXHR, estado)
+                    {
+                        console.log(estado);
+                    },
+                 });
+                 }
+            else
+                alert("todavia no se jugo");
+ });
+    </script>
 {% endblock %}

@@ -136,4 +136,4 @@ class Partidos(models.Model):
     fechaCreacion = models.DateTimeField(default=datetime.now(), blank=True)
 
     def __unicode__(self):
-        return (self.nombreDelGrupos)
+        return (self.eventos.nombreDGrupos.nombreDelGrupo)
