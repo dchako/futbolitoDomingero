@@ -163,6 +163,12 @@
             var gol_l = 23;
             if( cargar_goles == 1){
                 alert("se tiene q cargar los goles");
+                do{
+                gol_v = prompt("ingrese la cantidad de goles del visitante!",0);
+                }while(gol_v<0);
+                do{
+                gol_l = prompt("ingrese la cantidad de goles del local!",0);
+                }while(gol_l<0);
                 $.ajax({
                      data: { 'fecha_proximo':"{{ dia_cercano }} " ,
                              'id_evento': "{{ id_evento }} ",
