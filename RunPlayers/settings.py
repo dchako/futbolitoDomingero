@@ -105,8 +105,12 @@ WSGI_APPLICATION = 'RunPlayers.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'd5rspkv64or625',
+        'HOST': 'ec2-54-83-20-177.compute-1.amazonaws.com', 
+        'USER': 'fikjmqsvcxsyze',
+        'PORT': '5432',
+        'PASSWORD': 'gtxlPss3tdtkZH2XzBmqcjPC0y',
     }
 }
 
