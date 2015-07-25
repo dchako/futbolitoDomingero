@@ -1,0 +1,41 @@
+{% extends "Futbool-template/base.html" %}
+{% load staticfiles %}
+
+{% block wraper %}
+		{% block wraper_izquierda %}
+			<div class="agregar_jugador_left">
+				<h1 class="titulo">
+				    RunPlayers
+				</h1>
+			</div>
+			{% endblock wraper_izquierda %}
+
+			{% block wraper_centro %}
+			<div class="titular">
+				
+			</div>
+			{% endblock wraper_centro %}
+
+			{% block wraper_derecho %}
+				<div class="logo_usuario_right">
+
+				</div>
+			{% endblock wraper_derecho %}
+{% endblock %}
+	
+{% block wraper1 %}
+		<ul class="menu">
+			<li class="Nuevo_Grupo"><a href="#">#</a></li>
+			<li class="nombre"><a href="#">TIENES QUE LOGEARTE!</a></li>
+			<li class="cambiar"><a href="#">#</a></li>
+		</ul>
+{% endblock %}
+
+{% block wraper2 %}
+                <div class="login">
+                	<IMG SRC="{% static "imagenes/grupos.jpg" %}" height = "100%" width="100%" />
+                	<a  class="acceso" href="{% url 'social:begin' 'facebook' %}?next={%url 'home' '0' %}">Login with Facebook</a>
+                	
+
+                </div>
+{% endblock %}

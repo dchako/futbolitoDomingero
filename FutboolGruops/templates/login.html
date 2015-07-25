@@ -1,41 +1,121 @@
-{% extends "Futbool-template/base.html" %}
 {% load staticfiles %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Run Players</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="title" content="Run Players">
+	<meta name="description" content="Jugá al futbol con tus amigos de la forma mas facil">
+	<meta name="author" content="Chako">
+	<meta name="Copyright" content="Chako">
 
-{% block wraper %}
-		{% block wraper_izquierda %}
-			<div class="agregar_jugador_left">
-				<h1 class="titulo">
-				    RunPlayers
-				</h1>
-			</div>
-			{% endblock wraper_izquierda %}
+	<!-- Facebook Open Graph meta tags -->
+	<meta property="og:title" content="Run Players"/>
+	<meta property="og:url" content="https://runplayers.herokuapp.com/login"/>
+	<meta property="og:site_name" content="Run Players"/>
+	<meta property="og:image" content="/assets/imagenes/patada-krupo.jpg"/>
+	<meta property="og:image:width" content="400" />
+	<meta property="og:image:height" content="400" />
+	<!-- /Facebook Open Graph Meta Tags -->
 
-			{% block wraper_centro %}
-			<div class="titular">
-				
-			</div>
-			{% endblock wraper_centro %}
+	<!-- Twitter Cards meta tags -->
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:site" content="https://runplayers.herokuapp.com/login" />
+	<meta name="twitter:creator" content="@chako" />
+	<meta name="twitter:title" content="Run Players" />
+	<meta name="twitter:description" content="Jugá al futbol con tus amigos de la forma mas facil." />
+	<meta name="twitter:image" content="https://runplayers.herokuapp.com/assets/imagenes/patada-krupo.jpg" />
+	<meta name="twitter:url" content="https://runplayers.herokuapp.com" />
+	<!-- /Twitter Cards meta tags -->
 
-			{% block wraper_derecho %}
-				<div class="logo_usuario_right">
+	<!-- Google+ snippet -->
+	<meta itemprop="name" content="Run Players">
+	<meta itemprop="description" content="Jugá al futbol con tus amigos de la forma mas facil.">
+	<meta itemprop="image" content="/assets/imagenes/patada-krupo.jpg">
+	<!-- /Google+ snippet -->
 
-				</div>
-			{% endblock wraper_derecho %}
-{% endblock %}
-	
-{% block wraper1 %}
-		<ul class="menu">
-			<li class="Nuevo_Grupo"><a href="#">#</a></li>
-			<li class="nombre"><a href="#">TIENES QUE LOGEARTE!</a></li>
-			<li class="cambiar"><a href="#">#</a></li>
-		</ul>
-{% endblock %}
-
-{% block wraper2 %}
-                <div class="login">
-                	<IMG SRC="{% static "imagenes/grupos.jpg" %}" height = "100%" width="100%" />
-                	<a  class="acceso" href="{% url 'social:begin' 'facebook' %}?next={%url 'home' '0' %}">Login with Facebook</a>
-                	
-
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet' type='text/css'>
+    <!-- Pure como base (trae ingregado Normalize.css). Docs: http://purecss.io/ -->
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+    <!-- Pure responsive -->
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css">
+    <link rel="stylesheet" href="{% static "css/main.css" %}">
+</head>
+<body>
+    <header class="principal" id="principal">
+            <div class="wow bounceInUp">
+                <h1>Run Players</h1>
+                <h2>La mejor forma de organizar los partidos con tus amigos!</h2>
+                <br>
+                <p><a href="{% url 'social:begin' 'facebook' %}?next={%url 'home' '0' %}" class="btn">Login with Facebook</a></p>
+            </div>
+    </header>
+    <section class="acerca" id="acerca">
+        <div class="contenedor">
+            <h2 class="contenido-centrado">Organizemos nuestros partidos</h2>
+            <p>Nuestra plataforma te facilita la organizacion de tus partidos! No mas grupos de WASSAPS.</p>
+            <div class="tabla  wow bounceInLeft">
+                <div class="fila">
+                    <div class="celda">
+                        <div class="contenedor-columnas">
+                            <h3>Crea tus propias estrategias</h3>
+                            <img src="{% static "imagenes/icono-cancha.png" %}" alt="cancha">
+                            <p>Dependiendo de la cancha donde jueges podes crear una estrategia personalizada para tu equipo o darle a tu jugador una posicion en especial!.</p>
+                        </div>
+                    </div>
+                    <div class="celda">
+                        <div class="contenedor-columnas">
+                            <h3>Selecciona a tus jugadores</h3>
+                            <img src="{% static "imagenes/icono-jugador.png" %}" alt="jugador">
+                            <p>Podes elegir tus jugadores dependiendo de tu lista de amigos o conocido, invitando a unirse a tu grupo!. Solo tenes que buscar al jugador por su nombre de usuario y invitarlo a que se una a tu grupo!</p>
+                        </div>
+                    </div>
+                    <div class="celda">
+                        <div class="contenedor-columnas">
+                            <h3>Torneos y Copas Virtuales</h3>
+                            <img src="{% static "imagenes/icono-pelota.png" %}" alt="pelota">
+                            <p>Podes jugar tornoes y copas sin estar atado a un lugar fisico en especial! juga contra tus rivales por puntos o crea tu propia copa barrial!</p>
+                        </div>
+                    </div>
                 </div>
-{% endblock %}
+            </div>
+        </div>
+    </section>
+    <section class="social contenido-centrado">
+        <div class="contenedor wow flipInY" data-wow-delay=".5s">
+            <h2>Corré la bola!</h2>
+            <h3>Hacenos el aguante en las redes sociales</h3>
+            <br>
+            <a href="#!" class="btn">Facebook</a>
+            <a href="#!" class="btn">Google+</a>
+            <a href="#!" class="btn">Twitter</a>
+        </div>
+    </section>
+    <footer>
+        <div class="contenedor contenido-centrado">
+            <div class="contenedor">
+                <h4>Powered by FutbolitoDomingero</h4>
+                <h4>v0.1 por chako</h4>
+                <div class="botones-sociales">
+                    <!-- Facebook -->
+                    <div id="fb-root"></div>
+                    <script>(function(d, s, id) {
+                      var js, fjs = d.getElementsByTagName(s)[0];
+                      if (d.getElementById(id)) return;
+                      js = d.createElement(s); js.id = id;
+                      js.src = "//connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.4";
+                      fjs.parentNode.insertBefore(js, fjs);
+                    }(document, 'script', 'facebook-jssdk'));</script>
+                    <div class="fb-share-button" data-href="https://runplayers.herokuapp.com/login" data-layout="button_count"></div>
+                    <!-- /Facebook -->
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script type="text/javascript" src="{% static "js/vendor/wow.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/main.js" %}"></script>
+</body>
+</html>
+
