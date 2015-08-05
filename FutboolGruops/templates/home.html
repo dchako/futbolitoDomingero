@@ -180,6 +180,7 @@
                      success : function(data) {
                      if(data.code=='OK'){
                          alert("Datos cargados");
+                         location.reload();
                          }
                     else
                         {
@@ -196,7 +197,7 @@
                  });
                  }
             else
-                alert("todavia no se jugo");
+                //alert("todavia no se jugo");
  });
     </script>
 {% endblock %}

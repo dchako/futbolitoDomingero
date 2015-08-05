@@ -64,6 +64,7 @@ def home(request, id):
 
         dia_cercano = dias_recurrente.after(dt=datetime.now(tzutc()),
                                              inc=True)
+
         #cosas raras
         cant_p = len(partido)
         if cant_p > 1:
@@ -73,11 +74,13 @@ def home(request, id):
             partido_proximo = partido[0]
             partido_anterior = partido[0]
 
-        print(partido_anterior.fechaCreacion)
-        print(partido_proximo.fechaCreacion)
-        print(dia_cercano)
+        #print(partido_anterior.fechaCreacion)
+        #print(partido_proximo.fechaCreacion)
+        #print(type(dia_cercano))
         if  datetime.now(tzutc()) > partido_proximo.fechaCreacion:
             cargar_goles = 1
+            partido_proximo.fechaCreacion = dia_cercano
+            partido_proximo.save()
         else:
             cargar_goles = 0
         #tengo ...
@@ -249,17 +252,32 @@ def cargar_goles(request):
         id_evento = request.GET['id_evento']
         gol_v = request.GET['gol_v']
         gol_l = request.GET['gol_l']
+        #print(id_evento)
         data = {}
+        #dia = datetime.strptime(fecha_proximo, '%b%d%Y').strftime('%m/%d/%Y')
+        #print(dia)
         try:
             partido_anterior = Partidos.objects.get(id=id_evento)
-            partido_anterior.local = gol_l
-            partido_anterior.visitante = gol_v
-            proximo_partido = Partidos.objects.create(
-                            eventos=partido_anterior.eventos.id,
-                  fechaCreacion=fecha_proximo,
+        except e:
+            partido_anterior = Partidos.objects.create(
+                            eventos=id_evento,
                             )
+        try:
+            #print(type(fecha_proximo))
+            #print(dia)
+            #print("este es el dia", type(dia))
+            #partido_anterior = Partidos.objects.get(id=id_evento)
+            partido_anterior.local = int(gol_l)
+            partido_anterior.visitante = int(gol_v)
+            #partido_anterior.fechaCreacion = dia
+            #proximo_partido = Partidos.objects.create(
+             #               eventos=id_evento,
+                            #fechaCreacion=fecha_proximo,
+       #                     )
+
             partido_anterior.save()
-            proximo_partido.save()
+            #proximo_partido.save()
+            #print("sadasd")
             data['code'] = 'OK'
         except e:
             print(e)

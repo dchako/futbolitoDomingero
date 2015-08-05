@@ -20,13 +20,13 @@ $(document).on('ready',function (){
                  	if(data.code=='OK'){
                  		
                  		alert("agira asiste");
-                 		location.reload()
+                 		location.reload();
                  	}else{
                  		alert(data.message);
                  	}
                  },
             error : function(data) {
-                 	console.log('ERROR EN LA COMUNICACION CON EL SERVIDOR')
+                 	console.log('ERROR EN LA COMUNICACION CON EL SERVIDOR');
                   },
             complete: function(jqXHR, estado)
                 {
@@ -51,13 +51,13 @@ $(document).on('ready',function (){
                  	if(data.code=='OK'){
                  		
                  		alert("ya no asiste");
-                 		location.reload()
+                 		location.reload();
                  	}else{
                  		alert(data.message);
                  	}
                  },
             error : function(data) {
-                 	console.log('ERROR EN LA COMUNICACION CON EL SERVIDOR')
+                 	console.log('ERROR EN LA COMUNICACION CON EL SERVIDOR');
                   },
             complete: function(jqXHR, estado)
                 {
@@ -79,13 +79,13 @@ $(document).on('ready',function (){
              success : function(data) {
                  	if(data.code=='OK'){
                  	    alert("cambiaste de equipo");
-                 	    location.reload()
+                 	    location.reload();
                  	}else{
                  		alert(data.message);
                  	}
                  },
             error : function(data) {
-                 	console.log('ERROR EN LA COMUNICACION CON EL SERVIDOR')
+                 	console.log('ERROR EN LA COMUNICACION CON EL SERVIDOR');
                   },
             complete: function(jqXHR, estado)
                 {
@@ -98,7 +98,7 @@ $(document).on('ready',function (){
     $(".cambiarlo").on("click",function()
         {
 	var nombre = $(this).text();
-	alert (nombre)
+	alert (nombre);
         });
 
 
