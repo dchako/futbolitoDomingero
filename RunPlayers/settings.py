@@ -103,16 +103,21 @@ WSGI_APPLICATION = 'RunPlayers.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd5rspkv64or625',
-        'HOST': 'ec2-54-83-20-177.compute-1.amazonaws.com', 
-        'USER': 'fikjmqsvcxsyze',
-        'PORT': '5432',
-        'PASSWORD': 'gtxlPss3tdtkZH2XzBmqcjPC0y',
-    }
-}
+import dj_database_url
+DATABASES = {}
+DATABASES['default'] = dj_database_url.config()
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        #'NAME': 'd5rspkv64or625',
+        #'HOST': 'ec2-54-83-20-177.compute-1.amazonaws.com',
+        #'USER': 'fikjmqsvcxsyze',
+        #'PORT': '5432',
+        #'PASSWORD': 'gtxlPss3tdtkZH2XzBmqcjPC0y',
+    #}
+#}
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
@@ -134,6 +139,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = 'staticfiles'
+
+STATICFILES_DIRS = (
+   os.path.join(BASE_DIR, 'static'),
+)
 
 
 #AUTH_PROFILE_MODULE = 'futbolitoDomingero.Jugadores'
