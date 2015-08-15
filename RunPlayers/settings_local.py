@@ -16,7 +16,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'FutboolGruops',
-    #'social.apps.django_app.default',
+    'social.apps.django_app.default',
 )
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
