@@ -121,8 +121,8 @@
 				-->
 				{% for jugador in jugadores %}
 				  <TR>
-				       <TD>{{jugador.j1.usuario}}</TD>
-				       <TD>{{jugador.j2.usuario}}</TD>
+				       <TD>{{jugador.j1.usuario.username}}</TD>
+				       <TD>{{jugador.j2.usuario.username}}</TD>
 				  </TR>
 				{% endfor %}
 				</TABLE>

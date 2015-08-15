@@ -22,7 +22,7 @@ def home(request, id):
         eventoDadmins = Jugador.objects.filter(usuario=request.user.id)
         if id == '0':
             todos_los_usuarios = Jugador.objects.filter(
-                                            eventos=eventoDadmins[0].eventos)
+                                            eventos=eventoDadmins[0].eventos.id)
             eventoDadmin = get_object_or_404(Jugador,
                                         eventos=eventoDadmins[0].eventos.id,
                                         usuario=request.user.id).eventos
@@ -31,18 +31,18 @@ def home(request, id):
         else:
             #ACA EXPLOTA CUANDO EL ID Y EL USUARIO NO PERTENECE AL ID
             eventoDadmin = get_object_or_404(Jugador,
-                                            eventos=id,
+                                            eventos=int(id),
                                             usuario=request.user.id).eventos
             partido = Partidos.objects.order_by('-fechaCreacion'
-                            ).filter(eventos=id)
+                            ).filter(eventos=int(id))
             #traigo con un evento todo los jugadores de ese evento
             todos_los_usuarios = Jugador.objects.filter(
-                                                eventos=eventoDadmin)
+                                                eventos=eventoDadmin.id)
         cantidad = todos_los_usuarios.count
-        asis = Jugador.objects.filter(eventos=eventoDadmin, asistencia=True)
+        asis = Jugador.objects.filter(eventos=eventoDadmin.id, asistencia=True)
         asisten = asis.count
         Todos_los_equipos = Equipos.objects.filter(
-                                            nombreDelGrupos=eventoDadmin)
+                                            nombreDelGrupos=eventoDadmin.id)
         ju_v = Jugador.objects.filter(
                                     eventos=eventoDadmin.id,
                                     equipo=Todos_los_equipos[0].id)
