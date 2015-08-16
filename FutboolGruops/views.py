@@ -49,6 +49,8 @@ def home(request, id):
         ju_l = Jugador.objects.filter(
                         eventos=eventoDadmin.id,
                         equipo=Todos_los_equipos[1].id)
+        print(ju_v)
+        print(ju_l)
         #jugadores = list(zip(ju_l, ju_v))
         l, L = (list(ju_v), list(ju_l))
         if len(l) > len(L):
