@@ -43,6 +43,9 @@ def home(request, id):
         asisten = asis.count
         Todos_los_equipos = Equipos.objects.filter(
                                             nombreDelGrupos=eventoDadmin.id)
+        print(eventoDadmin.id)
+        print(Todos_los_equipos[0].id)
+        print(Todos_los_equipos[1].id)
         ju_v = Jugador.objects.filter(
                                     eventos=eventoDadmin.id,
                                     equipo=Todos_los_equipos[0].id)
