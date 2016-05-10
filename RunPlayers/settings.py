@@ -165,6 +165,7 @@ STATIC_ROOT = 'static'
 #STATIC_ROOT= os.path.join(BASE_DIR,'staticfiles/')
 STATICFILES_DIRS = (
    os.path.join(BASE_DIR, 'FutboolGruops/static'),
+   os.path.join(BASE_DIR, 'FutboolGruops/staticfiles'),
 )
 
 #AUTH_PROFILE_MODULE = 'futbolitoDomingero.Jugadores'
