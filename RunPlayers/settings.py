@@ -10,6 +10,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import dj_database_url
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
@@ -38,7 +39,25 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'FutboolGruops',
     'social.apps.django_app.default',
+    'rest_framework',
+    'corsheaders',
+    'django_filters',
 )
+REST_FRAMEWORK = {
+     # Use hyperlinked styles by default.
+     # Only used if the `serializer_class` attribute is not set on a view.
+     'DEFAULT_MODEL_SERIALIZER_CLASS':
+         'rest_framework.serializers.HyperlinkedModelSerializer',
+
+     # Use Django's standard `django.contrib.auth` permissions,
+     # or allow read-only access for unauthenticated users.
+     'DEFAULT_PERMISSION_CLASSES': [
+         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+     ],
+     'DEFAULT_FILTER_BACKENDS': [
+            'rest_framework.filters.DjangoFilterBackend',
+        ]
+}
 
 TEMPLATE_CONTEXT_PROCESSORS = (
    'django.contrib.auth.context_processors.auth',
@@ -71,6 +90,8 @@ AUTH_USER_MODEL = 'FutboolGruops.User'
 
 SOCIAL_AUTH_USER_MODEL = 'FutboolGruops.User'
 
+CORS_ORIGIN_ALLOW_ALL = True
+
 SOCIAL_AUTH_PIPELINE = (
     'social.pipeline.social_auth.social_details',
     'social.pipeline.social_auth.social_uid',
@@ -93,6 +114,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'social.apps.django_app.middleware.SocialAuthExceptionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 )
 
 ROOT_URLCONF = 'RunPlayers.urls'
@@ -103,7 +125,6 @@ WSGI_APPLICATION = 'RunPlayers.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
-import dj_database_url
 DATABASES = {}
 DATABASES['default'] = dj_database_url.config()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')

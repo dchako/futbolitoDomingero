@@ -17,6 +17,9 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'FutboolGruops',
     'social.apps.django_app.default',
+    'rest_framework',
+    'corsheaders',
+    'django_filters',
 )
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases

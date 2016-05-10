@@ -12,7 +12,23 @@ from django.http import Http404
 from dateutil.rrule import *
 from datetime import datetime
 from dateutil.tz import tzutc
+#desde aca todo nuevo
+from social.apps.django_app.utils import load_strategy, load_backend, strategy
+#from social.apps.django_app.utils import psa
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework import status, permissions
+from rest_framework.response import Response
+#from django.utils.six.moves import http_client
+from social.apps.django_app.views import _do_login
+from rest_framework import viewsets
+from .serializers import UserSerializer, JugadoresSerializer
+from .serializers import EventosSerializer, EquiposSerializer
+from .serializers import GruposSerializer, InvitacionSerializer
+from rest_framework.filters import DjangoFilterBackend
+#from django_filters import filters
 # Create your views here.
+import pdb
 
 
 @login_required(login_url='/login')
@@ -600,3 +616,118 @@ class ExtraDataView(View):
         'form': ExtraDataForm(request.POST),
                        }
                 return render(request, self.template_name, ctx)
+
+#add the following to views.py
+
+
+@strategy()
+#@psa('social:complete')
+def auth_by_token(request, backend):
+    #uri = ''
+    #strategy = load_strategy(request)
+    #backend = load_backend(strategy, backend, uri)
+    #backend = request.strategy.backend
+    backend = request.backend
+    user = request.user
+    #pdb.set_trace()
+    #print("antes")
+    user = backend.do_auth(
+        access_token=request.data.get('access_token'),
+        user=user.is_authenticated() and user or None
+        )
+    #print("despues")
+    if user and user.is_active:
+        print("el usuario vuelve")
+        #pdb.set_trace()
+        return user  # Return anything that makes sense here
+    else:
+        return None
+
+
+@csrf_exempt
+@api_view(['POST'])
+@permission_classes((permissions.AllowAny,))
+def social_register(request):
+    auth_token = request.data.get('access_token', None)
+    backend = request.data.get('backend', None)
+    if auth_token and backend:
+        try:
+            user = auth_by_token(request, backend)
+            #print("stamos Aca")
+        except Exception, err:
+            return Response(str(err), status=400)
+        if user:
+            strategy = load_strategy(request)
+            #pdb.set_trace()
+            #print("asta aca")
+            uri = ''
+            backend = load_backend(strategy, backend, uri)
+            #pdb.set_trace()
+            _do_login(backend, user, strategy)
+            #pdb.set_trace()
+            print("apunto de salir")
+            pdb.set_trace()
+            data = {
+                    'name': user.username,
+                    'id': user.id,
+                    'status': user.status
+                    }
+            return Response(data, status=status.HTTP_200_OK)
+        else:
+            return Response("Bad Credentials", status=403)
+    else:
+        return Response("Bad request", status=400)
+
+
+class UserViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = User.objects.all().order_by('-id')
+    serializer_class = UserSerializer
+
+
+class JugadoresViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows groups to be viewed or edited.
+    """
+    lookup_field = 'id'
+    filter_backend = DjangoFilterBackend
+    filter_fields = ('eventos', 'usuario', 'equipo')
+    queryset = Jugador.objects.all()
+    serializer_class = JugadoresSerializer
+
+
+class EventosViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows groups to be viewed or edited.
+    """
+    queryset = Eventos.objects.all()
+    serializer_class = EventosSerializer
+
+
+class EquiposViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows groups to be viewed or edited.
+    """
+    queryset = Equipos.objects.all()
+    lookup_field = 'id'
+    filter_backend = DjangoFilterBackend
+    filter_fields = ('nombreDelGrupos', 'local_visitante')
+    serializer_class = EquiposSerializer
+
+
+class GruposViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows groups to be viewed or edited.
+    """
+    queryset = Grupos.objects.all()
+    serializer_class = GruposSerializer
+
+
+class InvitacionViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows groups to be viewed or edited.
+    """
+    queryset = Invitacion.objects.all()
+    serializer_class = InvitacionSerializer

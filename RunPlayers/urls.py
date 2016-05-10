@@ -1,7 +1,21 @@
 from django.conf.urls import patterns, include, url
 from FutboolGruops.views import ExtraDataView
+from rest_framework import routers
+from FutboolGruops import views
 from django.contrib import admin
 admin.autodiscover()
+
+router = routers.DefaultRouter()
+router.register(r'users', views.UserViewSet)
+#router.register(r'groups', views.GroupViewSet)
+router.register(r'jugadores', views.JugadoresViewSet)
+
+router.register(r'Eventos', views.EventosViewSet)
+#equipo_list_id = views.EquiposViewSet.as_view({'get': 'list'})
+router.register(r'Equipos', views.EquiposViewSet)
+
+router.register(r'Grupos', views.GruposViewSet)
+router.register(r'Invitacion', views.InvitacionViewSet)
 
 urlpatterns = patterns('',
     # Examples:
@@ -33,4 +47,8 @@ urlpatterns = patterns('',
     url('', include('social.apps.django_app.urls', namespace='social')),
     url('', include('django.contrib.auth.urls', namespace='auth')),
     url(r'^admin/', include(admin.site.urls)),
+    #api
+    url(r'^sociallogin/', 'FutboolGruops.views.social_register'),
+    #url(r'^Equipos/(?P<pk>[0-9]+)$', equipo_list_id, name='eventos-detail'),
+    url(r'^', include(router.urls))
 )
