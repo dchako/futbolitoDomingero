@@ -14,7 +14,7 @@ $(document).on('ready',function (){
                  	if(data.code=='OK'){
                  		
                  		alert("as aceptado la invitacion");
-                 		location.reload()
+                 		location.reload();
                  	}else{
                  		alert(data.message);
                  	}
@@ -45,7 +45,7 @@ $(document).on('ready',function (){
                  	if(data.code=='OK'){
                  		
                  		alert("as rechazado la invitacion");
-                 		location.reload()
+                 		location.reload();
                  	}else{
                  		alert(data.message);
                  	}
