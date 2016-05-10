@@ -42,6 +42,8 @@ INSTALLED_APPS = (
     'rest_framework',
     'corsheaders',
     'django_filters',
+    'whitenoise.runserver_nostatic',
+    'django.contrib.staticfiles',
 )
 REST_FRAMEWORK = {
      # Use hyperlinked styles by default.
@@ -115,6 +117,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'social.apps.django_app.middleware.SocialAuthExceptionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 )
 
 ROOT_URLCONF = 'RunPlayers.urls'
@@ -157,7 +160,6 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
-
 STATIC_URL = '/static/'
 STATIC_ROOT = 'staticfiles'
 
@@ -165,6 +167,7 @@ STATICFILES_DIRS = (
    os.path.join(BASE_DIR, 'static'),
 )
 
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 #AUTH_PROFILE_MODULE = 'futbolitoDomingero.Jugadores'
 TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
