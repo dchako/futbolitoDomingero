@@ -37,40 +37,21 @@ def home(request, id):
         #traigo con el usuario todos los  evento del usuario!
         eventoDadmins = Jugador.objects.filter(usuario=request.user.id)
         if id == '0':
-            todos_los_usuarios = Jugador.objects.filter(
-                                            eventos=eventoDadmins[0].eventos.id)
-            eventoDadmin = get_object_or_404(Jugador,
-                                        eventos=eventoDadmins[0].eventos.id,
-                                        usuario=request.user.id).eventos
-            partido = Partidos.objects.order_by(
-              '-fechaCreacion').filter(eventos=eventoDadmins[0].eventos.id,)
+            todos_los_usuarios = Jugador.objects.filter(eventos=eventoDadmins[0].eventos.id)
+            eventoDadmin = get_object_or_404(Jugador,eventos=eventoDadmins[0].eventos.id,usuario=request.user.id).eventos
+            partido = Partidos.objects.order_by('-fechaCreacion').filter(eventos=eventoDadmins[0].eventos.id,)
         else:
             #ACA EXPLOTA CUANDO EL ID Y EL USUARIO NO PERTENECE AL ID
-            eventoDadmin = get_object_or_404(Jugador,
-                                            eventos=int(id),
-                                            usuario=request.user.id).eventos
-            partido = Partidos.objects.order_by('-fechaCreacion'
-                            ).filter(eventos=int(id))
+            eventoDadmin = get_object_or_404(Jugador, eventos=int(id), usuario=request.user.id).eventos
+            partido = Partidos.objects.order_by('-fechaCreacion').filter(eventos=int(id))
             #traigo con un evento todo los jugadores de ese evento
-            todos_los_usuarios = Jugador.objects.filter(
-                                                eventos=eventoDadmin.id)
+            todos_los_usuarios = Jugador.objects.filter(eventos=eventoDadmin.id)
         cantidad = todos_los_usuarios.count
         asis = Jugador.objects.filter(eventos=eventoDadmin.id, asistencia=True)
         asisten = asis.count
-        Todos_los_equipos = Equipos.objects.filter(
-                                            nombreDelGrupos=eventoDadmin.id)
-        print(eventoDadmin.id)
-        print(Todos_los_equipos[0].id)
-        print(Todos_los_equipos[1].id)
-        ju_v = Jugador.objects.filter(
-                                    eventos=eventoDadmin.id,
-                                    equipo=Todos_los_equipos[0].id)
-        ju_l = Jugador.objects.filter(
-                        eventos=eventoDadmin.id,
-                        equipo=Todos_los_equipos[1].id)
-        print(ju_v)
-        print(ju_l)
-        #jugadores = list(zip(ju_l, ju_v))
+        Todos_los_equipos = Equipos.objects.filter(nombreDelGrupos=eventoDadmin.id)
+        ju_v = Jugador.objects.filter(eventos=eventoDadmin.id, equipo=Todos_los_equipos[0].id)
+        ju_l = Jugador.objects.filter(eventos=eventoDadmin.id, equipo=Todos_los_equipos[1].id)
         l, L = (list(ju_v), list(ju_l))
         if len(l) > len(L):
             L = L + [None for x in range(len(l) - len(L))]
@@ -78,15 +59,8 @@ def home(request, id):
             l = l + [None for x in range(len(L) - len(l))]
         jugadores = [{'j1':L[x], 'j2':l[x]} for x in range(len(L))]
         #Aca el calculo recurrente
-
-        dias_recurrente = rrule(DAILY,
-                         byweekday=(1, 3),
-                          dtstart=eventoDadmin.dias_horas)
-
-        dia_cercano = dias_recurrente.after(dt=datetime.now(tzutc()),
-                                             inc=True)
-
-        #cosas raras
+        dias_recurrente = rrule(DAILY, byweekday=(1, 3), dtstart=eventoDadmin.dias_horas)
+        dia_cercano = dias_recurrente.after(dt=datetime.now(tzutc()), inc=True)
         cant_p = len(partido)
         if cant_p > 1:
             partido_proximo = partido[0]
@@ -95,9 +69,6 @@ def home(request, id):
             partido_proximo = partido[0]
             partido_anterior = partido[0]
 
-        #print(partido_anterior.fechaCreacion)
-        #print(partido_proximo.fechaCreacion)
-        #print(type(dia_cercano))
         if  datetime.now(tzutc()) > partido_proximo.fechaCreacion:
             cargar_goles = 1
             partido_proximo.fechaCreacion = dia_cercano
@@ -105,19 +76,15 @@ def home(request, id):
         else:
             cargar_goles = 0
         #tengo ...
-        obj_invit = Invitacion.objects.filter(
-                                            usuario_invitado=request.user.id,
-                                            estado=False,)
+        obj_invit = Invitacion.objects.filter(usuario_invitado=request.user.id, estado=False,)
         cant = obj_invit.count
         ctx = {'todos_los_usuarios': todos_los_usuarios,
             'nombreDelGrupos': eventoDadmins,
             'nombreDelGrupo': eventoDadmin,
             'Todos_los_equipos': Todos_los_equipos,
             'jugadores': jugadores,
-            'equipo_local': Todos_los_equipos.get(
-                                        local_visitante=True).nombreDelEquipo,
-            'equipo_visitante': Todos_los_equipos.get(
-                                        local_visitante=False).nombreDelEquipo,
+            'equipo_local': Todos_los_equipos.get(local_visitante=True).nombreDelEquipo,
+            'equipo_visitante': Todos_los_equipos.get(local_visitante=False).nombreDelEquipo,
             'asisten': asisten,
             'cantidad': cantidad,
             'cant': cant,
@@ -131,6 +98,8 @@ def home(request, id):
     else:
         return redirect('registrar')
 
+def home_2(request):
+    return redirect('login')
 
 def error(request):
     return render_to_response('error.html',
@@ -273,10 +242,7 @@ def cargar_goles(request):
         id_evento = request.GET['id_evento']
         gol_v = request.GET['gol_v']
         gol_l = request.GET['gol_l']
-        #print(id_evento)
         data = {}
-        #dia = datetime.strptime(fecha_proximo, '%b%d%Y').strftime('%m/%d/%Y')
-        #print(dia)
         try:
             partido_anterior = Partidos.objects.get(id=id_evento)
         except e:
@@ -284,21 +250,9 @@ def cargar_goles(request):
                             eventos=id_evento,
                             )
         try:
-            #print(type(fecha_proximo))
-            #print(dia)
-            #print("este es el dia", type(dia))
-            #partido_anterior = Partidos.objects.get(id=id_evento)
             partido_anterior.local = int(gol_l)
             partido_anterior.visitante = int(gol_v)
-            #partido_anterior.fechaCreacion = dia
-            #proximo_partido = Partidos.objects.create(
-             #               eventos=id_evento,
-                            #fechaCreacion=fecha_proximo,
-       #                     )
-
             partido_anterior.save()
-            #proximo_partido.save()
-            #print("sadasd")
             data['code'] = 'OK'
         except e:
             print(e)
@@ -623,22 +577,14 @@ class ExtraDataView(View):
 @strategy()
 #@psa('social:complete')
 def auth_by_token(request, backend):
-    #uri = ''
-    #strategy = load_strategy(request)
-    #backend = load_backend(strategy, backend, uri)
-    #backend = request.strategy.backend
     backend = request.backend
     user = request.user
-    #pdb.set_trace()
-    #print("antes")
     user = backend.do_auth(
         access_token=request.data.get('access_token'),
         user=user.is_authenticated() and user or None
         )
-    #print("despues")
     if user and user.is_active:
         print("el usuario vuelve")
-        #pdb.set_trace()
         return user  # Return anything that makes sense here
     else:
         return None
@@ -653,18 +599,13 @@ def social_register(request):
     if auth_token and backend:
         try:
             user = auth_by_token(request, backend)
-            #print("stamos Aca")
         except Exception, err:
             return Response(str(err), status=400)
         if user:
             strategy = load_strategy(request)
-            #pdb.set_trace()
-            #print("asta aca")
             uri = ''
             backend = load_backend(strategy, backend, uri)
-            #pdb.set_trace()
             _do_login(backend, user, strategy)
-            #pdb.set_trace()
             print("apunto de salir")
             pdb.set_trace()
             data = {

@@ -20,6 +20,7 @@ router.register(r'Invitacion', views.InvitacionViewSet)
 urlpatterns = patterns('',
     # Examples:
     url(r'^(?P<id>\d+)$', 'FutboolGruops.views.home', name='home'),
+    url(r'^$', 'FutboolGruops.views.home_2', name='home_2'),
     #url(r'^homes/(?P<id>\d+)$', 'FutboolGruops.views.homes', name='homes'),
     url(r'^invitar/(?P<id>\d+)$',
                         'FutboolGruops.views.invitar', name='invitar'),
@@ -50,5 +51,5 @@ urlpatterns = patterns('',
     #api
     url(r'^sociallogin/', 'FutboolGruops.views.social_register'),
     #url(r'^Equipos/(?P<pk>[0-9]+)$', equipo_list_id, name='eventos-detail'),
-    url(r'^', include(router.urls))
+    url(r'^api/', include(router.urls))
 )
