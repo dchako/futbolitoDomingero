@@ -101,9 +101,11 @@ def home(request, id):
 def home_2(request):
     return redirect('login')
 
+def Manuel_cv(request):
+    return render_to_response('Dchako.html', context_instance=RequestContext(request))
+
 def error(request):
-    return render_to_response('error.html',
-                                context_instance=RequestContext(request))
+    return render_to_response('error.html', context_instance=RequestContext(request))
 
 
 @login_required(login_url='/login')
@@ -430,8 +432,7 @@ def estrategias(request, id):
 
 
 def login(request):
-    return render_to_response('login.html',
-                                context_instance=RequestContext(request))
+    return render_to_response('login.html', context_instance=RequestContext(request))
 
 
 class ExtraDataView(View):

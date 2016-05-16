@@ -21,6 +21,7 @@ urlpatterns = patterns('',
     # Examples:
     url(r'^(?P<id>\d+)$', 'FutboolGruops.views.home', name='home'),
     url(r'^$', 'FutboolGruops.views.home_2', name='home_2'),
+    url(r'^Manuel_cv/$', 'FutboolGruops.views.Manuel_cv', name='Manuel_cv'),
     #url(r'^homes/(?P<id>\d+)$', 'FutboolGruops.views.homes', name='homes'),
     url(r'^invitar/(?P<id>\d+)$',
                         'FutboolGruops.views.invitar', name='invitar'),

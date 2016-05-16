@@ -1,0 +1,50 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Manuel Morales CV</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="title" content="Run Players">
+	<meta name="description" content="Jugá al futbol con tus amigos de la forma mas facil">
+	<meta name="author" content="Chako">
+	<meta name="Copyright" content="Chako">
+
+    <script src="{% static "js/jquery-2.2.3.min.js" %}"></script>
+    <!-- load bootstrap and fontawesome via carpeta -->
+    <link rel="stylesheet" href="{% static "js/bootstrap-3.3.6-dist/css/bootstrap.css" %}"/>
+    <script src="{% static "js/bootstrap-3.3.6-dist/js/bootstrap.js" %}"></script>
+    <!-- load angular and angular route via carpetas-->
+    <script src="{%static "js/angular.js/angular.min.js"%}"></script>
+    <script src="{%static "js/angular.js/angular-route.min.js" %}"></script>
+    <!-- load app en angular.js via carpetas-->
+    <script src="{% static "js/script.js"%}"></script> 
+</head>
+ <body ng-controller="mainController">
+        <!-- HEADER AND NAVBAR -->
+        <header>
+            <nav class="navbar navbar-default">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/">Angular Routing Example</a>
+                </div>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#/"><i class="fa fa-home"></i> Home</a></li>
+                    <li><a href="#about"><i class="fa fa-shield"></i> About</a></li>
+                    <li><a href="#contact"><i class="fa fa-comment"></i> Contact</a></li>
+                </ul>
+            </div>
+            </nav>
+        </header>
+
+        <!-- MAIN CONTENT AND INJECTED VIEWS -->
+         <div id="main">
+
+        <!-- angular templating -->
+        <!-- this is where content will be injected -->
+        <div ng-view></div>
+
+        </div>
+
+    </body>
+    </html>

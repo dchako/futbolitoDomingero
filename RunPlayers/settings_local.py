@@ -14,6 +14,7 @@ INSTALLED_APPS = (
     'FutboolGruops',
     'social.apps.django_app.default',
     'rest_framework',
+    'django_extensions',
 )
 
 # Database
