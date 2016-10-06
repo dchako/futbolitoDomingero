@@ -5,7 +5,7 @@
     var scotchApp = angular.module('scotchApp', ['ngRoute']);
 
     // configure our routes
-    scotchApp.config(function($routeProvider) {
+    scotchApp.config(function($routeProvider, RestangularProvider) {
         $routeProvider
 
             // route for the home page
@@ -16,13 +16,13 @@
 
             // route for the about page
             .when('/about', {
-                templateUrl : './pages/about.html',
+                templateUrl : 'static/pages/about.html',
                 controller  : 'aboutController'
             })
 
             // route for the contact page
             .when('/contact', {
-                templateUrl : './pages/contact.html',
+                templateUrl : 'staticfiles/static/pages/contact.html',
                 controller  : 'contactController'
             });
     });
