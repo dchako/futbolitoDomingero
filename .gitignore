@@ -1,6 +1,10 @@
 db.sqlite3
 **.pyc
-*py[co]
-/staticfiles
+*.pyc
+*.py[co]
+/staticfiles/
 /staticfiles/*
+env
+.env
+
 
