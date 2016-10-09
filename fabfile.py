@@ -65,7 +65,7 @@ def dumpdb():
 @task
 def loaddb():
     with settings(warn_only=True):
-        local('pg_restore --clean -O -h localhost -U postgres -d futbolito-domingero_prod {}'. \
+        local('pg_restore --clean -O -h localhost -U postgres -d futbolitodomingero_prod {}'. \
         format(DUMP_FILE))
 
 
