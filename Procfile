@@ -1,1 +1,1 @@
-web: gunicorn RunPlayers.wsgi 
+web: gunicorn -c config/gunicorn.conf.py RunPlayers.wsgi 

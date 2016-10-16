@@ -45,6 +45,7 @@ INSTALLED_APPS = (
     'django_extensions',
 #    'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
+    #'debug_toolbar',
 )
 REST_FRAMEWORK = {
      # Use hyperlinked styles by default.
@@ -118,6 +119,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'social.apps.django_app.middleware.SocialAuthExceptionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+    #'debug_toolbar.middleware.DebugToolbarMiddle',
 #    'whitenoise.middleware.WhiteNoiseMiddleware',
 )
 
