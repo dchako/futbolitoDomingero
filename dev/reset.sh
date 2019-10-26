@@ -1,8 +1,8 @@
-set -v
-sudo -u postgres psql -c "DROP IF EXISTS DATABASE $DB_NAME"
-sudo -u postgres psql -c "CREATE DATABASE $DB_NAME ENCODING 'UTF-8'"
+#set -v
+psql -U postgres -c "DROP IF EXISTS DATABASE $DB_NAME"
+psql -U postgres -c "CREATE DATABASE $DB_NAME ENCODING 'UTF-8'"
 
-$MANAGE syncdb --noinput
+m syncdb --noinput
 #$MANAGE migrate
 
 #set +v
