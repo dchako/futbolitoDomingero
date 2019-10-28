@@ -12,7 +12,7 @@ django-debug-toolbar==1.6
 django-extensions==1.6.7
 django-filter==0.5.4
 django-toolbelt==0.0.1
-djangorestframework==3.1.2
+djangorestframework==3.9.1
 ecdsa==0.13
 enum34==1.1.6
 gevent==1.1.2
