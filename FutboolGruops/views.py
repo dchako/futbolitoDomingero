@@ -608,7 +608,7 @@ def social_register(request):
             backend = load_backend(strategy, backend, uri)
             _do_login(backend, user, strategy)
             print("apunto de salir")
-            pdb.set_trace()
+            #pdb.set_trace()
             data = {
                     'name': user.username,
                     'id': user.id,
